@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.content.Intent;
 
 import org.secuso.privacyfriendlymath.R;
 
@@ -152,8 +153,7 @@ public class MainActivity extends BaseActivity {
                 }
                 break;
             case R.id.button_start_game:
-                /*
-                Intent intent = new Intent(view.getContext(), ExcerciseActivity.class);
+                Intent intent = new Intent(view.getContext(), ExerciseActivity.class);
                 intent.putExtra("add",add);
                 intent.putExtra("sub",sub);
                 intent.putExtra("mul",mul);
@@ -162,7 +162,6 @@ public class MainActivity extends BaseActivity {
                 intent.putExtra("space", mViewPager.getCurrentItem());
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                */
                 break;
             default:
         }

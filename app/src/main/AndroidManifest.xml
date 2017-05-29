@@ -61,15 +61,11 @@
                 android:value="org.secuso.privacyfriendlymath.activities.MainActivity" />
         </activity>
         <activity
-            android:name="org.secuso.privacyfriendlymath.activities.GameActivity"
-            android:label="@string/title_activity_game"
-            android:parentActivityName="org.secuso.privacyfriendlymath.activities.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.secuso.privacyfriendlymath.activities.MainActivity" />
+            android:name="org.secuso.privacyfriendlymath.activities.ExerciseActivity"
+            android:label="Excercise"
+            android:parentActivityName="org.secuso.privacyfriendlymath.activities.MainActivity">
         </activity>
+
     </application>
 
 </manifest>

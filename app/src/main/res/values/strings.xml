@@ -39,6 +39,10 @@
     <string name="number_range_three" translatable="false">100-1000</string>
     <string name="number_range_four" translatable="false">1000-10000</string>
 
+    <!--###EXCERCISE###-->
+    <string name="feedback_positiv">Right Answer</string>
+    <string name="feedback_negative">Wrong Answer</string>
+
     <!--###HELP###-->
     <string name="help">Help</string>
 

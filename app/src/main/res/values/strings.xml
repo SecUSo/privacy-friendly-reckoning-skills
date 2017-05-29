@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Mathe-Trainer</string>
-    <string name="app_name_long">Privacy Friendly Mathe-Trainer</string>
+    <string name="app_name">Math-Trainer</string>
+    <string name="app_name_long">Privacy Friendly Math-Trainer</string>
     <string name="app_prefix" translatable="false">Privacy Friendly</string>
 
     <!-- ###DRAWER###-->
@@ -40,7 +40,7 @@
     <string name="number_range_four" translatable="false">1000-10000</string>
 
     <!--###EXCERCISE###-->
-    <string name="feedback_positiv">Right Answer</string>
+    <string name="feedback_positive">Right Answer</string>
     <string name="feedback_negative">Wrong Answer</string>
 
     <!--###HELP###-->

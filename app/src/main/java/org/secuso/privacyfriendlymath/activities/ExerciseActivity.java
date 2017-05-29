@@ -207,7 +207,7 @@ public class ExerciseActivity extends AppCompatActivity {
         }
         sb.setLength(0);
         sb.append("0");
-        if (solution) feedback.setText(getResources().getString(R.string.feedback_positiv)); else feedback.setText(getResources().getString(R.string.feedback_negative));
+        if (solution) feedback.setText(getResources().getString(R.string.feedback_positive)); else feedback.setText(getResources().getString(R.string.feedback_negative));
         createNewExercise();
     }
 

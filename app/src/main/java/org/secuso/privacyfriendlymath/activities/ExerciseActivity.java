@@ -83,7 +83,7 @@ public class ExerciseActivity extends AppCompatActivity {
                 break;
             default:
                 nS.upperBound = 10;
-                nS.lowerBound = 1;
+                nS.lowerBound = 0;
                 break;
         }
 
@@ -137,17 +137,23 @@ public class ExerciseActivity extends AppCompatActivity {
                 break;
             case DIV:
                 randomX = rand.nextInt((nS.upperBound - nS.lowerBound)+1) + nS.lowerBound;
+                int lb = nS.lowerBound;
+                if(lb == 0) lb = 1;
 
                 randomY = 1;
                 ArrayList<Integer> divisors = new ArrayList<Integer>();
-                for(int i = nS.lowerBound; i <= randomX; i++){
-                    if(randomX % i == 0){
-                        divisors.add(i);
+                if(randomX == 0) {
+                    divisors.add(rand.nextInt((nS.upperBound - lb)+1) + lb);
+                } else {
+                    for (int i = lb; i <= randomX; i++) {
+                        if (randomX % i == 0) {
+                            divisors.add(i);
+                        }
                     }
                 }
                 int fint = rand.nextInt(((divisors.size()-1) - 0) + 1) + 0;
                 float fdiv = rand.nextFloat();
-                fdiv = (float) Math.pow(fdiv,2.0);
+                //fdiv = (float) Math.pow(fdiv,2.0);
                 randomY = divisors.get(Math.round(fdiv*fint));
 
                 break;

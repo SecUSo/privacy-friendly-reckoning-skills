@@ -26,6 +26,7 @@
     <string name="main_text_title">This is an example app to demonstrate the design of a Privacy Friendly App. Further explanations can be found in the Privacy Friendly App Guide.</string>
     <string name="main_text_normalbutton_desc">There are multiple ways to display basic buttons. Button 1 is the basic button. If you wish to separate a button visually, use button 2. The buttons 3&#8211;5 are examples for highlighted buttons. Depending on the app other colors are possible.</string>
     <string name="main_button_welcomedialog_text">Use the button in the lower left corner to call the Welcome Dialog.</string>
+    <string name="main_button_inactive_toast">At least one operator needs to be active.</string>
 
     <!-- ###GAME###-->
     <string name="title_activity_game">Game</string>
@@ -38,6 +39,9 @@
     <string name="number_range_two" translatable="false">10-100</string>
     <string name="number_range_three" translatable="false">100-1000</string>
     <string name="number_range_four" translatable="false">1000-10000</string>
+    <string name="game_button_confirm">Confirm</string>
+    <string name="game_button_reset">Reset</string>
+    <string name="game_max_length_toast">Input exceeds max input length.</string>
 
     <!--###EXCERCISE###-->
     <string name="feedback_positive">Right Answer</string>

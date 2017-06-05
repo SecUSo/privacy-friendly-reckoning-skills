@@ -1,5 +1,6 @@
 package org.secuso.privacyfriendlymath.activities;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
 
 import org.secuso.privacyfriendlymath.R;
 
@@ -117,6 +119,8 @@ public class MainActivity extends BaseActivity {
                     addButton.setBackgroundColor(getResources().getColor(R.color.lightblue));
                     add = true;
                     activeOperators++;
+                } else {
+                    oneActiveToast();
                 }
                 break;
             case R.id.button_sub:
@@ -128,6 +132,8 @@ public class MainActivity extends BaseActivity {
                     subButton.setBackgroundColor(getResources().getColor(R.color.lightblue));
                     sub = true;
                     activeOperators++;
+                } else {
+                    oneActiveToast();
                 }
                 break;
             case R.id.button_mul:
@@ -139,6 +145,8 @@ public class MainActivity extends BaseActivity {
                     mulButton.setBackgroundColor(getResources().getColor(R.color.lightblue));
                     mul = true;
                     activeOperators++;
+                } else {
+                    oneActiveToast();
                 }
                 break;
             case R.id.button_div:
@@ -150,6 +158,8 @@ public class MainActivity extends BaseActivity {
                     divButton.setBackgroundColor(getResources().getColor(R.color.lightblue));
                     div = true;
                     activeOperators++;
+                } else {
+                    oneActiveToast();
                 }
                 break;
             case R.id.button_start_game:
@@ -165,6 +175,15 @@ public class MainActivity extends BaseActivity {
                 break;
             default:
         }
+    }
+
+    void oneActiveToast(){
+        Context context = getApplicationContext();
+        CharSequence text = getResources().getString(R.string.main_button_inactive_toast);
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

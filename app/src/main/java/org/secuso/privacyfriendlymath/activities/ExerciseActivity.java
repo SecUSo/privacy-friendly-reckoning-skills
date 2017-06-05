@@ -1,9 +1,11 @@
 package org.secuso.privacyfriendlymath.activities;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.secuso.privacyfriendlymath.R;
 
@@ -123,13 +125,14 @@ public class ExerciseActivity extends AppCompatActivity {
                     f = (float) rand.nextFloat();
                     f = f * (1.0f-0.35f)+0.35f;
                 }
-                randomX = (int) (f* nS.upperBound);
-                if(randomX == 0) randomX = 1;
+                randomX = (int) Math.round(f* nS.upperBound);
+                int up;
+                if(randomX == 0) up =nS.upperBound; else
+                up = (int) Math.floor(nS.upperBound /randomX);
 
-                int up = (int) Math.floor(nS.upperBound /randomX);
                 float f2 = rand.nextFloat();
                 f2 = (float) (Math.pow(f2,1.0/3.0));
-                randomY = (int) (f2*up);
+                randomY = (int) Math.round(f2*up);
 
                 break;
             case DIV:
@@ -160,6 +163,7 @@ public class ExerciseActivity extends AppCompatActivity {
 
     public void calcbuttonClicked(View view) {
         if(sb.toString().equals("0")) sb.setLength(0);
+        int maxLength = 7;
 
         switch(view.getId()){
             case R.id.calcbutton_confirm:
@@ -168,25 +172,65 @@ public class ExerciseActivity extends AppCompatActivity {
                 }
                 commitAnswer();break;
             case R.id.calcbutton_00:
-                sb.append("0");break;
+                if(sb.length() < maxLength)
+                     sb.append("0");
+                else
+                    maxInputToast();
+                break;
             case R.id.calcbutton_01:
-                sb.append("1");break;
+                if(sb.length() < maxLength)
+                    sb.append("1");
+                else
+                    maxInputToast();
+                break;
             case R.id.calcbutton_02:
-                sb.append("2");break;
+                if(sb.length() < maxLength)
+                    sb.append("2");
+                else
+                    maxInputToast();
+                break;
             case R.id.calcbutton_03:
-                sb.append("3");break;
+                if(sb.length() < maxLength)
+                    sb.append("3");
+                else
+                    maxInputToast();
+                break;
             case R.id.calcbutton_04:
-                sb.append("4");break;
+                if(sb.length() < maxLength)
+                    sb.append("4");
+                else
+                    maxInputToast();
+                break;
             case R.id.calcbutton_05:
-                sb.append("5");break;
+                if(sb.length() < maxLength)
+                    sb.append("5");
+                else
+                    maxInputToast();
+                break;
             case R.id.calcbutton_06:
-                sb.append("6");break;
+                if(sb.length() < maxLength)
+                    sb.append("6");
+                else
+                    maxInputToast();
+                break;
             case R.id.calcbutton_07:
-                sb.append("7");break;
+                if(sb.length() < maxLength)
+                    sb.append("7");
+                else
+                    maxInputToast();
+                break;
             case R.id.calcbutton_08:
-                sb.append("8");break;
+                if(sb.length() < maxLength)
+                    sb.append("8");
+                else
+                    maxInputToast();
+                break;
             case R.id.calcbutton_09:
-                sb.append("9");break;
+                if(sb.length() < maxLength)
+                    sb.append("9");
+                else
+                    maxInputToast();
+                break;
             case R.id.calcbutton_trash:
                 sb.setLength(0);
                 sb.append("0");
@@ -194,6 +238,15 @@ public class ExerciseActivity extends AppCompatActivity {
         }
 
         textInput.setText(sb.toString());
+    }
+
+    void maxInputToast(){
+        Context context = getApplicationContext();
+        CharSequence text = getResources().getString(R.string.game_max_length_toast);
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
     private void commitAnswer(){

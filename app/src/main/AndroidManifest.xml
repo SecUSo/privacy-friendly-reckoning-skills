@@ -62,7 +62,7 @@
         </activity>
         <activity
             android:name="org.secuso.privacyfriendlymath.activities.ExerciseActivity"
-            android:label="Excercise"
+            android:label="@string/title_activity_exercise"
             android:parentActivityName="org.secuso.privacyfriendlymath.activities.MainActivity">
         </activity>
 

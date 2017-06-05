@@ -148,7 +148,7 @@ public class ExerciseActivity extends AppCompatActivity {
                 int fint = rand.nextInt(((divisors.size()-1) - 0) + 1) + 0;
                 float fdiv = rand.nextFloat();
                 fdiv = (float) Math.pow(fdiv,2.0);
-                randomY = divisors.get((int) fdiv*fint);
+                randomY = divisors.get(Math.round(fdiv*fint));
 
                 break;
         }

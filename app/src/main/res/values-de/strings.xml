@@ -32,21 +32,21 @@
     <string name="game_button_continue">Spiel fortsetzen</string>
     <string name="game_desc">Dies ist das Standard-Menü für Spiele-Apps. Der Viewpager oben sollte verwendet werden, um zwischen verschiedenen Spielmodi zu wechseln.</string>
 
-    <!--###EXCERCISE###-->
+    <!--###EXERCISE###-->
     <string name="feedback_negative">Falsche Antwort</string>
     <string name="feedback_positive">Richtige Antwort</string>
 
     <!--###HELP###-->
     <string name="help">Help</string>
 
-    <string name="help_whatis">Was ist Privacy Friendly Beispiel?</string>
-    <string name="help_whatis_answer">Privacy Friendly Beispiel zeigt das Standard-Design einer Privacy Friendly App.</string>
-    <string name="help_feature_one">Feature 1</string>
-    <string name="help_feature_one_answer">Beschreibung vom 1. Feature.</string>
+    <string name="help_whatis">Was ist Privacy Friendly Mathe-Trainer?</string>
+    <string name="help_whatis_answer">Privacy Friendly Mathe-Trainer ermöglicht es simple arithmetische Aufgaben zu lösen.</string>
+    <string name="help_feature_one">Privacy Friendly App Mathe-Trainer features</string>
+    <string name="help_feature_one_answer">Beschreibung über das Generieren der Aufgaben</string>
     <string name="help_privacy">Was macht die App privatsphäre-freundlich?</string>
-    <string name="help_privacy_answer">Erklären welche Mechanismen verwendet wurden.</string>
+    <string name="help_privacy_answer">Kein Tracking oder nötige Berechtigungen</string>
     <string name="help_permission">Welche Berechtigungen braucht die App?</string>
-    <string name="help_permission_answer">Privacy Friendly Beispiel benötigt keine Berechtigungen.</string>
+    <string name="help_permission_answer">Privacy Friendly Mathe-Trainer benötigt keine Berechtigungen.</string>
 
     <!--###ABOUT###-->
     <string name="about">Über</string>
@@ -84,5 +84,10 @@
     <string name="game_mode_one">Zahlenraum</string>
     <string name="game_mode_two">Arithmetische Operationen</string>
     <string name="help_feature_two_answer">Wie wird die Score ausgewertet?</string>
+    <string name="game_button_confirm">Bestätigen</string>
+    <string name="game_button_reset">Löschen</string>
+    <string name="game_max_length_toast">Input zu lang.</string>
+    <string name="main_button_inactive_toast">Es muss wenigstens ein Operator aktiv sein.</string>
+    <string name="title_activity_exercise">Übung</string>
 
 </resources>

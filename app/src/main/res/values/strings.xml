@@ -43,9 +43,10 @@
     <string name="game_button_reset">Reset</string>
     <string name="game_max_length_toast">Input exceeds max input length.</string>
 
-    <!--###EXCERCISE###-->
+    <!--###EXERCISE###-->
     <string name="feedback_positive">Right Answer</string>
     <string name="feedback_negative">Wrong Answer</string>
+    <string name="title_activity_exercise">Exercise</string>
 
     <!--###HELP###-->
     <string name="help">Help</string>

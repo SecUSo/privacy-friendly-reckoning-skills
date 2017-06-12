@@ -1,1 +1,1 @@
-## Privacy Friendly App Math-Trainer
+## Privacy Friendly App Math-Trainer!

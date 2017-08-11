@@ -32,6 +32,7 @@
     <string name="title_activity_game">Game</string>
     <string name="game_button_start">New Game</string>
     <string name="game_button_continue">Continue Game</string>
+    <string name="game_button_highscore">High Score</string>
     <string name="game_desc">This is the default main menu for game apps. The viewpager above should be used to switch between game modes.</string>
     <string name="game_mode_one">Number Range</string>
     <string name="game_mode_two">Arithmetic Operations</string>
@@ -47,6 +48,15 @@
     <string name="feedback_positive">Right Answer</string>
     <string name="feedback_negative">Wrong Answer</string>
     <string name="title_activity_exercise">Exercise</string>
+    <string name="alert_title">Name Input</string>
+
+    <!--###RESULT###-->
+    <string name="title_activity_result">Result</string>
+    <string name="upto">Up to</string>
+    <string name="result_score">Score</string>
+    <string name="result_solved">Solved</string>
+    <string name="result_solved_of">of</string>
+    <string name="result_highscore">Highscore</string>
 
     <!--###HELP###-->
     <string name="help">Help</string>
@@ -79,6 +89,18 @@
     <string name="pref_example_switch">Example Switch</string>
     <string name="pref_example_switch_summary">Example Switch Summary</string>
     <string name="pref_example_summary">Example Summary</string>
+    <string name="pref_header_feedback">Feedback</string>
+    <string name="pref_header_user">User</string>
+    <string name="pref_switch_feedback">Direct Feedback</string>
+    <string name="pref_switch_feedback_summary">Receive direct feedback</string>
+    <string name="pref_text_defaultname">Default name</string>
+    <string name="pref_text_defaultname_summary">Set default Name</string>
+    <string name="pref_switch_answer">Correct Answer</string>
+    <string name="pref_switch_answer_summary">Show correct answer instantly</string>
+
+    <!-- ###SCORE### -->
+    <string name="title_activity_score">Highscores</string>
+    <string name="score_credit">Points</string>
 
     <!-- ### TUTORIAL DIALOG ### -->
     <string name="slide1_heading">Welcome!</string>
@@ -95,5 +117,10 @@
     <string name="main_button_welcomedialog">Show Welcome</string>
     <string name="next">Next</string>
     <string name="skip">Skip</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

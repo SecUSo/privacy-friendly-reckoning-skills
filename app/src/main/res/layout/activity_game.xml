@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/game_mode_one"
             android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="24sp" />
 
         <android.support.v4.view.ViewPager
@@ -69,6 +70,7 @@
         android:layout_height="wrap_content"
         android:text="@string/game_mode_two"
         android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
         android:textSize="24sp" />
 
     <LinearLayout
@@ -81,7 +83,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/button_normal"
+            android:background="@android:color/transparent"
+            android:textColor="@color/red"
+            android:textSize="24sp"
             android:onClick="onClick"
             android:text="+" />
 
@@ -90,27 +94,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/button_normal"
+            android:background="@android:color/transparent"
+            android:textColor="@color/green"
+            android:textSize="24sp"
             android:onClick="onClick"
-            android:text="-" />
+            android:text="&#8722;" />
 
         <Button
             android:id="@+id/button_mul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/button_normal"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="24sp"
             android:onClick="onClick"
-            android:text="*" />
+            android:text="&#215;" />
 
         <Button
             android:id="@+id/button_div"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/button_normal"
+            android:background="@android:color/transparent"
+            android:textColor="@color/lightblue"
+            android:textSize="24sp"
             android:onClick="onClick"
-            android:text="/" />
+            android:text="&#247;" />
     </LinearLayout>
 
     <LinearLayout
@@ -154,6 +164,19 @@
             android:textColor="@color/white"
             android:textSize="25sp"
             android:visibility="visible" />
+
+        <Button
+            android:id="@+id/button_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/button_fullwidth"
+            android:onClick="onClick"
+            android:text="@string/game_button_highscore"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
 
     </LinearLayout>
 

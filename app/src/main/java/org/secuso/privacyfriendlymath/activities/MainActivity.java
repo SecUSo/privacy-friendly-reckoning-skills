@@ -17,6 +17,9 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import org.secuso.privacyfriendlymath.R;
+import org.secuso.privacyfriendlymath.gameInstance;
+
+import static android.R.color.holo_orange_light;
 
 /**
  * @author Chris
@@ -40,14 +43,11 @@ public class MainActivity extends BaseActivity {
     private Button subButton;
     private Button mulButton;
     private Button divButton;
-    private Button gameButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         final SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         // Set up the ViewPager with the sections adapter.
@@ -66,7 +66,6 @@ public class MainActivity extends BaseActivity {
         subButton = (Button) findViewById(R.id.button_sub);
         mulButton = (Button) findViewById(R.id.button_mul);
         divButton = (Button) findViewById(R.id.button_div);
-        gameButton = (Button) findViewById(R.id.button_start_game);
 
         //care for initial postiton of the ViewPager
         mArrowLeft.setVisibility((index==0)?View.INVISIBLE:View.VISIBLE);
@@ -112,11 +111,11 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.button_add:
                 if(add==true && activeOperators > 1) {
-                    addButton.setBackgroundColor(getResources().getColor(R.color.middlegrey));
+                    addButton.setTextColor(getResources().getColor(R.color.middlegrey));
                     add = false;
                     activeOperators--;
                 } else if(!add) {
-                    addButton.setBackgroundColor(getResources().getColor(R.color.lightblue));
+                    addButton.setTextColor(getResources().getColor(R.color.red));
                     add = true;
                     activeOperators++;
                 } else {
@@ -125,11 +124,11 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.button_sub:
                 if(sub==true && activeOperators > 1) {
-                    subButton.setBackgroundColor(getResources().getColor(R.color.middlegrey));
+                    subButton.setTextColor(getResources().getColor(R.color.middlegrey));
                     sub = false;
                     activeOperators--;
                 } else if(!sub) {
-                    subButton.setBackgroundColor(getResources().getColor(R.color.lightblue));
+                    subButton.setTextColor(getResources().getColor(R.color.green));
                     sub = true;
                     activeOperators++;
                 } else {
@@ -138,11 +137,11 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.button_mul:
                 if(mul==true && activeOperators > 1) {
-                    mulButton.setBackgroundColor(getResources().getColor(R.color.middlegrey));
+                    mulButton.setTextColor(getResources().getColor(R.color.middlegrey));
                     mul = false;
                     activeOperators--;
                 } else if(!mul) {
-                    mulButton.setBackgroundColor(getResources().getColor(R.color.lightblue));
+                    mulButton.setTextColor(getResources().getColor(holo_orange_light));
                     mul = true;
                     activeOperators++;
                 } else {
@@ -151,11 +150,11 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.button_div:
                 if(div==true && activeOperators > 1) {
-                    divButton.setBackgroundColor(getResources().getColor(R.color.middlegrey));
+                    divButton.setTextColor(getResources().getColor(R.color.middlegrey));
                     div = false;
                     activeOperators--;
                 } else if(!div) {
-                    divButton.setBackgroundColor(getResources().getColor(R.color.lightblue));
+                    divButton.setTextColor(getResources().getColor(R.color.lightblue));
                     div = true;
                     activeOperators++;
                 } else {
@@ -164,14 +163,21 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.button_start_game:
                 Intent intent = new Intent(view.getContext(), ExerciseActivity.class);
-                intent.putExtra("add",add);
-                intent.putExtra("sub",sub);
-                intent.putExtra("mul",mul);
-                intent.putExtra("div",div);
-                //this ok?
-                intent.putExtra("space", mViewPager.getCurrentItem());
+
+                gameInstance game = new gameInstance();
+                game.add = add;
+                game.sub = sub;
+                game.mul = mul;
+                game.div = div;
+                game.space = mViewPager.getCurrentItem();
+                intent.putExtra("game", game);
+
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                break;
+            case R.id.button_score:
+                Intent intentScore = new Intent(view.getContext(), ScoreActivity.class);
+                startActivity(intentScore);
                 break;
             default:
         }
@@ -241,6 +247,7 @@ public class MainActivity extends BaseActivity {
             View rootView = inflater.inflate(R.layout.fragment_main_menu, container, false);
 
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            textView.setTextColor(getResources().getColor(R.color.colorPrimary));
             switch(id) {
                 case(0): textView.setText(getResources().getString(R.string.number_range_one));
                     break;

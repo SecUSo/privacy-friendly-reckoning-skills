@@ -1,170 +1,58 @@
 package org.secuso.privacyfriendlymath.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.secuso.privacyfriendlymath.R;
-
-import java.util.Random;
-import java.util.ArrayList;
-
-class NumberSpace {
-    int upperBound;
-    int lowerBound;
-}
-
-enum Op {
-    ADD,SUB,MUL,DIV;
-    @Override
-    public String toString() {
-        String str;
-        switch (this.name()) {
-            case "ADD": str = "+"; break;
-            case "SUB": str = "-"; break;
-            case "MUL": str = "*"; break;
-            case "DIV": str = "/"; break;
-            default:
-                str = "+";
-                break;
-        }
-        return str;
-    }
-}
+import org.secuso.privacyfriendlymath.exerciseInstance;
+import org.secuso.privacyfriendlymath.gameInstance;
 
 public class ExerciseActivity extends AppCompatActivity {
 
-    StringBuilder sb = new StringBuilder();
-    TextView textInput;
-    TextView textX;
-    TextView textY;
+    //Ui
+    TextView input;
+    TextView operand1;
+    TextView operand2;
     TextView operator;
-    TextView feedback;
+    TextView lastinput;
 
-    Op activeOperator  = Op.ADD;
-    NumberSpace nS = new NumberSpace();
-
-    boolean mul,add,sub,div = true;
-    int x,y = 0;
+    StringBuilder sb = new StringBuilder();
+    long nanoElapsed = 0;
+    gameInstance game;
+    exerciseInstance exercise;
+    Boolean highScoreAchieved = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
 
-        textInput = (TextView) findViewById(R.id.inputfield);
-        textX = (TextView) findViewById(R.id.valuex);
-        textY = (TextView) findViewById(R.id.valuey);
+        //Ui
+        input = (TextView) findViewById(R.id.inputfield);
+        operand1 = (TextView) findViewById(R.id.valuex);
+        operand2 = (TextView) findViewById(R.id.valuey);
         operator = (TextView) findViewById(R.id.operator);
-        feedback = (TextView) findViewById(R.id.feedback);
+        lastinput = (TextView) findViewById(R.id.lastinput);
 
+        game = (gameInstance) getIntent().getSerializableExtra("game");
 
-        add = getIntent().getBooleanExtra("add",true);
-        sub = getIntent().getBooleanExtra("sub",true);
-        mul = getIntent().getBooleanExtra("mul",true);
-        div = getIntent().getBooleanExtra("div",true);
-        int space = getIntent().getIntExtra("space",1);
-
-        switch (space){
-            case 3:
-                nS.upperBound = 10000;
-                nS.lowerBound = 1000;
-                break;
-            case 2:
-                nS.upperBound = 1000;
-                nS.lowerBound = 100;
-                break;
-            case 1:
-                nS.upperBound = 100;
-                nS.lowerBound = 10;
-                break;
-            default:
-                nS.upperBound = 10;
-                nS.lowerBound = 0;
-                break;
-        }
-
-        this.createNewExercise();
-
-    }
-
-
-    private void createNewExercise(){
-
-        Random rand = new Random();
-        int randomX = 0;
-        int randomY = 0;
-
-        ArrayList<Op> choose = new ArrayList<Op>();
-        if(add) choose.add(Op.ADD);
-        if(sub) choose.add(Op.SUB);
-        if(mul) choose.add(Op.MUL);
-        if(div) choose.add(Op.DIV);
-
-        activeOperator =  choose.get(rand.nextInt(((choose.size()-1) - 0) + 1) + 0);
-
-        switch(activeOperator){
-            case ADD:
-                randomX = rand.nextInt(((nS.upperBound -nS.lowerBound) - nS.lowerBound) + 1) + nS.lowerBound;
-                randomY = rand.nextInt(((nS.upperBound -randomX) - nS.lowerBound) + 1) + nS.lowerBound;
-                break;
-            case SUB:
-                randomX = rand.nextInt((nS.upperBound - nS.lowerBound *2) + 1) + nS.lowerBound *2;
-                randomY = rand.nextInt(((randomX-nS.lowerBound) - nS.lowerBound) + 1) + nS.lowerBound;
-                break;
-            case MUL:
-
-                float f = rand.nextFloat(); //incl0.0f,excl.1.0f
-
-                if(f <= 0.9) {
-                    f = (float) Math.tanh(f) / 2;
-                } else {
-                    f = (float) rand.nextFloat();
-                    f = f * (1.0f-0.35f)+0.35f;
-                }
-                randomX = (int) Math.round(f* nS.upperBound);
-                int up;
-                if(randomX == 0) up =nS.upperBound; else
-                up = (int) Math.floor(nS.upperBound /randomX);
-
-                float f2 = rand.nextFloat();
-                f2 = (float) (Math.pow(f2,1.0/3.0));
-                randomY = (int) Math.round(f2*up);
-
-                break;
-            case DIV:
-                randomX = rand.nextInt((nS.upperBound - nS.lowerBound)+1) + nS.lowerBound;
-                int lb = nS.lowerBound;
-                if(lb == 0) lb = 1;
-
-                randomY = 1;
-                ArrayList<Integer> divisors = new ArrayList<Integer>();
-                if(randomX == 0) {
-                    divisors.add(rand.nextInt((nS.upperBound - lb)+1) + lb);
-                } else {
-                    for (int i = lb; i <= randomX; i++) {
-                        if (randomX % i == 0) {
-                            divisors.add(i);
-                        }
-                    }
-                }
-                int fint = rand.nextInt(((divisors.size()-1) - 0) + 1) + 0;
-                float fdiv = rand.nextFloat();
-                //fdiv = (float) Math.pow(fdiv,2.0);
-                randomY = divisors.get(Math.round(fdiv*fint));
-
-                break;
-        }
-
-        x = randomX;
-        y = randomY;
-        textX.setText(Integer.toString(x));
-        textY.setText(Integer.toString(y));
-        operator.setText(activeOperator.toString());
-
+        //start timer and first exercise
+        nanoElapsed = System.nanoTime();
+        exercise = game.createNewExercise();
+        operand1.setText(""+exercise.x);
+        operand2.setText(""+exercise.y);
+        operator.setText(exercise.o);
     }
 
     public void calcbuttonClicked(View view) {
@@ -243,7 +131,7 @@ public class ExerciseActivity extends AppCompatActivity {
                 break;
         }
 
-        textInput.setText(sb.toString());
+        input.setText(sb.toString());
     }
 
     void maxInputToast(){
@@ -257,17 +145,113 @@ public class ExerciseActivity extends AppCompatActivity {
 
     private void commitAnswer(){
         int input = Integer.parseInt(sb.toString());
-        boolean solution = false;
-        switch (activeOperator) {
-            case ADD: solution = ((x + y) == input) ? true: false; break;
-            case SUB: solution = ((x - y) == input) ? true: false; break;
-            case MUL: solution = ((x * y) == input) ? true: false; break;
-            case DIV: solution = ((x / y) == input) ? true: false; break;
+
+        game.putExercise(exercise.x,exercise.y,input,exercise.o.toString());
+
+        //direct feedback
+        /*
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        if(sharedPref.getBoolean("pref_example_switch", false)){
+             feedback.setText(getResources().getString(R.string.feedback_positive));
         }
-        sb.setLength(0);
-        sb.append("0");
-        if (solution) feedback.setText(getResources().getString(R.string.feedback_positive)); else feedback.setText(getResources().getString(R.string.feedback_negative));
-        createNewExercise();
+        if (solution)  feedback.setText(getResources().getString(R.string.feedback_positive)); else  feedback.setText(getResources().getString(R.string.feedback_negative));
+        */
+
+        if(game.exercisesSolved() >= 5){
+            highScoreAchieved = achievedHighscore(game.calculateScore((int)((System.nanoTime() - nanoElapsed)/1000000000.0)),game.space);
+            if(highScoreAchieved){
+                displayNameInput();
+            } else {
+                startResultActivity("defaultname");
+            }
+        } else {
+            sb.setLength(0);
+            sb.append("0");
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            if(sharedPref.getBoolean("pref_switch_feedback", false)){
+                if(input == exercise.solve()){
+                    lastinput.setTextColor(getResources().getColor(R.color.green));
+                } else {
+                    lastinput.setTextColor(getResources().getColor(R.color.red));
+                }
+                String s = ""+exercise.x+" "+exercise.o+" "+exercise.y+" = " + input;
+                if(sharedPref.getBoolean("pref_switch_answer", false)){
+                    s = s + "(" + exercise.solve() + ")";
+                }
+                lastinput.setText(s);
+            }
+            exercise = game.createNewExercise();
+            operand1.setText(""+exercise.x);
+            operand2.setText(""+exercise.y);
+            operator.setText(exercise.o);
+        }
+    }
+
+    private Boolean achievedHighscore(int score, int space){
+        SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
+        for(int i = 0; i < 5; i++){
+            String s = hs.getString("hsscore"+i+space,null);
+            if(s != null){
+                if (score >= Integer.parseInt(s)){
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void startResultActivity(String name){
+        Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+        intent.putExtra("highScoreAchieved", highScoreAchieved);
+        intent.putExtra("game", game);
+        intent.putExtra("name", name);
+
+        startActivity(intent);
+    }
+
+    private void displayNameInput(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getResources().getString(R.string.alert_title));
+        final EditText inputs = new EditText(this);
+
+        //check if name has been set
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String name = sharedPref.getString("weight",null);
+        //otherwise use previous input
+        SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
+        if(name != null){
+            inputs.setText(name);
+        } else {
+            inputs.setText(hs.getString("previousname",""));
+        }
+
+        inputs.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(inputs);
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String text = inputs.getText().toString();
+
+                //save name
+                SharedPreferences hs = getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = hs.edit();
+                editor.putString("previousname", text);
+                editor.commit();
+
+                startResultActivity(text);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                startResultActivity("defaultname");
+            }
+        });
+        builder.show();
     }
 
 }

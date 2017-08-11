@@ -2,15 +2,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="Example Category">
+        android:title="@string/pref_header_feedback">
         <SwitchPreference
             android:id="@+id/pref_example_switch"
-            android:key="pref_example_switch"
-            android:title="@string/pref_example_switch"
-            android:summary="@string/pref_example_switch_summary"
+            android:key="pref_switch_feedback"
+            android:title="@string/pref_switch_feedback"
+            android:summary="@string/pref_switch_feedback_summary"
             android:defaultValue="false"/>
-        <Preference android:title="Test Setting"
-            android:summary="Text Summary"/>
+        <SwitchPreference
+            android:id="@+id/pref_switch_answer"
+            android:key="pref_switch_answer"
+            android:title="@string/pref_switch_answer"
+            android:summary="@string/pref_switch_answer_summary"
+            android:defaultValue="false"/>
+        </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_header_user">
+        <EditTextPreference
+            android:key="weight"
+            android:title="@string/pref_text_defaultname"
+            android:persistent="true"
+            android:summary="@string/pref_text_defaultname_summary" />
     </PreferenceCategory>
 
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->

@@ -28,10 +28,11 @@ public class PFASQLiteHelper extends SQLiteOpenHelper {
      * Use the following pattern for the name of the database
      * PF_[Name of the app]_DB
      */
-    public static final String DATABASE_NAME = "PF_EXAMPLE_DB";
+    public static final String DATABASE_NAME = "PF_MATH_DB";
 
     //Names of table in the database
     private static final String TABLE_SAMPLEDATA = "SAMPLE_DATA";
+    private static final String TABLE_EXERCISES = "SAVED_EXERCISES";
 
     //Names of columns in the databases in this example we only use one table
     private static final String KEY_ID = "id";
@@ -50,19 +51,27 @@ public class PFASQLiteHelper extends SQLiteOpenHelper {
          * Create the table sample data on the first start
          * Be careful with the final line of the query and the SQL syntax that is used in the String.
          */
-        String CREATE_SAMPLEDATA_TABLE = "CREATE TABLE " + TABLE_SAMPLEDATA +
+        String CREATE_SAMPLEDATA_TABLE = "CREATE TABLE " + TABLE_EXERCISES +
                 "(" +
                 KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 KEY_DOMAIN + " TEXT NOT NULL," +
                 KEY_USERNAME + " TEXT NOT NULL," +
                 KEY_LENGTH + " INTEGER);";
 
-        sqLiteDatabase.execSQL(CREATE_SAMPLEDATA_TABLE);
+        String CREATE_SAVED_EXERCISES = "CREATE TABLE " + TABLE_EXERCISES +
+                "(" +
+                "id" + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "space INTEGER," +
+                "operator1 INTEGER," +
+                "operator2 INTEGER," +
+                "operand TEXT NOT NULL);";
+
+        sqLiteDatabase.execSQL(CREATE_SAVED_EXERCISES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_SAMPLEDATA);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_EXERCISES);
 
         onCreate(sqLiteDatabase);
     }

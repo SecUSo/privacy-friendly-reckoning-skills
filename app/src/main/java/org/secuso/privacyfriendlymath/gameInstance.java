@@ -104,12 +104,6 @@ public class gameInstance implements Serializable {
         exerciseInstance e = new exerciseInstance(randomX,randomY,0,op.toString());
         return e;
 
-        /*
-        operand1.setText(Integer.toString(x));
-        operand2.setText(Integer.toString(y));
-        operator.setText(op.toString());
-        */
-
     }
 
     public int getUpperBound(){

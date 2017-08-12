@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1"
     tools:context="org.secuso.privacyfriendlymath.activities.ResultActivity">
 
     <LinearLayout
@@ -15,7 +14,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -25,7 +24,6 @@
                 android:id="@+id/space"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:text="Bis \n10000"
                 android:textAlignment="center"
                 android:textColor="@color/lightblue"
@@ -33,7 +31,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -43,7 +41,6 @@
                 android:id="@+id/score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textColor="@color/lightblue" />
@@ -52,7 +49,6 @@
                 android:id="@+id/solved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textColor="@color/lightblue" />
@@ -60,24 +56,21 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/sign_add"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="+"
                     android:textAlignment="center"
                     android:textColor="@color/red"
@@ -85,9 +78,8 @@
 
                 <TextView
                     android:id="@+id/sign_div"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="&#247;"
                     android:textAlignment="center"
                     android:textColor="@color/lightblue"
@@ -98,15 +90,12 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/sign_sub"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="&#8722;"
                     android:textAlignment="center"
                     android:textColor="@color/green"
@@ -114,9 +103,8 @@
 
                 <TextView
                     android:id="@+id/sign_mul"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="&#215;"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_orange_light"
@@ -135,6 +123,10 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="@color/colorAccent" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -160,13 +152,9 @@
             android:orientation="vertical">
 
         </LinearLayout>
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Button" />
+    </ScrollView>
 
 </LinearLayout>

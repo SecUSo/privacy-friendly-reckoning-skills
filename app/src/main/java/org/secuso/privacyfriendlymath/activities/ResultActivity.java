@@ -1,7 +1,9 @@
 package org.secuso.privacyfriendlymath.activities;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.secuso.privacyfriendlymath.R;
+import org.secuso.privacyfriendlymath.database.PFASQLiteHelper;
 import org.secuso.privacyfriendlymath.exerciseInstance;
 import org.secuso.privacyfriendlymath.gameInstance;
 
-public class ResultActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class ResultActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView space;
     TextView score;
@@ -30,10 +35,17 @@ public class ResultActivity extends AppCompatActivity {
     Boolean newHighScore;
     String name;
 
+    ArrayList<TextView> resultTexts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
+        SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = hs.edit();
+        editor.putBoolean("continue", false);
+        editor.commit();
 
         game = (gameInstance) getIntent().getSerializableExtra("game");
         newHighScore = getIntent().getBooleanExtra("highScoreAchieved",false);
@@ -57,6 +69,8 @@ public class ResultActivity extends AppCompatActivity {
         if(!game.mul) mulSign.setTextColor(getResources().getColor(R.color.middlegrey));
         if(!game.div) divSign.setTextColor(getResources().getColor(R.color.middlegrey));
 
+        resultTexts = new ArrayList<>();
+
         for(int i = 0; i < 5; i++){
             TextView tmp = new TextView(this);
             TextView tmp2 = new TextView(this);
@@ -77,12 +91,17 @@ public class ResultActivity extends AppCompatActivity {
                 tmp.setTextColor(getResources().getColor(R.color.red));
             }
 
+            tmp.setId(i);
+            tmp.setOnClickListener(this);
+
             tmp.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             tmp.setGravity(Gravity.CENTER_VERTICAL);
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.exercises);
             LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.exercises2);
             linearLayout.addView(tmp);
             linearLayout2.addView(tmp2);
+
+            resultTexts.add(tmp);
         }
 
         if(newHighScore) {
@@ -91,6 +110,27 @@ public class ResultActivity extends AppCompatActivity {
             score.setText(getResources().getString(R.string.result_score) + " " + game.score);
         }
         solved.setText(getResources().getString(R.string.result_solved) + " " + game.exercisesSolved() + " "+ getResources().getString(R.string.result_solved_of) + " 10");
+    }
+
+    @Override
+    public void onClick(View v) {
+        for(int i = 0; i < game.exercisesSolved(); i++){
+            if((v.getId() == resultTexts.get(i).getId()) && (game.exercises.get(i).solve() != game.exercises.get(i).z) && !game.exercises.get(i).revisit){
+                resultTexts.get(i).setTextColor(getResources().getColor(R.color.middlegrey));
+                game.exercises.get(i).revisit = true;
+
+                ContentValues values = new ContentValues();
+                values.put("operator1",game.exercises.get(i).x);
+                values.put("operator2",game.exercises.get(i).y);
+                values.put("operand",game.exercises.get(i).o);
+                values.put("space",game.space);
+
+                PFASQLiteHelper helper = new PFASQLiteHelper(this);
+                SQLiteDatabase db = helper.getWritableDatabase();
+                db.insert("SAVED_EXERCISES",null,values);
+
+            }
+        }
     }
 
     private void updateStats(){

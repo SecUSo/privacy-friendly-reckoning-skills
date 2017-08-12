@@ -112,6 +112,10 @@
             android:layout_marginRight="15dp"
             android:background="?attr/colorAccent" />
 
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -133,6 +137,8 @@
                 android:layout_weight="0.5"
                 android:orientation="vertical"></LinearLayout>
         </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 

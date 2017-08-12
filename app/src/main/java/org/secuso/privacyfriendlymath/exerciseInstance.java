@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class exerciseInstance implements Serializable {
 
-    exerciseInstance(int x_,int y_,int z_,String o_){
+    public exerciseInstance(int x_,int y_,int z_,String o_){
         x=x_;
         y=y_;
         z=z_;
@@ -16,6 +16,7 @@ public class exerciseInstance implements Serializable {
     public int z = 0;
     //operator
     public String o = "+";
+    public Boolean revisit = false;
 
     public int solve(){
         switch (o) {

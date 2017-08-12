@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity {
     private Button subButton;
     private Button mulButton;
     private Button divButton;
+    private Button continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,8 @@ public class MainActivity extends BaseActivity {
         subButton = (Button) findViewById(R.id.button_sub);
         mulButton = (Button) findViewById(R.id.button_mul);
         divButton = (Button) findViewById(R.id.button_div);
+
+        continueButton = (Button) findViewById(R.id.game_button_continue);
 
         //care for initial postiton of the ViewPager
         mArrowLeft.setVisibility((index==0)?View.INVISIBLE:View.VISIBLE);
@@ -94,6 +97,19 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
+        if(hs.getBoolean("continue",false)){
+            continueButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            continueButton.setEnabled(true);
+        } else {
+            continueButton.setBackgroundColor(getResources().getColor(R.color.middlegrey));
+            continueButton.setEnabled(false);
+        }
     }
 
     @Override
@@ -179,6 +195,19 @@ public class MainActivity extends BaseActivity {
                 Intent intentScore = new Intent(view.getContext(), ScoreActivity.class);
                 startActivity(intentScore);
                 break;
+            case R.id.game_button_continue:
+                Intent cont = new Intent(view.getContext(), ExerciseActivity.class);
+                gameInstance game2 = new gameInstance();
+                cont.putExtra("continue",true);
+                game2.add = add;
+                game2.sub = sub;
+                game2.mul = mul;
+                game2.div = div;
+                game2.space = mViewPager.getCurrentItem();
+                cont.putExtra("game", game2);
+                cont.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(cont);
+
             default:
         }
     }

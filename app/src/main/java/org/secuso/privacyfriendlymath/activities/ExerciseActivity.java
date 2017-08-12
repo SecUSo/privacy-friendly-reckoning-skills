@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,8 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.secuso.privacyfriendlymath.R;
+import org.secuso.privacyfriendlymath.database.PFASQLiteHelper;
 import org.secuso.privacyfriendlymath.exerciseInstance;
 import org.secuso.privacyfriendlymath.gameInstance;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class ExerciseActivity extends AppCompatActivity {
 
@@ -49,10 +59,60 @@ public class ExerciseActivity extends AppCompatActivity {
 
         //start timer and first exercise
         nanoElapsed = System.nanoTime();
-        exercise = game.createNewExercise();
+        exercise = newExercise();
         operand1.setText(""+exercise.x);
         operand2.setText(""+exercise.y);
         operator.setText(exercise.o);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveGameToStorage();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(getIntent().getBooleanExtra("continue",false)){
+            loadGameFromStorage();
+        }
+    }
+
+    private void saveGameToStorage(){
+
+        SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = hs.edit();
+        editor.putBoolean("continue", true);
+        editor.commit();
+
+        try {
+            FileOutputStream fos = this.openFileOutput("gameinstance", Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(game);
+            os.close();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadGameFromStorage(){
+        try {
+            FileInputStream fis = this.openFileInput("gameinstance");
+            ObjectInputStream is = new ObjectInputStream(fis);
+            game = (gameInstance) is.readObject();
+            is.close();
+            fis.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
+        } catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     public void calcbuttonClicked(View view) {
@@ -148,15 +208,6 @@ public class ExerciseActivity extends AppCompatActivity {
 
         game.putExercise(exercise.x,exercise.y,input,exercise.o.toString());
 
-        //direct feedback
-        /*
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        if(sharedPref.getBoolean("pref_example_switch", false)){
-             feedback.setText(getResources().getString(R.string.feedback_positive));
-        }
-        if (solution)  feedback.setText(getResources().getString(R.string.feedback_positive)); else  feedback.setText(getResources().getString(R.string.feedback_negative));
-        */
-
         if(game.exercisesSolved() >= 5){
             highScoreAchieved = achievedHighscore(game.calculateScore((int)((System.nanoTime() - nanoElapsed)/1000000000.0)),game.space);
             if(highScoreAchieved){
@@ -180,11 +231,30 @@ public class ExerciseActivity extends AppCompatActivity {
                 }
                 lastinput.setText(s);
             }
-            exercise = game.createNewExercise();
+            exercise = newExercise();
             operand1.setText(""+exercise.x);
             operand2.setText(""+exercise.y);
             operator.setText(exercise.o);
         }
+    }
+
+    private exerciseInstance newExercise(){
+
+        exerciseInstance savedExercise;
+        PFASQLiteHelper helper = new PFASQLiteHelper(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        String[] cols = new String[] {"id", "operator1", "operator2", "operand", "space"};
+        Cursor cursor = db.query("SAVED_EXERCISES", cols, "space = " + game.space, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            String operand = cursor.getString(cursor.getColumnIndex("operand"));
+            int x = cursor.getInt(cursor.getColumnIndex("operator1"));
+            int y = cursor.getInt(cursor.getColumnIndex("operator2"));
+            savedExercise = new exerciseInstance(x,y,0,operand);
+            db.delete("SAVED_EXERCISES","id = "+cursor.getInt(cursor.getColumnIndex("id")), null);
+            return savedExercise;
+        }
+        return game.createNewExercise();
     }
 
     private Boolean achievedHighscore(int score, int space){

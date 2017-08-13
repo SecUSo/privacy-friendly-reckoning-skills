@@ -240,11 +240,13 @@ public class ExerciseActivity extends AppCompatActivity {
 
     private exerciseInstance newExercise(){
 
+        String op = game.randomOperator();
+
         exerciseInstance savedExercise;
         PFASQLiteHelper helper = new PFASQLiteHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
         String[] cols = new String[] {"id", "operator1", "operator2", "operand", "space"};
-        Cursor cursor = db.query("SAVED_EXERCISES", cols, "space = " + game.space, null, null, null, null);
+        Cursor cursor = db.query("SAVED_EXERCISES", cols, "space = " + game.space + " AND operand = '" + op + "'", null, null, null, null);
 
         if (cursor.moveToFirst()) {
             String operand = cursor.getString(cursor.getColumnIndex("operand"));

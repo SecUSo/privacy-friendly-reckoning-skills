@@ -34,19 +34,23 @@ public class gameInstance implements Serializable {
         return c;
     }
 
+    public String randomOperator(){
+        Random rand = new Random();
+        ArrayList<String> choose = new ArrayList<>();
+        if(add) choose.add("+");
+        if(sub) choose.add("-");
+        if(mul) choose.add("*");
+        if(div) choose.add("/");
+        return choose.get(rand.nextInt(((choose.size()-1) - 0) + 1) + 0);
+    }
+
     public exerciseInstance createNewExercise(){
 
         Random rand = new Random();
         int randomX = 0;
         int randomY = 0;
 
-        ArrayList<String> choose = new ArrayList<>();
-        if(add) choose.add("+");
-        if(sub) choose.add("-");
-        if(mul) choose.add("*");
-        if(div) choose.add("/");
-
-        String op =  choose.get(rand.nextInt(((choose.size()-1) - 0) + 1) + 0);
+        String op =  randomOperator();
 
         switch(op){
             case "+":

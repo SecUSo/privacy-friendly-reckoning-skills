@@ -121,9 +121,6 @@ public class ExerciseActivity extends AppCompatActivity {
 
         switch(view.getId()){
             case R.id.calcbutton_confirm:
-                if(sb.length() == 0){
-                    sb.append("0");
-                }
                 commitAnswer();break;
             case R.id.calcbutton_00:
                 if(sb.length() < maxLength)
@@ -186,8 +183,7 @@ public class ExerciseActivity extends AppCompatActivity {
                     maxInputToast();
                 break;
             case R.id.calcbutton_trash:
-                sb.setLength(0);
-                sb.append("0");
+                if(sb.length()>0) sb.setLength(sb.length() - 1);
                 break;
         }
 
@@ -204,7 +200,10 @@ public class ExerciseActivity extends AppCompatActivity {
     }
 
     private void commitAnswer(){
-        int input = Integer.parseInt(sb.toString());
+        int input = 0;
+        if(sb.length() > 0) {
+            input = Integer.parseInt(sb.toString());
+        }
 
         game.putExercise(exercise.x,exercise.y,input,exercise.o.toString());
 
@@ -217,7 +216,6 @@ public class ExerciseActivity extends AppCompatActivity {
             }
         } else {
             sb.setLength(0);
-            sb.append("0");
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
             if(sharedPref.getBoolean("pref_switch_feedback", false)){
                 if(input == exercise.solve()){

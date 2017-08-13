@@ -60,10 +60,18 @@
         android:id="@+id/inputfield"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0"
+        android:text=""
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="48sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:background="?attr/colorPrimary" />
 
     <TextView
         android:id="@+id/lastinput"
@@ -71,15 +79,6 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:background="?attr/colorPrimary" />
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -2,14 +2,12 @@ package org.secuso.privacyfriendlymath.activities;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,7 +31,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
     gameInstance game;
 
     Boolean newHighScore;
-    String name;
+    String playerName;
 
     ArrayList<TextView> resultTexts;
 
@@ -49,7 +47,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
         game = (gameInstance) getIntent().getSerializableExtra("game");
         newHighScore = getIntent().getBooleanExtra("highScoreAchieved",false);
-        name = getIntent().getStringExtra("name");
+        playerName = getIntent().getStringExtra("name");
 
         //Ui
         space = (TextView) findViewById(R.id.space);
@@ -62,7 +60,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         divSign = (TextView) findViewById(R.id.sign_div);
 
         updateStats();
-        updateScore(name);
+        updateScore(playerName);
 
         if(!game.add) addSign.setTextColor(getResources().getColor(R.color.middlegrey));
         if(!game.sub) subSign.setTextColor(getResources().getColor(R.color.middlegrey));
@@ -72,36 +70,33 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         resultTexts = new ArrayList<>();
 
         for(int i = 0; i < 5; i++){
-            TextView tmp = new TextView(this);
-            TextView tmp2 = new TextView(this);
-            tmp.setTextSize(24);
-            tmp2.setTextSize(24);
-            tmp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            tmp2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            tmp.setTextColor(getResources().getColor(R.color.lightblue));
-            tmp.setTypeface(Typeface.MONOSPACE);
+            TextView exercise = new TextView(this);
+            TextView solution = new TextView(this);
+            exercise.setTextSize(24);
+            solution.setTextSize(24);
+            exercise.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            solution.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            exercise.setTextColor(getResources().getColor(R.color.lightblue));
+            solution.setTextColor(getResources().getColor(R.color.lightblue));
 
-            tmp.setText(game.exercises.get(i).x + " " + game.exercises.get(i).o + " " + game.exercises.get(i).y + " = " + game.exercises.get(i).z);
+            exercise.setText(game.exercises.get(i).x + " " + game.exercises.get(i).o + " " + game.exercises.get(i).y + " = " + game.exercises.get(i).z);
             if(game.exercises.get(i).solve() == game.exercises.get(i).z){
-                tmp2.setText("\u2713");
-                tmp2.setTextColor(getResources().getColor(R.color.green));
+                solution.setText("\u2713");
+                solution.setTextColor(getResources().getColor(R.color.green));
             } else {
-                tmp2.setText(""+game.exercises.get(i).solve());
-                tmp2.setTextColor(getResources().getColor(R.color.lightblue));
-                tmp.setTextColor(getResources().getColor(R.color.red));
+                solution.setText(""+game.exercises.get(i).solve());
+                exercise.setTextColor(getResources().getColor(R.color.red));
             }
 
-            tmp.setId(i);
-            tmp.setOnClickListener(this);
+            exercise.setId(i);
+            exercise.setOnClickListener(this);
 
-            tmp.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            tmp.setGravity(Gravity.CENTER_VERTICAL);
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.exercises);
-            LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.exercises2);
-            linearLayout.addView(tmp);
-            linearLayout2.addView(tmp2);
+            LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.solutions);
+            linearLayout.addView(exercise);
+            linearLayout2.addView(solution);
 
-            resultTexts.add(tmp);
+            resultTexts.add(exercise);
         }
 
         if(newHighScore) {
@@ -110,6 +105,13 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
             score.setText(getResources().getString(R.string.result_score) + " " + game.score);
         }
         solved.setText(getResources().getString(R.string.result_solved) + " " + game.exercisesSolved() + " "+ getResources().getString(R.string.result_solved_of) + " 10");
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @Override

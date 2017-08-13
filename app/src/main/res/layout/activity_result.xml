@@ -137,17 +137,15 @@
             android:id="@+id/exercises"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:orientation="vertical">
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/exercises2"
+            android:id="@+id/solutions"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:orientation="vertical">
 

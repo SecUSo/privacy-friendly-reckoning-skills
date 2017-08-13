@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,9 +39,17 @@ public class ExerciseActivity extends AppCompatActivity {
     TextView operand2;
     TextView operator;
     TextView lastinput;
+    Toolbar toolbar;
+    Chronometer timer;
+    TextView addsign;
+    TextView subsign;
+    TextView mulsign;
+    TextView divsign;
+    TextView progress;
+    TextView currentspace;
 
     StringBuilder sb = new StringBuilder();
-    long nanoElapsed = 0;
+    long miliElapsed = 0;
     gameInstance game;
     exerciseInstance exercise;
     Boolean highScoreAchieved = false;
@@ -54,12 +65,66 @@ public class ExerciseActivity extends AppCompatActivity {
         operand2 = (TextView) findViewById(R.id.valuey);
         operator = (TextView) findViewById(R.id.operator);
         lastinput = (TextView) findViewById(R.id.lastinput);
+        timer = (Chronometer) findViewById(R.id.chronometer);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        addsign = (TextView) findViewById(R.id.sign_add);
+        subsign = (TextView) findViewById(R.id.sign_sub);
+        mulsign = (TextView) findViewById(R.id.sign_mul);
+        divsign = (TextView) findViewById(R.id.sign_div);
+        progress = (TextView) findViewById(R.id.progress);
+        currentspace = (TextView) findViewById(R.id.space);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         game = (gameInstance) getIntent().getSerializableExtra("game");
+        exercise = newExercise();
 
         //start timer and first exercise
-        nanoElapsed = System.nanoTime();
-        exercise = newExercise();
+
+        updateLabels();
+
+        if(!getIntent().getBooleanExtra("continue",false)){
+            timer.setBase(SystemClock.elapsedRealtime());
+            timer.start();
+        }
+        operand1.setText(""+exercise.x);
+        operand2.setText(""+exercise.y);
+        operator.setText(exercise.o);
+    }
+
+    protected void updateLabels(){
+        if(!game.add)addsign.setTextColor(getResources().getColor(R.color.middlegrey)); else
+            addsign.setTextColor(getResources().getColor(R.color.red));
+        if(!game.sub)subsign.setTextColor(getResources().getColor(R.color.middlegrey)); else
+            subsign.setTextColor(getResources().getColor(R.color.green));
+        if(!game.mul)mulsign.setTextColor(getResources().getColor(R.color.middlegrey)); else
+            mulsign.setTextColor(getResources().getColor(android.R.color.holo_orange_light));
+        if(!game.div)divsign.setTextColor(getResources().getColor(R.color.middlegrey)); else
+            divsign.setTextColor(getResources().getColor(R.color.lightblue));
+
+        progress.setText(""+game.exercises.size()+"/"+"10");
+
+        switch (game.space){
+            case 3:
+                currentspace.setText(""+10000);
+                break;
+            case 2:
+                currentspace.setText(""+1000);
+                break;
+            case 1:
+                currentspace.setText(""+100);
+                break;
+            default:
+                currentspace.setText(""+10);
+                break;
+        }
+
         operand1.setText(""+exercise.x);
         operand2.setText(""+exercise.y);
         operator.setText(exercise.o);
@@ -68,14 +133,21 @@ public class ExerciseActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        long diff = (SystemClock.elapsedRealtime()- miliElapsed);
+        game.timeElapsed = game.timeElapsed + diff;
         saveGameToStorage();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
+        miliElapsed =SystemClock.elapsedRealtime();
         if(getIntent().getBooleanExtra("continue",false)){
             loadGameFromStorage();
+            timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
+            timer.start();
+            exercise = newExercise();
+            updateLabels();
         }
     }
 
@@ -207,8 +279,9 @@ public class ExerciseActivity extends AppCompatActivity {
 
         game.putExercise(exercise.x,exercise.y,input,exercise.o.toString());
 
-        if(game.exercisesSolved() >= 5){
-            highScoreAchieved = achievedHighscore(game.calculateScore((int)((System.nanoTime() - nanoElapsed)/1000000000.0)),game.space);
+        if(game.exercisesSolved() >= 10){
+            timer.stop();
+            highScoreAchieved = achievedHighscore(game.calculateScore((int)((game.timeElapsed)/1000.0)),game.space);
             if(highScoreAchieved){
                 displayNameInput();
             } else {
@@ -233,6 +306,7 @@ public class ExerciseActivity extends AppCompatActivity {
             operand1.setText(""+exercise.x);
             operand2.setText(""+exercise.y);
             operator.setText(exercise.o);
+            updateLabels();
         }
     }
 

@@ -62,7 +62,7 @@
         <activity
             android:name=".activities.ExerciseActivity"
             android:label="@string/title_activity_exercise"
-            android:parentActivityName=".activities.MainActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.ResultActivity"
             android:label="@string/title_activity_result"

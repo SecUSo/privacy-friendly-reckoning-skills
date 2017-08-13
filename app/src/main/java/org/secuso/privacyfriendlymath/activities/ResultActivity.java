@@ -69,7 +69,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
         resultTexts = new ArrayList<>();
 
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 10; i++){
             TextView exercise = new TextView(this);
             TextView solution = new TextView(this);
             exercise.setTextSize(24);
@@ -104,7 +104,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             score.setText(getResources().getString(R.string.result_score) + " " + game.score);
         }
-        solved.setText(getResources().getString(R.string.result_solved) + " " + game.exercisesSolved() + " "+ getResources().getString(R.string.result_solved_of) + " 10");
+        solved.setText(getResources().getString(R.string.result_solved) + " " + game.answeredCorrectly() + " "+ getResources().getString(R.string.result_solved_of) + " 10");
     }
 
     @Override

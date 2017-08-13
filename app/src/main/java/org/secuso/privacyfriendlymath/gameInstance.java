@@ -9,6 +9,7 @@ public class gameInstance implements Serializable {
     public int score = 0;
     public int space = 0;
     public Boolean mul,add,sub,div = true;
+    public long timeElapsed;
 
     //do this properly
     public ArrayList<exerciseInstance> exercises = new ArrayList<>();

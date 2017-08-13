@@ -50,42 +50,43 @@ public class gameInstance implements Serializable {
 
         switch(op){
             case "+":
-                randomX = rand.nextInt(((getUpperBound() - getLowerBound()) - getLowerBound()) + 1) + getLowerBound();
-                randomY = rand.nextInt(((getUpperBound() -randomX) - getLowerBound()) + 1) + getLowerBound();
+                int lowerboundadd = 0;
+                randomX = rand.nextInt(getUpperBound() + 1 - lowerboundadd) + lowerboundadd;
+                randomY = rand.nextInt((getUpperBound() - randomX) + 1 - lowerboundadd) + lowerboundadd;
                 break;
             case "-":
-                randomX = rand.nextInt((getUpperBound() - getLowerBound() *2) + 1) + getLowerBound() *2;
-                randomY = rand.nextInt(((randomX- getLowerBound()) - getLowerBound()) + 1) + getLowerBound();
+                int lowerboundsub = 0;
+                randomX = rand.nextInt((getUpperBound() + 1 - lowerboundsub)) + lowerboundsub;
+                randomY = rand.nextInt((randomX + 1 - lowerboundsub)) + lowerboundsub;
                 break;
             case "*":
 
                 float f = rand.nextFloat(); //incl0.0f,excl.1.0f
-
                 if(f <= 0.9) {
                     f = (float) Math.tanh(f) / 2;
                 } else {
-                    f = (float) rand.nextFloat();
+                    f = rand.nextFloat();
                     f = f * (1.0f-0.35f)+0.35f;
                 }
-                randomX = (int) Math.round(f* getUpperBound());
+
+                randomX = Math.round(f * getUpperBound());
                 int up;
-                if(randomX == 0) up = getUpperBound(); else
-                    up = (int) Math.floor(getUpperBound() /randomX);
+                if(randomX == 0)
+                    up = getUpperBound();
+                else up = (int) Math.floor(getUpperBound() /randomX);
 
                 float f2 = rand.nextFloat();
                 f2 = (float) (Math.pow(f2,1.0/3.0));
-                randomY = (int) Math.round(f2*up);
+                randomY = Math.round(f2*up);
 
                 break;
             case "/":
-                randomX = rand.nextInt((getUpperBound() - getLowerBound())+1) + getLowerBound();
-                int lb = getLowerBound();
-                if(lb == 0) lb = 1;
+                randomX = rand.nextInt(getUpperBound() + 1 - 0) + 0;
+                int lb = 1;
 
-                randomY = 1;
-                ArrayList<Integer> divisors = new ArrayList<Integer>();
+                ArrayList<Integer> divisors = new ArrayList<>();
                 if(randomX == 0) {
-                    divisors.add(rand.nextInt((getUpperBound() - lb)+1) + lb);
+                    divisors.add(rand.nextInt(getUpperBound() - lb + 1) + lb);
                 } else {
                     for (int i = lb; i <= randomX; i++) {
                         if (randomX % i == 0) {
@@ -93,10 +94,10 @@ public class gameInstance implements Serializable {
                         }
                     }
                 }
-                int fint = rand.nextInt(((divisors.size()-1) - 0) + 1) + 0;
-                float fdiv = rand.nextFloat();
+                int fint = rand.nextInt((divisors.size()-1) +1 - 0) + 0;
+                //float fdiv = rand.nextFloat();
                 //fdiv = (float) Math.pow(fdiv,2.0);
-                randomY = divisors.get(Math.round(fdiv*fint));
+                randomY = divisors.get(fint);
 
                 break;
         }

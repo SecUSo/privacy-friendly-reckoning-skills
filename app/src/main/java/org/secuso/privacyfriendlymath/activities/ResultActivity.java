@@ -139,30 +139,35 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         int rightAnswersSub = 0;
         int rightAnswersMul = 0;
         int rightAnswersDiv = 0;
+        int wrongAnswersAdd = 0;
+        int wrongAnswersSub = 0;
+        int wrongAnswersMul = 0;
+        int wrongAnswersDiv = 0;
+
 
         for(exerciseInstance e: game.exercises){
             switch(e.o) {
                 case "+":
-                    if(e.solve()==e.z) rightAnswersAdd++; break;
+                    if(e.solve()==e.z) rightAnswersAdd++; else wrongAnswersAdd++; break;
                 case "-":
-                    if(e.solve()==e.z) rightAnswersSub++; break;
+                    if(e.solve()==e.z) rightAnswersSub++; else wrongAnswersSub++; break;
                 case "*":
-                    if(e.solve()==e.z) rightAnswersMul++; break;
+                    if(e.solve()==e.z) rightAnswersMul++; else wrongAnswersMul++; break;
                 case "/":
-                    if(e.solve()==e.z) rightAnswersDiv++; break;
+                    if(e.solve()==e.z) rightAnswersDiv++; else wrongAnswersDiv++; break;
             }
         }
 
         SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = hs.edit();
         editor.putInt("rightadd"+game.space,hs.getInt("rightadd"+game.space,0)+rightAnswersAdd);
-        editor.putInt("wrongadd"+game.space,hs.getInt("wrongadd"+game.space,0)+game.exercises.size() - rightAnswersAdd);
+        editor.putInt("wrongadd"+game.space,hs.getInt("wrongadd"+game.space,0)+wrongAnswersAdd);
         editor.putInt("rightsub"+game.space,hs.getInt("rightsub"+game.space,0)+rightAnswersSub);
-        editor.putInt("wrongsub"+game.space,hs.getInt("wrongsub"+game.space,0)+game.exercises.size() - rightAnswersSub);
+        editor.putInt("wrongsub"+game.space,hs.getInt("wrongsub"+game.space,0)+wrongAnswersSub);
         editor.putInt("rightmul"+game.space,hs.getInt("rightmul"+game.space,0)+rightAnswersMul);
-        editor.putInt("wrongmul"+game.space,hs.getInt("wrongmul"+game.space,0)+game.exercises.size() - rightAnswersMul);
+        editor.putInt("wrongmul"+game.space,hs.getInt("wrongmul"+game.space,0)+wrongAnswersMul);
         editor.putInt("rightdiv"+game.space,hs.getInt("rightdiv"+game.space,0)+rightAnswersDiv);
-        editor.putInt("wrongdiv"+game.space,hs.getInt("wrongdiv"+game.space,0)+game.exercises.size() - rightAnswersDiv);
+        editor.putInt("wrongdiv"+game.space,hs.getInt("wrongdiv"+game.space,0)+wrongAnswersDiv);
         editor.commit();
     }
 

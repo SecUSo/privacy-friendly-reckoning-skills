@@ -1,6 +1,5 @@
 package org.secuso.privacyfriendlymath.activities;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,20 +33,19 @@ public class ScoreFragment extends Fragment{
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-            TextView tmp;
-            Context context = getActivity();
-            SharedPreferences sharedPref = context.getSharedPreferences(
-                    "pfa-math-highscore", Context.MODE_PRIVATE);
+            SharedPreferences sharedPref = getActivity().getSharedPreferences("pfa-math-highscore", getActivity().MODE_PRIVATE);
 
             TextView add = (TextView) getView().findViewById(R.id.stat_add);
             TextView sub = (TextView) getView().findViewById(R.id.stat_sub);
             TextView mul = (TextView) getView().findViewById(R.id.stat_mul);
             TextView div = (TextView) getView().findViewById(R.id.stat_div);
+            LinearLayout names = (LinearLayout) getView().findViewById(R.id.namelist);
+            LinearLayout scores = (LinearLayout) getView().findViewById(R.id.scorelist);
 
-            add.setText(""+(int)(100.0/(((float)sharedPref.getInt("rightadd"+space,1)+(float)sharedPref.getInt("wrongadd"+space,1))/(float)sharedPref.getInt("rightadd"+space,1)))+"%");
-            sub.setText(""+(int)(100.0/(((float)sharedPref.getInt("rightsub"+space,1)+(float)sharedPref.getInt("wrongsub"+space,1))/(float)sharedPref.getInt("rightsub"+space,1)))+"%");
-            mul.setText(""+(int)(100.0/(((float)sharedPref.getInt("rightmul"+space,1)+(float)sharedPref.getInt("wrongmul"+space,1))/(float)sharedPref.getInt("rightmul"+space,1)))+"%");
-            div.setText(""+(int)(100.0/(((float)sharedPref.getInt("rightdiv"+space,1)+(float)sharedPref.getInt("wrongdiv"+space,1))/(float)sharedPref.getInt("rightdiv"+space,1)))+"%");
+            add.setText(""+perc(sharedPref.getInt("rightadd"+space,0),sharedPref.getInt("rightadd"+space,0)+sharedPref.getInt("wrongadd"+space,0))+"%");
+            sub.setText(""+perc(sharedPref.getInt("rightsub"+space,0),sharedPref.getInt("rightsub"+space,0)+sharedPref.getInt("wrongsub"+space,0))+"%");
+            mul.setText(""+perc(sharedPref.getInt("rightmul"+space,0),sharedPref.getInt("rightmul"+space,0)+sharedPref.getInt("wrongmul"+space,0))+"%");
+            div.setText(""+perc(sharedPref.getInt("rightdiv"+space,0),sharedPref.getInt("rightdiv"+space,0)+sharedPref.getInt("wrongdiv"+space,0))+"%");
 
             for (int i = 0; i < 5; i++) {
                 String name = sharedPref.getString("hsname"+i+space,null);
@@ -56,26 +54,30 @@ public class ScoreFragment extends Fragment{
                 if(name == null){
                     break;
                 } else {
-                    tmp = new TextView(getContext());
-                    TextView tmp2 = new TextView(getContext());
-                    tmp.setTextSize(18);
-                    tmp2.setTextSize(18);
-                    tmp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    tmp2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    TextView nameEntry = new TextView(getContext());
+                    TextView scoreEntry = new TextView(getContext());
+                    nameEntry.setTextSize(18);
+                    scoreEntry.setTextSize(18);
+                    nameEntry.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    scoreEntry.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    nameEntry.setTextColor(getResources().getColor(R.color.lightblue));
+                    scoreEntry.setTextColor(getResources().getColor(R.color.lightblue));
 
-                    tmp.setText(name + "\n");
-                    tmp2.setText(score + " " + getResources().getString(R.string.score_credit) + "\n");
-                    tmp.setTextColor(getResources().getColor(R.color.lightblue));
-                    tmp2.setTextColor(getResources().getColor(R.color.lightblue));
+                    nameEntry.setText(name + "\n");
+                    scoreEntry.setText(score + " " + getResources().getString(R.string.score_credit) + "\n");
 
-                    tmp.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                    tmp2.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                    LinearLayout linearLayout = (LinearLayout) getView().findViewById(R.id.scorelist);
-                    LinearLayout linearLayout2 = (LinearLayout) getView().findViewById(R.id.scorelist2);
-                    linearLayout.addView(tmp);
-                    linearLayout2.addView(tmp2);
+                    names.addView(nameEntry);
+                    scores.addView(scoreEntry);
                 }
             }
+    }
+
+    int perc (int x, int y){
+        if(y == 0){
+            return 100;
+        }
+        int i = (int)((x*100.0f) / y);
+        return i;
     }
 
 }

@@ -31,7 +31,7 @@
     <!-- ###GAME###-->
     <string name="title_activity_game">Game</string>
     <string name="game_button_start">New Game</string>
-    <string name="game_button_continue">Continue Game</string>
+    <string name="game_button_continue">Continue</string>
     <string name="game_button_highscore">High Score</string>
     <string name="game_desc">This is the default main menu for game apps. The viewpager above should be used to switch between game modes.</string>
     <string name="game_mode_one">Number Range</string>

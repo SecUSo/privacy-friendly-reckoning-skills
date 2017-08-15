@@ -89,5 +89,23 @@
     <string name="game_max_length_toast">Input zu lang.</string>
     <string name="main_button_inactive_toast">Es muss wenigstens ein Operator aktiv sein.</string>
     <string name="title_activity_exercise">Übung</string>
+    <string name="alert_title">Namens Eingabe</string>
+    <string name="game_button_highscore">High Score</string>
+    <string name="pref_header_feedback">Feedback</string>
+    <string name="pref_header_user">Nutzer</string>
+    <string name="pref_switch_answer">Richtige Antwort</string>
+    <string name="pref_switch_answer_summary">Zeige die richtige Antwort sofort</string>
+    <string name="pref_switch_feedback">Sofortiges Feedback</string>
+    <string name="pref_switch_feedback_summary">Bekomme sofortiges Feedback</string>
+    <string name="pref_text_defaultname">Voreingegebener Name</string>
+    <string name="pref_text_defaultname_summary">Voreingegebener Name für die Highscore</string>
+    <string name="result_highscore">Höchstpunktzahl</string>
+    <string name="result_score">Punktzahl</string>
+    <string name="result_solved">Gelöst</string>
+    <string name="result_solved_of">von</string>
+    <string name="score_credit">Punkte</string>
+    <string name="title_activity_result">Ergebniss</string>
+    <string name="title_activity_score">Höchstpunktzahl</string>
+    <string name="upto">Bis</string>
 
 </resources>

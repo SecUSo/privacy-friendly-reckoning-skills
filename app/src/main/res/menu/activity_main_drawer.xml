@@ -5,7 +5,7 @@
         android:checkableBehavior="all">
         <item
             android:id="@+id/nav_example"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_home"
             android:title="@string/action_main" />
     </group>
 
@@ -13,12 +13,16 @@
         android:checkableBehavior="all">
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_settings"
             android:title="@string/action_settings" />
         <item
             android:id="@+id/nav_help"
             android:icon="@drawable/ic_menu_help"
             android:title="@string/action_help" />
+        <item
+            android:id="@+id/nav_tutorial"
+            android:icon="@drawable/ic_menu_tutorial"
+            android:title="@string/action_tutorial" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_menu_info"

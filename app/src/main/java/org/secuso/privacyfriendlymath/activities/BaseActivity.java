@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import org.secuso.privacyfriendlymath.R;
+import org.secuso.privacyfriendlymath.tutorial.TutorialActivity;
 
 /**
  * @author Chris
@@ -153,6 +154,11 @@ public abstract class BaseActivity extends AppCompatActivity implements OnNaviga
                 intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                break;
+            case R.id.nav_tutorial:
+                intent = new Intent(this, TutorialActivity.class);
+                intent.setAction(TutorialActivity.ACTION_SHOW_ANYWAYS);
+                createBackStack(intent);
                 break;
             case R.id.nav_about:
                 intent = new Intent(this, AboutActivity.class);

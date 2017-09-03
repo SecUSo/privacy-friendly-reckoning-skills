@@ -10,6 +10,7 @@
     <string name="action_main">Main</string>
     <string name="action_game">Game</string>
     <string name="action_tutorial">Tutorial</string>
+    <string name="action_score">Score</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -36,7 +37,7 @@
     <string name="game_button_highscore">High Score</string>
     <string name="game_desc">This is the default main menu for game apps. The viewpager above should be used to switch between game modes.</string>
     <string name="game_mode_one">Number Range</string>
-    <string name="game_mode_two">Arithmetic Operations</string>
+    <string name="game_mode_two">Choose operators</string>
     <string name="number_range_one" translatable="false">0-10</string>
     <string name="number_range_two" translatable="false">10-100</string>
     <string name="number_range_three" translatable="false">100-1000</string>

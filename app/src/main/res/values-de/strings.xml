@@ -82,7 +82,7 @@
     <string name="next">Weiter</string>
     <string name="skip">Überspringen</string>
     <string name="game_mode_one">Zahlenraum</string>
-    <string name="game_mode_two">Arithmetische Operationen</string>
+    <string name="game_mode_two">Wähle Rechenart</string>
     <string name="help_feature_two_answer">Wie wird die Score ausgewertet?</string>
     <string name="game_button_confirm">Bestätigen</string>
     <string name="game_button_reset">Löschen</string>

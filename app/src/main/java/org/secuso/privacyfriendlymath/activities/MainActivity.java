@@ -118,10 +118,10 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
         if(hs.getBoolean("continue",false)){
-            continueButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            continueButton.setBackgroundResource(R.drawable.button_fullwidth);
             continueButton.setEnabled(true);
         } else {
-            continueButton.setBackgroundColor(getResources().getColor(R.color.middlegrey));
+            continueButton.setBackgroundResource(R.drawable.button_disabled);
             continueButton.setEnabled(false);
         }
     }
@@ -204,10 +204,6 @@ public class MainActivity extends BaseActivity {
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                break;
-            case R.id.button_score:
-                Intent intentScore = new Intent(view.getContext(), ScoreActivity.class);
-                startActivity(intentScore);
                 break;
             case R.id.game_button_continue:
                 Intent cont = new Intent(view.getContext(), ExerciseActivity.class);

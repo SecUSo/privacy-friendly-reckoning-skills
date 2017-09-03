@@ -71,13 +71,13 @@
 
     <!-- ### TUTORIAL DIALOG ### -->
     <string name="slide1_heading">Willkommen!</string>
-    <string name="slide1_text">Diese App soll als Anleitung zum Design von Privacy Friendly Apps dienen. Hier wird die App in ein bis zwei Sätzen vorgestellt.</string>
+    <string name="slide1_text">Mit dieser App kannst du Aufgaben der 4 Grundrechenarten in verschiedenen Zahlenräumen üben.</string>
 
-    <string name="slide2_heading">Schlüsselelements</string>
-    <string name="slide2_text">Hier können Schlüsselelemente vorgestellt werden. Achtung: Nicht zu detailliert werden.</string>
+    <string name="slide2_heading">Rechenarten und Zahlenräume</string>
+    <string name="slide2_text">Im Hauptmenü kannst du zwischen verschiedenen Rechenarten und Zahlenräumen wählen. Auf eine der Rechenarten drücken wird sie für das nächste Spiel aktivieren/deaktivieren.</string>
 
-    <string name="slide3_heading">Github und Guide</string>
-    <string name="slide3_text">Der Quellcode dieser App ist auf GitHub. Weitere Infos gibt es im Privacy Friendly App Guide.</string>
+    <string name="slide3_heading">Aufgaben wiederholen</string>
+    <string name="slide3_text">Du kannst Aufgaben zum Wiederholen markieren indem du im Ergebnis-Bildschirm auf sie drückst.</string>
 
     <string name="next">Weiter</string>
     <string name="skip">Überspringen</string>
@@ -86,7 +86,7 @@
     <string name="help_feature_two_answer">Wie wird die Score ausgewertet?</string>
     <string name="game_button_confirm">Bestätigen</string>
     <string name="game_button_reset">Löschen</string>
-    <string name="game_max_length_toast">Input zu lang.</string>
+    <string name="game_max_length_toast">Ergebnis kann nicht größer sein als 9999999</string>
     <string name="main_button_inactive_toast">Es muss wenigstens ein Operator aktiv sein.</string>
     <string name="title_activity_exercise">Übung</string>
     <string name="alert_title">Namens Eingabe</string>

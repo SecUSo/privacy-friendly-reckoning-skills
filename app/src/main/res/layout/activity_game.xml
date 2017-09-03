@@ -87,7 +87,7 @@
             android:onClick="onClick"
             android:text="+"
             android:textColor="@color/red"
-            android:textSize="24sp" />
+            android:textSize="48sp" />
 
         <Button
             android:id="@+id/button_sub"
@@ -98,7 +98,7 @@
             android:onClick="onClick"
             android:text="&#8722;"
             android:textColor="@color/green"
-            android:textSize="24sp" />
+            android:textSize="48sp" />
 
         <Button
             android:id="@+id/button_mul"
@@ -109,7 +109,7 @@
             android:onClick="onClick"
             android:text="&#215;"
             android:textColor="@android:color/holo_orange_light"
-            android:textSize="24sp" />
+            android:textSize="48sp" />
 
         <Button
             android:id="@+id/button_div"
@@ -120,7 +120,7 @@
             android:onClick="onClick"
             android:text="&#247;"
             android:textColor="@color/lightblue"
-            android:textSize="24sp" />
+            android:textSize="48sp" />
     </LinearLayout>
 
     <LinearLayout

@@ -31,6 +31,10 @@ public class gameInstance implements Serializable {
         exercises.add(new exerciseInstance(x,y,z,op));
     }
 
+    public void putExercise2(exerciseInstance e){
+        exercises.add(e);
+    }
+
     public int exercisesSolved(){
         return exercises.size();
     }

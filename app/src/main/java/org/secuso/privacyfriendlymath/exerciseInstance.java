@@ -31,6 +31,7 @@ public class exerciseInstance implements Serializable {
     //operator
     public String o = "+";
     public Boolean revisit = false;
+    public Boolean pausedOn = false;
 
     public int solve(){
         switch (o) {

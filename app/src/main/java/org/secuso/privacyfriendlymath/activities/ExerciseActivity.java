@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -64,9 +65,12 @@ public class ExerciseActivity extends AppCompatActivity {
 
     StringBuilder sb = new StringBuilder();
     long miliElapsed = 0;
+    long miliElapsed2 = 0;
     gameInstance game;
     exerciseInstance exercise;
     Boolean highScoreAchieved = false;
+    Boolean exerciseAnswered = false;
+    long miliElapsedOnPause = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +103,7 @@ public class ExerciseActivity extends AppCompatActivity {
         game = (gameInstance) getIntent().getSerializableExtra("game");
         exercise = newExercise();
 
-        //start timer and first exercise
-
+        miliElapsed2 =SystemClock.elapsedRealtime();
         updateLabels();
 
         if(!getIntent().getBooleanExtra("continue",false)){
@@ -147,6 +150,10 @@ public class ExerciseActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        if(exercise.pausedOn){
+            miliElapsed =SystemClock.elapsedRealtime();
+            timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
+        }
         long diff = (SystemClock.elapsedRealtime()- miliElapsed);
         game.timeElapsed = game.timeElapsed + diff;
         saveGameToStorage();
@@ -158,10 +165,40 @@ public class ExerciseActivity extends AppCompatActivity {
         miliElapsed =SystemClock.elapsedRealtime();
         if(getIntent().getBooleanExtra("continue",false)){
             loadGameFromStorage();
-            timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
-            timer.start();
-            exercise = newExercise();
-            updateLabels();
+            if(game.exercises.size() > 0) {
+                exercise = game.exercises.get(game.exercises.size() - 1);
+                if (exercise.pausedOn) {
+                    timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
+                    input.setText(""+exercise.z);
+                    sb.setLength(0);
+                    sb.append(""+exercise.z);
+                    String s = ""+exercise.z;
+                    if(exercise.z == exercise.solve()){
+                        input.setTextColor(getResources().getColor(R.color.green));
+                        s = s + "" + " \u2713";
+                    } else {
+                        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+                        if(sharedPref.getBoolean("pref_switch_answer", false)) {
+                            s = s + " (" + exercise.solve() + ")";
+                            input.setTextColor(getResources().getColor(R.color.red));
+                        } else {
+                            input.setTextColor(getResources().getColor(R.color.red));
+                        }
+                    }
+                    input.setText(s);
+                    updateLabels();
+                } else {
+                    timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
+                    timer.start();
+                    exercise = newExercise();
+                    updateLabels();
+                }
+            } else {
+                timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
+                timer.start();
+                exercise = newExercise();
+                updateLabels();
+            }
         }
     }
 
@@ -207,7 +244,55 @@ public class ExerciseActivity extends AppCompatActivity {
 
         switch(view.getId()){
             case R.id.calcbutton_confirm:
-                commitAnswer();break;
+                int inputtemp = 0;
+                if(sb.length() > 0) {
+                    inputtemp = Integer.parseInt(sb.toString());
+                }
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+                if(sharedPref.getBoolean("pref_switch_feedback", false)) {
+                    exercise.z = inputtemp;
+                    if(!exercise.pausedOn) {
+                        game.putExercise2(exercise);
+                    }
+                    String s = ""+exercise.z;
+                    if(exercise.z == exercise.solve()){
+                        input.setTextColor(getResources().getColor(R.color.green));
+                        s = s + "" + " \u2713";
+                    } else {
+                        if(sharedPref.getBoolean("pref_switch_answer", false)) {
+                            s = s + " (" + exercise.solve() + ")";
+                            input.setTextColor(getResources().getColor(R.color.red));
+                        } else {
+                            input.setTextColor(getResources().getColor(R.color.red));
+                        }
+                    }
+                    input.setText(s);
+
+                    if(exercise.pausedOn) {
+                        miliElapsed =SystemClock.elapsedRealtime();
+                        timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
+                        timer.start();
+                        game.exercises.get(game.exercises.size()-1).pausedOn = false;
+                        input.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        commitAnswer();
+                    }else {
+                        long diff = (SystemClock.elapsedRealtime()- miliElapsed);
+                        game.timeElapsed = game.timeElapsed + diff;
+                        timer.stop();
+                        updateLabels();
+                        exercise.pausedOn = true;
+                    }
+                } else {
+                    if(exercise.pausedOn){
+                        miliElapsed =SystemClock.elapsedRealtime();
+                        timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
+                        input.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        timer.start();
+                    }
+                    game.putExercise(exercise.x,exercise.y,inputtemp,exercise.o.toString());
+                    commitAnswer();
+                }
+                break;
             case R.id.calcbutton_00:
                 if(sb.length() < maxLength)
                      sb.append("0");
@@ -272,8 +357,10 @@ public class ExerciseActivity extends AppCompatActivity {
                 if(sb.length()>0) sb.setLength(sb.length() - 1);
                 break;
         }
+        if(!exercise.pausedOn){
+            input.setText(sb);
+        }
 
-        input.setText(sb.toString());
     }
 
     void maxInputToast(){
@@ -291,8 +378,6 @@ public class ExerciseActivity extends AppCompatActivity {
             input = Integer.parseInt(sb.toString());
         }
 
-        game.putExercise(exercise.x,exercise.y,input,exercise.o.toString());
-
         if(game.exercisesSolved() >= 10){
             timer.stop();
             highScoreAchieved = achievedHighscore(game.calculateScore((int)((game.timeElapsed)/1000.0)),game.space);
@@ -303,19 +388,6 @@ public class ExerciseActivity extends AppCompatActivity {
             }
         } else {
             sb.setLength(0);
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-            if(sharedPref.getBoolean("pref_switch_feedback", false)){
-                if(input == exercise.solve()){
-                    lastinput.setTextColor(getResources().getColor(R.color.green));
-                } else {
-                    lastinput.setTextColor(getResources().getColor(R.color.red));
-                }
-                String s = ""+exercise.x+" "+exercise.o+" "+exercise.y+" = " + input;
-                if(sharedPref.getBoolean("pref_switch_answer", false)){
-                    s = s + "(" + exercise.solve() + ")";
-                }
-                lastinput.setText(s);
-            }
             exercise = newExercise();
             operand1.setText(""+exercise.x);
             operand2.setText(""+exercise.y);

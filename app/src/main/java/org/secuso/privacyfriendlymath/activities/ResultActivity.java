@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -73,6 +75,17 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         mulSign = (TextView) findViewById(R.id.sign_mul);
         divSign = (TextView) findViewById(R.id.sign_div);
 
+        //fab
+        FloatingActionButton myFab = (FloatingActionButton)  this.findViewById(R.id.myFAB);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                saveSelectedExercises();
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
         updateStats();
         updateScore(playerName);
 
@@ -88,10 +101,11 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
             TextView solution = new TextView(this);
             exercise.setTextSize(24);
             solution.setTextSize(24);
-            exercise.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            exercise.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
             solution.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            exercise.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             exercise.setTextColor(getResources().getColor(R.color.lightblue));
-            solution.setTextColor(getResources().getColor(R.color.lightblue));
+            solution.setTextColor(getResources().getColor(R.color.red));
 
             exercise.setText(game.exercises.get(i).x + " " + game.exercises.get(i).o + " " + game.exercises.get(i).y + " = " + game.exercises.get(i).z);
             if(game.exercises.get(i).solve() == game.exercises.get(i).z){
@@ -99,7 +113,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
                 solution.setTextColor(getResources().getColor(R.color.green));
             } else {
                 solution.setText(""+game.exercises.get(i).solve());
-                exercise.setTextColor(getResources().getColor(R.color.red));
+                exercise.setTextColor(getResources().getColor(R.color.lightblue));
             }
 
             exercise.setId(i);
@@ -131,20 +145,29 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         for(int i = 0; i < game.exercisesSolved(); i++){
-            if((v.getId() == resultTexts.get(i).getId()) && (game.exercises.get(i).solve() != game.exercises.get(i).z) && !game.exercises.get(i).revisit){
-                resultTexts.get(i).setTextColor(getResources().getColor(R.color.middlegrey));
-                game.exercises.get(i).revisit = true;
+            if((v.getId() == resultTexts.get(i).getId()) && (game.exercises.get(i).solve() != game.exercises.get(i).z)){
+                if(!game.exercises.get(i).revisit) {
+                    resultTexts.get(i).setTextColor(getResources().getColor(R.color.middlegrey));
+                    game.exercises.get(i).revisit = true;
+                } else {
+                    resultTexts.get(i).setTextColor(getResources().getColor(R.color.colorPrimary));
+                    game.exercises.get(i).revisit = false;
+                }
+            }
+        }
+    }
 
+    private void saveSelectedExercises(){
+        PFASQLiteHelper helper = new PFASQLiteHelper(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        for(int i = 0; i < game.exercisesSolved(); i++){
+            if(game.exercises.get(i).revisit) {
                 ContentValues values = new ContentValues();
                 values.put("operator1",game.exercises.get(i).x);
                 values.put("operator2",game.exercises.get(i).y);
                 values.put("operand",game.exercises.get(i).o);
                 values.put("space",game.space);
-
-                PFASQLiteHelper helper = new PFASQLiteHelper(this);
-                SQLiteDatabase db = helper.getWritableDatabase();
                 db.insert("SAVED_EXERCISES",null,values);
-
             }
         }
     }

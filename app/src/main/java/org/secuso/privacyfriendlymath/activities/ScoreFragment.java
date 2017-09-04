@@ -88,7 +88,7 @@ public class ScoreFragment extends Fragment{
 
     int perc (int x, int y){
         if(y == 0){
-            return 100;
+            return 0;
         }
         int i = (int)((x*100.0f) / y);
         return i;

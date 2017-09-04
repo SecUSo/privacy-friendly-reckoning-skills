@@ -59,6 +59,7 @@
     <string name="result_solved">Solved</string>
     <string name="result_solved_of">of</string>
     <string name="result_highscore">Highscore</string>
+    <string name="result_toast_selected">Selected exercise to be repeated</string>
 
     <!--###HELP###-->
     <string name="help">Help</string>

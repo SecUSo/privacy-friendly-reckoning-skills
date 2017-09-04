@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.secuso.privacyfriendlymath.R;
 import org.secuso.privacyfriendlymath.database.PFASQLiteHelper;
@@ -149,8 +150,10 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
                 if(!game.exercises.get(i).revisit) {
                     resultTexts.get(i).setTextColor(getResources().getColor(R.color.middlegrey));
                     game.exercises.get(i).revisit = true;
+                    Toast.makeText(this, getResources().getString(R.string.result_toast_selected),
+                            Toast.LENGTH_SHORT).show();
                 } else {
-                    resultTexts.get(i).setTextColor(getResources().getColor(R.color.colorPrimary));
+                    resultTexts.get(i).setTextColor(getResources().getColor(R.color.lightblue));
                     game.exercises.get(i).revisit = false;
                 }
             }

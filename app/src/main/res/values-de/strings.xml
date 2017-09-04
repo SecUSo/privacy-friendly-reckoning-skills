@@ -107,5 +107,6 @@
     <string name="title_activity_result">Ergebniss</string>
     <string name="title_activity_score">Höchstpunktzahl</string>
     <string name="upto">Bis</string>
+    <string name="result_toast_selected">Aufgabe zum wiederholen ausgewählt</string>
 
 </resources>

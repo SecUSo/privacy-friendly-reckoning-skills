@@ -40,7 +40,7 @@ public class gameInstance implements Serializable {
     }
 
     public int calculateScore(int seconds){
-        score =(int) ((1.0 + (1.0/100.0) + Math.max(100-seconds,0)) * (answeredCorrectly())*answeredCorrectly());
+        score =(int) ((1.0 + (1.0/100.0) * Math.max(100-seconds,0)) * (answeredCorrectly())*answeredCorrectly());
         return score;
     }
 

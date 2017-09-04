@@ -379,6 +379,8 @@ public class ExerciseActivity extends AppCompatActivity {
         }
 
         if(game.exercisesSolved() >= 10){
+            long diff = (SystemClock.elapsedRealtime()- miliElapsed);
+            game.timeElapsed = game.timeElapsed + diff;
             timer.stop();
             highScoreAchieved = achievedHighscore(game.calculateScore((int)((game.timeElapsed)/1000.0)),game.space);
             if(highScoreAchieved){

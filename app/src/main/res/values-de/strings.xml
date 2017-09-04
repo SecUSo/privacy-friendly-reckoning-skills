@@ -40,9 +40,7 @@
     <string name="help">Help</string>
 
     <string name="help_whatis">Was ist Privacy Friendly Mathe-Trainer?</string>
-    <string name="help_whatis_answer">Privacy Friendly Mathe-Trainer ermöglicht es simple arithmetische Aufgaben zu lösen.</string>
-    <string name="help_feature_one">Privacy Friendly App Mathe-Trainer features</string>
-    <string name="help_feature_one_answer">Beschreibung über das Generieren der Aufgaben</string>
+    <string name="help_whatis_answer">Privacy Friendly Mathe-Trainer ermöglicht es simple arithmetische Kopfrechenaufgaben in vier verschiedenen Zahlenräumen zu lösen.</string>
     <string name="help_privacy">Was macht die App privatsphäre-freundlich?</string>
     <string name="help_privacy_answer">Kein Tracking oder nötige Berechtigungen</string>
     <string name="help_permission">Welche Berechtigungen braucht die App?</string>
@@ -83,7 +81,6 @@
     <string name="skip">Überspringen</string>
     <string name="game_mode_one">Zahlenraum</string>
     <string name="game_mode_two">Wähle Rechenart</string>
-    <string name="help_feature_two_answer">Wie wird die Score ausgewertet?</string>
     <string name="game_button_confirm">Bestätigen</string>
     <string name="game_button_reset">Löschen</string>
     <string name="game_max_length_toast">Ergebnis kann nicht größer sein als 9999999</string>
@@ -108,5 +105,13 @@
     <string name="title_activity_score">Höchstpunktzahl</string>
     <string name="upto">Bis</string>
     <string name="result_toast_selected">Aufgabe zum wiederholen ausgewählt</string>
+    <string name="help_game">Wie kann ich ein neues Spiel starten?</string>
+    <string name="help_game_answer">"Du kannst ein neues Spiel starten, indem du einen der 4 Zahlenräume und wenigstens einen der 4 Operatoren im Hauptmenü auswählst und auf den \"Neues Spiel\" Knopf drückst. "</string>
+    <string name="help_pause">Wie kann ich ein laufendes Spiel pausieren und fortsetzen?</string>
+    <string name="help_pause_answer">Beim Verlassen des Spiel-Fensters, zum Beispiel durch Drücken des Zurück-Buttons oben links oder durch den Zurück-Button auf deinem Android Gerät, wird das aktuelle Spiel automatisch pausiert. Das Spiel kann durch den \"Fortsetzen\"-Button im Hauptmenü fortgesetzt werden.</string>
+    <string name="help_revisit">Wie kann ich eine bestimmte Aufgabe ein weiteres Mal üben?</string>
+    <string name="help_revisit_answer">Auf dem Ergebnis-Bildschirm am Ende eines Spiels können Aufgaben zum Wiederholen im nächsten Spiel durch drücken ausgewählt werden.</string>
+    <string name="help_score">Wie wird die Punktzahl berechnet?</string>
+    <string name="help_score_answer">Die Punktzahl setzt sich aus der Anzahl der richtig beantworteten Aufgaben, sowie der Zeit die insgesamt für alle Aufgaben benötigt wurde zusammen.</string>
 
 </resources>

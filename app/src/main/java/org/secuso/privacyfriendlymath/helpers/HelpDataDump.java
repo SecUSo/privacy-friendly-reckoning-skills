@@ -29,11 +29,21 @@ public class HelpDataDump {
 
         expandableListDetail.put(context.getResources().getString(R.string.help_whatis), general);
 
-        List<String> features = new ArrayList<String>();
-        features.add(context.getResources().getString(R.string.help_feature_one_answer));
-        features.add(context.getResources().getString(R.string.help_feature_two_answer));
+        List<String> game = new ArrayList<String>();
+        game.add(context.getResources().getString(R.string.help_game_answer));
+        expandableListDetail.put(context.getResources().getString(R.string.help_game), game);
 
-        expandableListDetail.put(context.getResources().getString(R.string.help_feature_one), features);
+        List<String> pause = new ArrayList<String>();
+        pause.add(context.getResources().getString(R.string.help_pause_answer));
+        expandableListDetail.put(context.getResources().getString(R.string.help_pause), pause);
+
+        List<String> revisit = new ArrayList<String>();
+        revisit.add(context.getResources().getString(R.string.help_revisit_answer));
+        expandableListDetail.put(context.getResources().getString(R.string.help_revisit), revisit);
+
+        List<String> score = new ArrayList<String>();
+        score.add(context.getResources().getString(R.string.help_score_answer));
+        expandableListDetail.put(context.getResources().getString(R.string.help_score), score);
 
         List<String> privacy = new ArrayList<String>();
         privacy.add(context.getResources().getString(R.string.help_privacy_answer));

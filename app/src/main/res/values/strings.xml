@@ -65,10 +65,20 @@
     <string name="help">Help</string>
 
     <string name="help_whatis">What is Privacy Friendly App Math-Trainer?</string>
-    <string name="help_whatis_answer">Privacy Friendly App Math-Trainer lets you solve basic arithmetic exercises in four different number spaces. </string>
-    <string name="help_feature_one">Privacy Friendly App Math-Trainer features</string>
-    <string name="help_feature_one_answer">Description regarding how the exercises are actually generated?</string>
-    <string name="help_feature_two_answer">Description regarding how the score is actually generated?</string>
+    <string name="help_whatis_answer">Privacy Friendly App Math-Trainer generates basic arithmetic mental exercises in four different number spaces. </string>
+
+    <string name="help_game">How can I start a game?</string>
+    <string name="help_game_answer">You can start a game by selecting one of the four number ranges and at least one of the four operators in the main menu and tapping the "New Game" button.</string>
+
+    <string name="help_pause">How can I pause and continue a game?</string>
+    <string name="help_pause_answer">Leaving the game window, for example by tapping the back button on the top left or by tapping the back button on your phone will pause the game. You can continue a paused game by tapping the "Continue" button in the main menu.</string>
+
+    <string name="help_revisit">How can I revisit a particular exercise?</string>
+    <string name="help_revisit_answer">You can select a particular exercise to be tested again by tapping it on the result screen after you finished a game.</string>
+
+    <string name="help_score">How is the score calculated?</string>
+    <string name="help_score_answer">The score takes into account how many exercises were solved successfully and how much time it took you to answer all of them.</string>
+
     <string name="help_privacy">What makes the app privacy-friendly?</string>
     <string name="help_privacy_answer">Privacy Friendly App Math-Trainer does not require any permission. It further does not include any tracking mechanisms or advertisement.</string>
     <string name="help_permission">Which permissions does the App require?</string>
@@ -78,7 +88,7 @@
     <string name="about">About</string>
     <string name="version_number">Version</string>
     <string name="about_author">Authors: </string>
-    <string name="about_author_names" translatable="false">rfstu</string>
+    <string name="about_author_names" translatable="false">rfstu(Github-User)</string>
     <string name="about_author_contributors">and contributors.</string>
     <string name="about_affiliation">In affiliation with</string>
     <string name="privacy_friendly">This application belongs to the group of Privacy Friendly Apps developed by Technische Universität Darmstadt. Sourcecode licensed under GPLv3. Images copyright TU Darmstadt and Google Inc.</string>

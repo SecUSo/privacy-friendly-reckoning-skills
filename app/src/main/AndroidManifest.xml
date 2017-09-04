@@ -35,8 +35,7 @@
         <activity
             android:name=".activities.AboutActivity"
             android:label="@string/about"
-            android:parentActivityName=".activities.MainActivity"
-            android:screenOrientation="portrait">
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.secuso.privacyfriendlymath.activities.MainActivity" />

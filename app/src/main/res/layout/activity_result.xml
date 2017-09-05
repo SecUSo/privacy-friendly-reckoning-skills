@@ -69,6 +69,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -167,7 +168,7 @@
         android:id="@+id/myFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_menu_home"
+        android:src="@drawable/ic_check_white_24dp"
         android:layout_gravity="bottom|right"
         android:layout_margin="15dp"
         android:layout_weight="1"

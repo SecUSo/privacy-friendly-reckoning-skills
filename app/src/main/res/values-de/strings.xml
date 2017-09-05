@@ -113,5 +113,6 @@
     <string name="help_revisit_answer">Auf dem Ergebnis-Bildschirm am Ende eines Spiels können Aufgaben zum Wiederholen im nächsten Spiel durch drücken ausgewählt werden.</string>
     <string name="help_score">Wie wird die Punktzahl berechnet?</string>
     <string name="help_score_answer">Die Punktzahl setzt sich aus der Anzahl der richtig beantworteten Aufgaben, sowie der Zeit die insgesamt für alle Aufgaben benötigt wurde zusammen.</string>
+    <string name="action_score" >Punktzahl</string>
 
 </resources>

@@ -5,9 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -105,7 +109,11 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
             exercise.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
             solution.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             exercise.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            exercise.setTextColor(getResources().getColor(R.color.lightblue));
+            if(game.exercises.get(i).revisit) {
+                exercise.setTextColor(getResources().getColor(R.color.middlegrey));
+            } else {
+                exercise.setTextColor(getResources().getColor(R.color.lightblue));
+            }
             solution.setTextColor(getResources().getColor(R.color.red));
 
             exercise.setText(game.exercises.get(i).x + " " + game.exercises.get(i).o + " " + game.exercises.get(i).y + " = " + game.exercises.get(i).z);
@@ -113,8 +121,12 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
                 solution.setText("\u2713");
                 solution.setTextColor(getResources().getColor(R.color.green));
             } else {
+                String answer =""+game.exercises.get(i).z;
+                final SpannableStringBuilder sb = new SpannableStringBuilder(exercise.getText());
+                final ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.red));
+                sb.setSpan(fcs, exercise.getText().length()-answer.length(), exercise.getText().length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                 solution.setText(""+game.exercises.get(i).solve());
-                exercise.setTextColor(getResources().getColor(R.color.lightblue));
+                exercise.setText(sb);
             }
 
             exercise.setId(i);

@@ -14,6 +14,7 @@
             android:key="pref_switch_answer"
             android:title="@string/pref_switch_answer"
             android:summary="@string/pref_switch_answer_summary"
+            android:dependency="pref_switch_feedback"
             android:defaultValue="false"/>
         </PreferenceCategory>
     <PreferenceCategory

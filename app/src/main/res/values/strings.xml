@@ -38,10 +38,10 @@
     <string name="game_desc">This is the default main menu for game apps. The viewpager above should be used to switch between game modes.</string>
     <string name="game_mode_one">Number Range</string>
     <string name="game_mode_two">Choose operators</string>
-    <string name="number_range_one" translatable="false">0-10</string>
-    <string name="number_range_two" translatable="false">10-100</string>
-    <string name="number_range_three" translatable="false">100-1000</string>
-    <string name="number_range_four" translatable="false">1000-10000</string>
+    <string name="number_range_one" translatable="false">10</string>
+    <string name="number_range_two" translatable="false">100</string>
+    <string name="number_range_three" translatable="false">1000</string>
+    <string name="number_range_four" translatable="false">10000</string>
     <string name="game_button_confirm">Confirm</string>
     <string name="game_button_reset">Reset</string>
     <string name="game_max_length_toast">Result can\'t be larger than 9999999</string>

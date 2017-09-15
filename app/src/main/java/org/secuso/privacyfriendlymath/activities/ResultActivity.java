@@ -85,14 +85,13 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 saveSelectedExercises();
+                updateStats();
+                updateScore(playerName);
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
-
-        updateStats();
-        updateScore(playerName);
 
         if(!game.add) addSign.setTextColor(getResources().getColor(R.color.middlegrey));
         if(!game.sub) subSign.setTextColor(getResources().getColor(R.color.middlegrey));
@@ -150,6 +149,8 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed() {
+        updateStats();
+        updateScore(playerName);
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

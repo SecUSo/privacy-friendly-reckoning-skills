@@ -101,13 +101,14 @@ public class ExerciseActivity extends AppCompatActivity {
         });
 
         game = (gameInstance) getIntent().getSerializableExtra("game");
+
         exercise = newExercise();
 
         miliElapsed2 =SystemClock.elapsedRealtime();
         updateLabels();
 
         if(!getIntent().getBooleanExtra("continue",false)){
-            timer.setBase(SystemClock.elapsedRealtime());
+            timer.setBase(SystemClock.elapsedRealtime()  - game.timeElapsed);
             timer.start();
         }
         operand1.setText(""+exercise.x);
@@ -163,46 +164,72 @@ public class ExerciseActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         miliElapsed =SystemClock.elapsedRealtime();
-        if(getIntent().getBooleanExtra("continue",false)){
+        if(getIntent().getBooleanExtra("continue",false) || game.timeElapsed > 0) {
             loadGameFromStorage();
-            if(game.exercises.size() > 0) {
-                exercise = game.exercises.get(game.exercises.size() - 1);
-                if (exercise.pausedOn) {
-                    timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
-                    input.setText(""+exercise.z);
-                    sb.setLength(0);
-                    sb.append(""+exercise.z);
-                    String s = ""+exercise.z;
-                    if(exercise.z == exercise.solve()){
-                        input.setTextColor(getResources().getColor(R.color.green));
-                        s = s + "" + " \u2713";
-                    } else {
-                        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-                        if(sharedPref.getBoolean("pref_switch_answer", false)) {
-                            s = s + " (" + exercise.solve() + ")";
-                            input.setTextColor(getResources().getColor(R.color.red));
+            //this can happen if orientation changes during name input
+            if (game.gameFinished) {
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+                String name = sharedPref.getString("weight",null);
+                if(name == null){
+                    startResultActivity("");
+                } else {
+                    startResultActivity(name);
+                }
+            } else {
+                if (game.exercises.size() > 0) {
+                    if (exercise.pausedOn) {
+                        timer.stop();
+                        exercise = game.exercises.get(game.exercises.size() - 1);
+                        timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
+                        input.setText("" + exercise.z);
+                        sb.setLength(0);
+                        sb.append("" + exercise.z);
+                        String s = "" + exercise.z;
+                        if (exercise.z == exercise.solve()) {
+                            input.setTextColor(getResources().getColor(R.color.green));
+                            s = s + "" + " \u2713";
                         } else {
-                            input.setTextColor(getResources().getColor(R.color.red));
+                            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+                            if (sharedPref.getBoolean("pref_switch_answer", false)) {
+                                s = s + " (" + exercise.solve() + ")";
+                                input.setTextColor(getResources().getColor(R.color.red));
+                            } else {
+                                input.setTextColor(getResources().getColor(R.color.red));
+                            }
                         }
+                        input.setText(s);
+                        updateLabels();
+                    } else {
+                        timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
+                        timer.start();
+                        //exercise = newExercise();
+                        input.setText(sb);
+                        updateLabels();
                     }
-                    input.setText(s);
-                    updateLabels();
                 } else {
                     timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
                     timer.start();
-                    exercise = newExercise();
+                    //exercise = newExercise();
+                    input.setText(sb);
                     updateLabels();
                 }
-            } else {
-                timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
-                timer.start();
-                exercise = newExercise();
-                updateLabels();
             }
         }
     }
 
     private void saveGameToStorage(){
+
+        //save current exercise
+        game.e_x = exercise.x;
+        game.e_y = exercise.y;
+        if(sb.length() == 0){
+            game.e_input = "";
+        } else {
+            game.e_input = sb.toString();
+        }
+        game.e_op = exercise.o;
+        game.e_paused = exercise.pausedOn;
+
 
         SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = hs.edit();
@@ -229,6 +256,16 @@ public class ExerciseActivity extends AppCompatActivity {
             game = (gameInstance) is.readObject();
             is.close();
             fis.close();
+
+            //retrieve current exercise
+            exercise.x = game.e_x;
+            exercise.y = game.e_y;
+            exercise.o = game.e_op;
+            sb.setLength(0);
+            sb.append(game.e_input);
+            exercise.pausedOn = game.e_paused;
+
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e){
@@ -294,66 +331,77 @@ public class ExerciseActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.calcbutton_00:
+                if(!exercise.pausedOn)
                 if(sb.length() < maxLength)
                      sb.append("0");
                 else
                     maxInputToast();
                 break;
             case R.id.calcbutton_01:
+                if(!exercise.pausedOn)
                 if(sb.length() < maxLength)
                     sb.append("1");
                 else
                     maxInputToast();
                 break;
             case R.id.calcbutton_02:
+                if(!exercise.pausedOn)
                 if(sb.length() < maxLength)
                     sb.append("2");
                 else
                     maxInputToast();
                 break;
             case R.id.calcbutton_03:
+                if(!exercise.pausedOn)
                 if(sb.length() < maxLength)
                     sb.append("3");
                 else
                     maxInputToast();
                 break;
             case R.id.calcbutton_04:
+                if(!exercise.pausedOn)
                 if(sb.length() < maxLength)
                     sb.append("4");
                 else
                     maxInputToast();
                 break;
             case R.id.calcbutton_05:
+                if(!exercise.pausedOn)
                 if(sb.length() < maxLength)
                     sb.append("5");
                 else
                     maxInputToast();
                 break;
             case R.id.calcbutton_06:
+                if(!exercise.pausedOn)
                 if(sb.length() < maxLength)
                     sb.append("6");
                 else
                     maxInputToast();
                 break;
             case R.id.calcbutton_07:
+                if(!exercise.pausedOn)
                 if(sb.length() < maxLength)
                     sb.append("7");
                 else
                     maxInputToast();
                 break;
             case R.id.calcbutton_08:
+                if(!exercise.pausedOn)
                 if(sb.length() < maxLength)
                     sb.append("8");
                 else
                     maxInputToast();
                 break;
             case R.id.calcbutton_09:
+                if(!exercise.pausedOn)
                 if(sb.length() < maxLength)
                     sb.append("9");
                 else
                     maxInputToast();
                 break;
             case R.id.calcbutton_trash:
+                if(!exercise.pausedOn)
                 if(sb.length()>0) sb.setLength(sb.length() - 1);
                 break;
         }
@@ -384,11 +432,20 @@ public class ExerciseActivity extends AppCompatActivity {
             timer.stop();
             highScoreAchieved = achievedHighscore(game.calculateScore((int)((game.timeElapsed)/1000.0)),game.space);
             if(highScoreAchieved){
+                game.gameFinished = true;
                 displayNameInput();
             } else {
-                startResultActivity("defaultname");
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+                String name = sharedPref.getString("weight",null);
+                if(name == null){
+                    startResultActivity("");
+                } else {
+                    startResultActivity(name);
+                }
+                startResultActivity(name);
             }
         } else {
+            game.e_commited = true;
             sb.setLength(0);
             exercise = newExercise();
             operand1.setText(""+exercise.x);
@@ -450,7 +507,8 @@ public class ExerciseActivity extends AppCompatActivity {
 
         //check if name has been set
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String name = sharedPref.getString("weight",null);
+        final String name = sharedPref.getString("weight",null);
+
         //otherwise use previous input
         SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
         if(name != null){
@@ -480,7 +538,11 @@ public class ExerciseActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                startResultActivity("defaultname");
+                if(name == null){
+                    startResultActivity("");
+                } else {
+                    startResultActivity(name);
+                }
             }
         });
         builder.show();

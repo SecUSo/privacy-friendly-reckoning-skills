@@ -23,7 +23,16 @@ public class gameInstance implements Serializable {
     public int score = 0;
     public int space = 0;
     public Boolean mul,add,sub,div = true;
-    public long timeElapsed;
+    public long timeElapsed = 0;
+
+    public int e_x = 0;
+    public int e_y = 0;
+    public int e_z = 0;
+    public String e_input = "0";
+    public String e_op = "+";
+    public Boolean e_commited = false;
+    public Boolean e_paused = false;
+    public Boolean gameFinished = false;
 
     public ArrayList<exerciseInstance> exercises = new ArrayList<>();
 

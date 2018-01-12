@@ -10,7 +10,7 @@
     <string name="action_main">Main</string>
     <string name="action_game">Game</string>
     <string name="action_tutorial" translatable="false">Tutorial</string>
-    <string name="action_score">Score</string>
+    <string name="action_score">Highscore</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
-        applicationId "org.secuso.math"
+        applicationId "org.secuso.privacyfriendlycalculationtrainer"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 5
-        versionName "0.1"
+        versionCode 1
+        versionName "1.0"
     }
     buildTypes {
         release {

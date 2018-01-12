@@ -34,7 +34,7 @@
     <string name="title_activity_game">Game</string>
     <string name="game_button_start">New Game</string>
     <string name="game_button_continue">Continue</string>
-    <string name="game_button_highscore">High Score</string>
+    <string name="game_button_highscore">Highscore</string>
     <string name="game_desc">This is the default main menu for game apps. The viewpager above should be used to switch between game modes.</string>
     <string name="game_mode_one">Number Range</string>
     <string name="game_mode_two">Choose operators</string>
@@ -55,7 +55,7 @@
     <!--###RESULT###-->
     <string name="title_activity_result">Result</string>
     <string name="upto">Up to</string>
-    <string name="result_score">Score</string>
+    <string name="result_score">Highscore</string>
     <string name="result_solved">Solved</string>
     <string name="result_solved_of">of</string>
     <string name="result_highscore">Highscore</string>
@@ -76,8 +76,8 @@
     <string name="help_revisit">How can I revisit a particular exercise?</string>
     <string name="help_revisit_answer">You can select a particular exercise to be tested again by tapping it on the result screen after you finished a game.</string>
 
-    <string name="help_score">How is the score calculated?</string>
-    <string name="help_score_answer">The score takes into account how many exercises were solved successfully and how much time it took you to answer all of them.</string>
+    <string name="help_score">How is the highscore calculated?</string>
+    <string name="help_score_answer">The highscore takes into account how many exercises were solved successfully and how much time it took you to answer all of them.</string>
 
     <string name="help_privacy">What makes the app privacy-friendly?</string>
     <string name="help_privacy_answer">Privacy Friendly App Math-Trainer does not require any permission. It further does not include any tracking mechanisms or advertisement.</string>

@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Mathe-Trainer</string>
-    <string name="app_name_long">Privacy Friendly Mathe-Trainer</string>
+    <string name="app_name">Kopfrechentrainer</string>
+    <string name="app_name_long">Privacy Friendly Kopfrechentrainer</string>
 
     <!-- ###DRAWER###-->
     <string name="action_help">Hilfe</string>
@@ -11,20 +11,6 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <!-- ###MAIN### -->
-    <string name="main_button_text">Button volle Breite</string>
-    <string name="main_button_disabled_text">Inaktiver Button</string>
-    <string name="main_button_1">1</string>
-    <string name="main_button_2">2</string>
-    <string name="main_button_3">3</string>
-    <string name="main_button_4">4</string>
-    <string name="main_button_5">5</string>
-    <string name="main_text_fullwithbutton_desc">Ein Button mit voller breite sieht folgendermaßen aus:</string>
-    <string name="main_text_disabledbutton_desc">Ein inaktiver Button sieht folgendermaßen aus (jede Größe):</string>
-    <string name="main_text_title">Das hier ist eine Beispiel-App zum das Design der Privacy Friendly Apps zu demonstrieren. Weitere Infos gibt es im Privacy Friendly App Guide.</string>
-    <string name="main_text_normalbutton_desc">Es gibt verschiedene Möglichkeiten, um einfache Buttons darzustellen. Button 1 entspricht der Basisform. Wenn Buttons visual abgetrennt werden sollen, ist Button 2 zu verwenden. Die Buttons 3&#8211;5 sind Beispiels für hevorgehobene Buttons. Je nach App können auch andere Farben zum Highlighten verwendet werden.</string>
-    <string name="main_button_welcomedialog_text">Der Button in der Ecke unten links öffnet einen Beispiel-Welcome Dialog.</string>
 
     <!-- ###GAME###-->
     <string name="title_activity_game">Spiel</string>
@@ -39,8 +25,8 @@
     <!--###HELP###-->
     <string name="help">Help</string>
 
-    <string name="help_whatis">Was ist Privacy Friendly Mathe-Trainer?</string>
-    <string name="help_whatis_answer">Privacy Friendly Mathe-Trainer ermöglicht es simple arithmetische Kopfrechenaufgaben in vier verschiedenen Zahlenräumen zu lösen.</string>
+    <string name="help_whatis">Was ist Privacy Friendly Kopfrechentrainer?</string>
+    <string name="help_whatis_answer">Privacy Friendly Kopfrechentrainer ermöglicht es simple arithmetische Kopfrechenaufgaben in vier verschiedenen Zahlenräumen zu üben.</string>
     <string name="help_privacy">Was macht die App privatsphäre-freundlich?</string>
     <string name="help_privacy_answer">Kein Tracking oder nötige Berechtigungen</string>
     <string name="help_permission">Welche Berechtigungen braucht die App?</string>
@@ -69,13 +55,13 @@
 
     <!-- ### TUTORIAL DIALOG ### -->
     <string name="slide1_heading">Willkommen!</string>
-    <string name="slide1_text">Mit dieser App kannst du Aufgaben der 4 Grundrechenarten in verschiedenen Zahlenräumen üben.</string>
+    <string name="slide1_text">Mit Privacy Friendly Kopfrechentrainer können Sie Aufgaben der 4 Grundrechenarten in verschiedenen Zahlenräumen üben.</string>
 
     <string name="slide2_heading">Rechenarten und Zahlenräume</string>
-    <string name="slide2_text">Im Hauptmenü kannst du zwischen verschiedenen Rechenarten und Zahlenräumen wählen. Auf eine der Rechenarten drücken wird sie für das nächste Spiel aktivieren/deaktivieren.</string>
+    <string name="slide2_text">Im Hauptmenü können Sie zwischen verschiedenen Rechenarten und Zahlenräumen wählen. Dabei wird die jeweilige Rechenart durch einen Klick gewählt.</string>
 
     <string name="slide3_heading">Aufgaben wiederholen</string>
-    <string name="slide3_text">Du kannst Aufgaben zum Wiederholen markieren indem du im Ergebnis-Bildschirm auf sie drückst.</string>
+    <string name="slide3_text">Falls Sie Aufgaben wiederholt üben möchten, können Sie diese im Ergebnisbildschirm durch einen Klick auswählen.</string>
 
     <string name="next">Weiter</string>
     <string name="skip">Überspringen</string>
@@ -101,7 +87,7 @@
     <string name="result_solved">Gelöst</string>
     <string name="result_solved_of">von</string>
     <string name="score_credit">Punkte</string>
-    <string name="title_activity_result">Ergebniss</string>
+    <string name="title_activity_result">Ergebnis</string>
     <string name="title_activity_score">Höchstpunktzahl</string>
     <string name="upto">Bis</string>
     <string name="result_toast_selected">Aufgabe zum wiederholen ausgewählt</string>

@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Math-Trainer</string>
-    <string name="app_name_long">Privacy Friendly Math-Trainer</string>
+    <string name="app_name">Reckoning Skills</string>
+    <string name="app_name_long">Privacy Friendly Reckoning Skills</string>
     <string name="app_prefix" translatable="false">Privacy Friendly</string>
 
     <!-- ###DRAWER###-->
@@ -64,8 +64,8 @@
     <!--###HELP###-->
     <string name="help">Help</string>
 
-    <string name="help_whatis">What is Privacy Friendly App Math-Trainer?</string>
-    <string name="help_whatis_answer">Privacy Friendly App Math-Trainer generates basic arithmetic mental exercises in four different number spaces. </string>
+    <string name="help_whatis">What is Privacy Friendly Reckoning Skills?</string>
+    <string name="help_whatis_answer">Privacy Friendly Reckoning Skills generates basic arithmetic mental exercises in four different number spaces. </string>
 
     <string name="help_game">How can I start a game?</string>
     <string name="help_game_answer">You can start a game by selecting one of the four number ranges and at least one of the four operators in the main menu and tapping the "New Game" button.</string>
@@ -80,9 +80,9 @@
     <string name="help_score_answer">The highscore takes into account how many exercises were solved successfully and how much time it took you to answer all of them.</string>
 
     <string name="help_privacy">What makes the app privacy-friendly?</string>
-    <string name="help_privacy_answer">Privacy Friendly App Math-Trainer does not require any permission. It further does not include any tracking mechanisms or advertisement.</string>
+    <string name="help_privacy_answer">Privacy Friendly Reckoning Skills does not require any permission. It further does not include any tracking mechanisms or advertisement.</string>
     <string name="help_permission">Which permissions does the App require?</string>
-    <string name="help_permission_answer">Privacy Friendly App Math-Trainer does not require any permissions.</string>
+    <string name="help_permission_answer">Privacy Friendly Reckoning Skills does not require any permissions.</string>
 
     <!--###ABOUT###-->
     <string name="about">About</string>

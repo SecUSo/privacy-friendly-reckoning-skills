@@ -1,14 +1,15 @@
 package org.secuso.privacyfriendlymath.activities;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
 
+import org.secuso.privacyfriendlymath.R;
 import org.secuso.privacyfriendlymath.helpers.ExpandableListAdapter;
 import org.secuso.privacyfriendlymath.helpers.HelpDataDump;
-import org.secuso.privacyfriendlymath.R;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * Class structure taken from tutorial at http://www.journaldev.com/9942/android-expandablelistview-example-tutorial

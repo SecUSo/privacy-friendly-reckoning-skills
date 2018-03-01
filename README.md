@@ -1,6 +1,6 @@
-# Privacy Friendly Math Trainer
+﻿# Privacy Friendly Reckoning Skills
 
-Privacy Friendly Math Trainer is a game for practicing basic arithmetic exercises and belongs to the group of Privacy Friendly Apps developed by Technische Universität Darmstadt, Germany. 
+Privacy Friendly Reckoning Skills is a game for practicing basic arithmetic exercises and belongs to the group of Privacy Friendly Apps developed by Technische Universität Darmstadt, Germany. 
 
 It doesn't use any tracking mechanisms or advertisement. The app requires no permissions.
 
@@ -19,7 +19,7 @@ Target SDK: 25
 
 ## License
 
-Privacy Friendly Math Trainer is licensed under the GPLv3.
+Privacy Friendly Reckoning Skills is licensed under the GPLv3.
 Copyright (C) 2017  rfstu (github user)
 
 This program is free software: you can redistribute it and/or modify
@@ -44,7 +44,4 @@ Markus Hau<br />
 
 Github-Users: <br />
 rfstu <br />
-Yonjuni (privacy-friendly-app-example) <br />
-Kamuno (privacy-friendly-app-example)
-
-
+Yonjuni

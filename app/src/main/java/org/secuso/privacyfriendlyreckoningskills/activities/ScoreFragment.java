@@ -1,3 +1,17 @@
+/*
+ This file is part of Privacy Friendly Reckoning Skills.
+ Privacy Friendly Reckoning Skills is free software:
+ you can redistribute it and/or modify it under the terms of the
+ GNU General Public License as published by the Free Software Foundation,
+ either version 3 of the License, or any later version.
+ Privacy Friendly Reckoning Skills is distributed in the hope
+ that it will be useful, but WITHOUT ANY WARRANTY; without even
+ the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ See the GNU General Public License for more details.
+ You should have received a copy of the GNU General Public License
+ along with Privacy Friendly Reckoning Skills. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.secuso.privacyfriendlyreckoningskills.activities;
 
 import android.content.SharedPreferences;
@@ -11,20 +25,6 @@ import android.widget.TextView;
 
 import org.secuso.privacyfriendlyreckoningskills.R;
 
-/**
- *This program is free software: you can redistribute it and/or modify
- *it under the terms of the GNU General Public License as published by
- *the Free Software Foundation, either version 3 of the License, or
- *(at your option) any later version.
- *
- *This program is distributed in the hope that it will be useful,
- *but WITHOUT ANY WARRANTY; without even the implied warranty of
- *MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *GNU General Public License for more details.
- *
- *You should have received a copy of the GNU General Public License
- *along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 public class ScoreFragment extends Fragment{
 
     int space;
@@ -49,12 +49,12 @@ public class ScoreFragment extends Fragment{
 
             SharedPreferences sharedPref = getActivity().getSharedPreferences("pfa-math-highscore", getActivity().MODE_PRIVATE);
 
-            TextView add = (TextView) getView().findViewById(R.id.stat_add);
-            TextView sub = (TextView) getView().findViewById(R.id.stat_sub);
-            TextView mul = (TextView) getView().findViewById(R.id.stat_mul);
-            TextView div = (TextView) getView().findViewById(R.id.stat_div);
-            LinearLayout names = (LinearLayout) getView().findViewById(R.id.namelist);
-            LinearLayout scores = (LinearLayout) getView().findViewById(R.id.scorelist);
+            TextView add = getView().findViewById(R.id.stat_add);
+            TextView sub = getView().findViewById(R.id.stat_sub);
+            TextView mul = getView().findViewById(R.id.stat_mul);
+            TextView div = getView().findViewById(R.id.stat_div);
+            LinearLayout names = getView().findViewById(R.id.namelist);
+            LinearLayout scores = getView().findViewById(R.id.scorelist);
 
             add.setText(""+perc(sharedPref.getInt("rightadd"+space,0),sharedPref.getInt("rightadd"+space,0)+sharedPref.getInt("wrongadd"+space,0))+"%");
             sub.setText(""+perc(sharedPref.getInt("rightsub"+space,0),sharedPref.getInt("rightsub"+space,0)+sharedPref.getInt("wrongsub"+space,0))+"%");
@@ -90,8 +90,8 @@ public class ScoreFragment extends Fragment{
         if(y == 0){
             return 0;
         }
-        int i = (int)((x*100.0f) / y);
-        return i;
+        //int i = (int)((x*100.0f) / y);
+        return (int)((x*100.0f) / y);
     }
 
 }

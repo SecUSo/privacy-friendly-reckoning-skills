@@ -1,11 +1,11 @@
-package org.secuso.privacyfriendlymath.activities;
+package org.secuso.privacyfriendlyreckoningskills.activities;
 
 import android.os.Bundle;
 import android.widget.ExpandableListView;
 
-import org.secuso.privacyfriendlymath.R;
-import org.secuso.privacyfriendlymath.helpers.ExpandableListAdapter;
-import org.secuso.privacyfriendlymath.helpers.HelpDataDump;
+import org.secuso.privacyfriendlyreckoningskills.R;
+import org.secuso.privacyfriendlyreckoningskills.helpers.ExpandableListAdapter;
+import org.secuso.privacyfriendlyreckoningskills.helpers.HelpDataDump;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

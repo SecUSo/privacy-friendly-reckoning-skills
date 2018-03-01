@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath.helpers;
+package org.secuso.privacyfriendlyreckoningskills.helpers;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import org.secuso.privacyfriendlymath.R;
+import org.secuso.privacyfriendlyreckoningskills.R;
 
 import java.util.HashMap;
 import java.util.List;

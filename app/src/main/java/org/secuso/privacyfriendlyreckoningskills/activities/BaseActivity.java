@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath.activities;
+package org.secuso.privacyfriendlyreckoningskills.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,8 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-import org.secuso.privacyfriendlymath.R;
-import org.secuso.privacyfriendlymath.tutorial.TutorialActivity;
+import org.secuso.privacyfriendlyreckoningskills.R;
+import org.secuso.privacyfriendlyreckoningskills.tutorial.TutorialActivity;
 
 /**
  * @author Chris

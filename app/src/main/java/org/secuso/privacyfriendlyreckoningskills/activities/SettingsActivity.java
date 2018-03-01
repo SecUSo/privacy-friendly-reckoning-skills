@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath.activities;
+package org.secuso.privacyfriendlyreckoningskills.activities;
 
 
 import android.annotation.TargetApi;
@@ -14,7 +14,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 
-import org.secuso.privacyfriendlymath.R;
+import org.secuso.privacyfriendlyreckoningskills.R;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On

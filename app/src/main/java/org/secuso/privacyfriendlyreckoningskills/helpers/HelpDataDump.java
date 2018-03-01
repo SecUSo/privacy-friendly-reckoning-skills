@@ -1,8 +1,8 @@
-package org.secuso.privacyfriendlymath.helpers;
+package org.secuso.privacyfriendlyreckoningskills.helpers;
 
 import android.content.Context;
 
-import org.secuso.privacyfriendlymath.R;
+import org.secuso.privacyfriendlyreckoningskills.R;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

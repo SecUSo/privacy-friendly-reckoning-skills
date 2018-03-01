@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath.activities;
+package org.secuso.privacyfriendlyreckoningskills.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

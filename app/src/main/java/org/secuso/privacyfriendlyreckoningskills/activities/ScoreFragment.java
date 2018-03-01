@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath.activities;
+package org.secuso.privacyfriendlyreckoningskills.activities;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.secuso.privacyfriendlymath.R;
+import org.secuso.privacyfriendlyreckoningskills.R;
 
 /**
  *This program is free software: you can redistribute it and/or modify

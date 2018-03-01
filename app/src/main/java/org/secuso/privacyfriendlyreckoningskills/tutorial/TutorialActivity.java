@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath.tutorial;
+package org.secuso.privacyfriendlyreckoningskills.tutorial;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,8 +18,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.secuso.privacyfriendlymath.R;
-import org.secuso.privacyfriendlymath.activities.MainActivity;
+import org.secuso.privacyfriendlyreckoningskills.R;
+import org.secuso.privacyfriendlyreckoningskills.activities.MainActivity;
 
 /**
  * Class structure taken from tutorial at http://www.androidhive.info/2016/05/android-build-intro-slider-app/

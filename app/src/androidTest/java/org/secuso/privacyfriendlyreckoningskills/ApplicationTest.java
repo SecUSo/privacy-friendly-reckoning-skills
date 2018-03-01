@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath;
+package org.secuso.privacyfriendlyreckoningskills;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

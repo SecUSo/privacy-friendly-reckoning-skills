@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.secuso.privacyfriendlymath">
+    package="org.secuso.privacyfriendlyreckoningskills">
 
     <supports-screens
         android:anyDensity="true"
@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.SplashActivity"
+            android:name="org.secuso.privacyfriendlyreckoningskills.activities.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,50 +26,50 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".tutorial.TutorialActivity"
+            android:name="org.secuso.privacyfriendlyreckoningskills.tutorial.TutorialActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.AboutActivity"
+            android:name="org.secuso.privacyfriendlyreckoningskills.activities.AboutActivity"
             android:label="@string/about"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.secuso.privacyfriendlymath.activities.MainActivity" />
+                android:value="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.HelpActivity"
+            android:name="org.secuso.privacyfriendlyreckoningskills.activities.HelpActivity"
             android:label="@string/help"
-            android:parentActivityName=".activities.MainActivity"
+            android:parentActivityName="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.secuso.privacyfriendlymath.activities.MainActivity" />
+                android:value="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name="org.secuso.privacyfriendlyreckoningskills.activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".activities.MainActivity"
+            android:parentActivityName="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.secuso.privacyfriendlymath.activities.MainActivity" />
+                android:value="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.ExerciseActivity"
+            android:name="org.secuso.privacyfriendlyreckoningskills.activities.ExerciseActivity"
             android:label="@string/title_activity_exercise"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.ResultActivity"
+            android:name="org.secuso.privacyfriendlyreckoningskills.activities.ResultActivity"
             android:label="@string/title_activity_result"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity" />
         <activity
-            android:name=".activities.ScoreActivity"
+            android:name="org.secuso.privacyfriendlyreckoningskills.activities.ScoreActivity"
             android:label="@string/title_activity_score"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity" />
     </application>
 
 </manifest>

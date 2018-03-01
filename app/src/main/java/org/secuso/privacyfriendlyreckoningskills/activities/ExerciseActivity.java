@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath.activities;
+package org.secuso.privacyfriendlyreckoningskills.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,10 +19,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.secuso.privacyfriendlymath.R;
-import org.secuso.privacyfriendlymath.database.PFASQLiteHelper;
-import org.secuso.privacyfriendlymath.exerciseInstance;
-import org.secuso.privacyfriendlymath.gameInstance;
+import org.secuso.privacyfriendlyreckoningskills.R;
+import org.secuso.privacyfriendlyreckoningskills.database.PFASQLiteHelper;
+import org.secuso.privacyfriendlyreckoningskills.exerciseInstance;
+import org.secuso.privacyfriendlyreckoningskills.gameInstance;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

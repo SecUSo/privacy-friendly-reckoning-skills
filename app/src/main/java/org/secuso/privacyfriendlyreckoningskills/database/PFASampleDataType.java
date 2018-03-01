@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath.database;
+package org.secuso.privacyfriendlyreckoningskills.database;
 
 /**
  *

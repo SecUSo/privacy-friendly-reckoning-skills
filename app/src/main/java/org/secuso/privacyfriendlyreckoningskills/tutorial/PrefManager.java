@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath.tutorial;
+package org.secuso.privacyfriendlyreckoningskills.tutorial;
 
 import android.content.Context;
 import android.content.SharedPreferences;

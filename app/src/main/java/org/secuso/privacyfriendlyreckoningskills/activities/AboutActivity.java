@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath.activities;
+package org.secuso.privacyfriendlyreckoningskills.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -7,8 +7,8 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
-import org.secuso.privacyfriendlymath.BuildConfig;
-import org.secuso.privacyfriendlymath.R;
+import org.secuso.privacyfriendlyreckoningskills.BuildConfig;
+import org.secuso.privacyfriendlyreckoningskills.R;
 
 /**
  * Created by yonjuni on 15.06.16.

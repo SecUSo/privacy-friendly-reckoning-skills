@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath;
+package org.secuso.privacyfriendlyreckoningskills;
 
 import org.junit.Test;
 

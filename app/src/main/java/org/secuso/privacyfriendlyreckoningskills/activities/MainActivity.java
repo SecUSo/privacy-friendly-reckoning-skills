@@ -1,4 +1,4 @@
-package org.secuso.privacyfriendlymath.activities;
+package org.secuso.privacyfriendlyreckoningskills.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.secuso.privacyfriendlymath.R;
-import org.secuso.privacyfriendlymath.gameInstance;
+import org.secuso.privacyfriendlyreckoningskills.R;
+import org.secuso.privacyfriendlyreckoningskills.gameInstance;
 
 import static android.R.color.holo_orange_light;
 

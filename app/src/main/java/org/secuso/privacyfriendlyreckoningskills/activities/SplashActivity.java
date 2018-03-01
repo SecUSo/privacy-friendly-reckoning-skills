@@ -1,10 +1,13 @@
-package org.secuso.privacyfriendlymath.database;
+package org.secuso.privacyfriendlyreckoningskills.activities;
 
-import org.json.JSONObject;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import org.secuso.privacyfriendlyreckoningskills.tutorial.TutorialActivity;
 
 /**
- * @author Karola Marky
- * @version 20161225
+ * Created by yonjuni on 22.10.16.
  */
 
 /**
@@ -21,16 +24,15 @@ import org.json.JSONObject;
  *You should have received a copy of the GNU General Public License
  *along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+public class SplashActivity extends AppCompatActivity {
 
-public class DatabaseImporter {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    private final String DEBUG_TAG = "DATABASE_IMPORTER";
-
-    public void importSimpleTable(PFASQLiteHelper database, JSONObject JSONTable) {
-
-    }
-
-    public void importDatabase(PFASQLiteHelper database, JSONObject JSONDB) {
+        Intent mainIntent = new Intent(SplashActivity.this, TutorialActivity.class);
+        SplashActivity.this.startActivity(mainIntent);
+        SplashActivity.this.finish();
 
     }
 

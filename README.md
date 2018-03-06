@@ -15,12 +15,12 @@ Further development requires Android Studio, we recommend to use at least versio
 ### API Reference
 
 Mininum SDK: 17
-Target SDK: 25 
+Target SDK: 26 
 
 ## License
 
 Privacy Friendly Reckoning Skills is licensed under the GPLv3.
-Copyright (C) 2017  rfstu (github user)
+Copyright (C) 2017-2018  rfstu (github user)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

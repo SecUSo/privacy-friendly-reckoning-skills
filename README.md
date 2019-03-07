@@ -4,6 +4,13 @@ Privacy Friendly Reckoning Skills is a game for practicing basic arithmetic exer
 
 It doesn't use any tracking mechanisms or advertisement. The app requires no permissions.
 
+[<img src="https://f-droid.org/badge/get-it-on.png"
+      alt="Get it on F-Droid"
+      height="80">](https://f-droid.org/packages/org.secuso.privacyfriendlyrecknoningskills/)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+      alt="Get it on Google Play"
+      height="80">](https://play.google.com/store/apps/details?id=org.secuso.privacyfriendlyrecknoningskills)
+
 ## Motivation
 
 Privacy Friendly Apps are group of Android applications which are optimized with regards to privacy. Further information can be found on secuso.org/pfa

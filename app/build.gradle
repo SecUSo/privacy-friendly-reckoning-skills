@@ -27,7 +27,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     // Backup
-    // implementation project(path: ':backup-api')
+    implementation project(path: ':backup-api')
     def work_version = "2.4.0"
     implementation "androidx.work:work-runtime:$work_version"
     implementation "androidx.work:work-runtime-ktx:$work_version"

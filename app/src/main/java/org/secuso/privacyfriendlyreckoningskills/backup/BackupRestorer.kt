@@ -82,6 +82,27 @@ class BackupRestorer : IBackupRestorer {
         reader.endObject()
     }
 
+    @Throws(IOException::class)
+    private fun readHighscores(reader: JsonReader, preferences: SharedPreferences.Editor) {
+        val hs_string = Regex("(hs|previous).*")
+        val hs_int = Regex("(right|wrong).*")
+        val hs_bool = Regex("continue")
+
+        reader.beginObject()
+        while (reader.hasNext()) {
+            val name: String = reader.nextName()
+            Log.d("preference", name)
+
+            when {
+                hs_string.matches(name)-> preferences.putString(name, reader.nextString())
+                hs_int.matches(name)-> preferences.putInt(name, reader.nextInt())
+                hs_bool.matches(name)-> preferences.putBoolean(name, reader.nextBoolean())
+                else -> throw RuntimeException("Unknown preference $name")
+            }
+        }
+        reader.endObject()
+    }
+
     private fun readPreferenceSet(reader: JsonReader): Set<String> {
         val preferenceSet = mutableSetOf<String>()
 
@@ -98,6 +119,7 @@ class BackupRestorer : IBackupRestorer {
             val isReader = InputStreamReader(restoreData)
             val reader = JsonReader(isReader)
             val preferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
+            val highsores = context.applicationContext.getSharedPreferences("pfa-math-highscore", 0 ).edit()
 
             // START
             reader.beginObject()
@@ -106,11 +128,13 @@ class BackupRestorer : IBackupRestorer {
                 when (type) {
                     "database" -> readDatabase(reader, context)
                     "preferences" -> readPreferences(reader, preferences)
+                    "highscore" -> readHighscores(reader, highsores)
                     else -> throw RuntimeException("Can not parse type $type")
                 }
             }
             reader.endObject()
             preferences.commit()
+            highsores.commit()
 
             exitProcess(0)
         } catch (e: Exception) {

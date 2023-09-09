@@ -37,6 +37,12 @@ class BackupCreator : IBackupCreator {
             val pref = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
             writePreferences(writer, pref)
 
+            Log.d(TAG, "Writing highscores")
+            writer.name("highscore")
+
+            val highscore = context.applicationContext.getSharedPreferences("pfa-math-highscore", 0 )
+            writePreferences(writer, highscore)
+
             writer.endObject()
             writer.close()
         } catch (e: Exception) {

@@ -5,7 +5,7 @@
 [PFA]: https://secuso.org/pfa
 [Mastodon]: https://xn--baw-joa.social/@SECUSO_Research
 [Twitter]: https://twitter.com/SECUSOResearch
-<img src="https://github.com/SecUSo/privacy-friendly-qr-scanner/raw/master/fastlane/metadata/android/en-US/images/icon.png"
+<img src="https://github.com/SecUSo/privacy-friendly-reckoning-skills/raw/master/fastlane/metadata/android/en-US/images/icon.png"
      alt="Privacy Friendly QR Scanner Icon"
      width="80px"
      align="right"

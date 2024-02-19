@@ -1,15 +1,6 @@
-Privacy Friendly Kopfrechnentrainer ermöglicht es, Kopfrechenaufgaben in den vier Grundrechenarten spielerisch zu lösen. Für jede Übungsrunde kann der Spieler zwischen den vier Grundrechenarten und verschiedenen Schwierigkeitsstufen (Aufgaben bis zu 10, 100, 1000 oder 10000) wählen.
 
-Für jede beendete Übungsrunde erhält der Spieler eine Punktzahl, die sich aus der Anzahl an richtig beantworteten Aufgaben und der insgesamt benötigten Zeit zusammensetzt.Nach jedem Spiel kann der Spieler in einer Übersicht alle Aufgaben sowie seine Eingaben und die richtigen Lösungen einsehen. Es ist zudem möglich in den Einstellungen "Direktes Feedback" einzustellen und so nach jeder einzelnen Aufgabe direkt zu erfahren, ob diese korrekt gelöst wurde.
 
-Was unterscheidet Privacy Friendly Kopfrechentrainer von anderen, ähnlichen Apps?
-
-1) Keine Berechtigungen
-Privacy Friendly Kopfrechentrainer benötigt keine Berechtigungen.
-
-Zum Vergleich: Die Top Ten ähnlicher Apps, die im Google Play Store erhältlich sind, benötigt durchschnittlich 3,4 Berechtigungen (Stand: November 2017). Hierzu zählen der Zugriff auf Netzwerke, das Internet oder Standortdaten.
-
-2) Keine störende Werbung
-Viele andere kostenlose Apps im Google Play Store blenden störende Werbung ein, die unter anderem auch die Akkulaufzeit verkürzt und Datenvolumen verbrauchen kann.
-
-Die App gehört zur Gruppe der Privacy Friendly Apps, die von der Forschungsgruppe SECUSO der Technischen Universität Darmstadt entwickelt werden. Mehr Informationen unter: https://secuso.org/pfa
+Kontaktieren Sie uns gerne   ber:
+Twitter - @SECUSOResearch https://twitter.com/secusoresearc)
+Mastodon - @SECUSO_Research@baw  .social https://xn--baw-joa.social/@SECUSO_Research/
+Offene Stellen - https://secuso.aifb.kit.edu/83_1557.php

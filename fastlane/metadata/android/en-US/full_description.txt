@@ -1,3 +1,4 @@
+
 Privacy Friendly Reckoning Skills helps you improving your mental calculation skills in the four basic calculating operations.
 
 For each game, the player can choose between the four basic arithmetic operations and four difficulties (exercises up to 10, 100, 1000 and 10000).
@@ -18,3 +19,9 @@ Moreover, Privacy Friendly Ludo distinguishes from many other applications in th
 
 This App requires minimal permissions and is part of the Privacy Friendly Apps group
 developed by the research group SECUSO at Technische Universität Darmstadt. More information can be found at https://secuso.org/pfa
+
+
+Feel free to contact us via:
+Twitter - @SECUSOResearch https://twitter.com/secusoresearch
+Mastodon - @SECUSO_Research@bawü.social https://xn--baw-joa.social/@SECUSO_Research/
+Job opening - https://secuso.aifb.kit.edu/english/Job_Offers_1557.php

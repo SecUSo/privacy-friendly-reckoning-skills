@@ -1,4 +1,7 @@
 
+Privacy Friendly Reckoning Skills helps you improving your mental calculation skills in the four basic calculating operations.
+
+For each game, the player can choose between the four basic arithmetic operations and four difficulties (exercises up to 10, 100, 1000 and 10000).
 
 After finishing an exercise round the player receives a score which depends on the number of exercises answered correctly and the time it took to answer all ten exercises.
 

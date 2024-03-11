@@ -1,4 +1,6 @@
+Privacy Friendly Kopfrechnentrainer ermöglicht es, Kopfrechenaufgaben in den vier Grundrechenarten spielerisch zu lösen. Für jede Übungsrunde kann der Spieler zwischen den vier Grundrechenarten und verschiedenen Schwierigkeitsstufen (Aufgaben bis zu 10, 100, 1000 oder 10000) wählen.
 
+Für jede beendete Übungsrunde erhält der Spieler eine Punktzahl, die sich aus der Anzahl an richtig beantworteten Aufgaben und der insgesamt benötigten Zeit zusammensetzt.Nach jedem Spiel kann der Spieler in einer Übersicht alle Aufgaben sowie seine Eingaben und die richtigen Lösungen einsehen. Es ist zudem möglich in den Einstellungen "Direktes Feedback" einzustellen und so nach jeder einzelnen Aufgabe direkt zu erfahren, ob diese korrekt gelöst wurde.
 
 Was unterscheidet Privacy Friendly Kopfrechentrainer von anderen, ähnlichen Apps?
 

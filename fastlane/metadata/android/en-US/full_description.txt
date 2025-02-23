@@ -1,27 +1,21 @@
+Privacy Friendly Reckoning Skills helps you improve your mental calculation skills in the four basic calculating operations.
 
-Privacy Friendly Reckoning Skills helps you improving your mental calculation skills in the four basic calculating operations.
+For each game, the player can choose between the four primary arithmetic operations and four levels of difficulty (10, 100, 1000, 10000).
 
-For each game, the player can choose between the four basic arithmetic operations and four difficulties (exercises up to 10, 100, 1000 and 10000).
+After finishing a round, the player receives a score that is determined by two factors: the number of exercises answered correctly and the time it took to complete them.
 
-After finishing an exercise round the player receives a score which depends on the number of exercises answered correctly and the time it took to answer all ten exercises.
+An overview is provided after every game, which shows whether the exercises were solved correctly. Additionally, the "Direct Feedback" attribute (that is available in settings) furnishes instant feedback after each individual exercise.
 
-After every game there is an overview which shows whether the exercises were solved correctly. It is also possible to choose "Direct Feedback" in the settings. If direct feedback is chosen, the player will receive feedback whether the exercise was solved correctly after each single exercise.
+How does Privacy Friendly Reckoning Skills differ from similar apps?
+1) No Permissions
+Reckoning Skills does not require any permissions. For comparison, the top ten similar apps in the Google Play Store require an average of 3 or 4 permissions (as of November 2017). Such breaches include, for example, the location permission, as well as permissions to access, modify, or delete storage data.
 
-How does Privacy Friendly Reckoning Skills differ from other similar apps?
-
-1) No permissions
-Privacy Friendly Reckoning Skills does not require any permissions.
-
-For comparison: The Top Ten of similar apps from the Google Play Store requires an average of 3,4 permissions (in November 2017). These are for instance the location permission or the permissions to access, modify or delete storage.
-
-2) No advertisement
-Moreover, Privacy Friendly Ludo distinguishes from many other applications in the way that it completely relinquishes advertisements. Advertisement might track a user's actions. It could also shorten battery life or use mobile data.
-
-This App requires minimal permissions and is part of the Privacy Friendly Apps group
-developed by the research group SECUSO at Technische Universität Darmstadt. More information can be found at https://secuso.org/pfa
-
+2) No Advertisements
+Moreover, Reckoning Skills differs from many other applications in that it is completely free of advertisements that might track a user's actions, shorten battery life, or use mobile data.
+This app requires minimal permissions and is part of the Privacy Friendly Apps group developed by the research organization SECUSO at Technische Universität Darmstadt. More information can be found at https://secuso.org/pfa.
 
 Feel free to contact us via:
 Twitter - @SECUSOResearch https://twitter.com/secusoresearch
 Mastodon - @SECUSO_Research@bawü.social https://xn--baw-joa.social/@SECUSO_Research/
 Job opening - https://secuso.aifb.kit.edu/english/Job_Offers_1557.php
+

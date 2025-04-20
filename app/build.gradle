@@ -36,6 +36,10 @@ android {
         jvmToolchain(17)
     }
 
+    lint {
+        lintConfig = file("lint.xml")
+    }
+
     android.applicationVariants.configureEach { variant ->
         variant.outputs.configureEach {
             def appName = "pfa-reckoning-skills"

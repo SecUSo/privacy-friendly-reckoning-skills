@@ -1,8 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Reckoning Skills</string>
     <string name="app_name_long">Privacy Friendly Reckoning Skills</string>
     <string name="app_prefix" translatable="false">Privacy Friendly</string>
-
     <!-- ###DRAWER###-->
     <string name="action_help">Help</string>
     <string name="action_about">About</string>
@@ -11,13 +11,10 @@
     <string name="action_game">Game</string>
     <string name="action_tutorial" translatable="false">Tutorial</string>
     <string name="action_score">Highscore</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <!-- ###MAIN### -->
     <string name="main_button_inactive_toast">At least one operator needs to be active.</string>
-
     <!-- ###GAME###-->
     <string name="title_activity_game">Game</string>
     <string name="game_button_start">New Game</string>
@@ -33,13 +30,11 @@
     <string name="game_button_confirm">Confirm</string>
     <string name="game_button_reset">Reset</string>
     <string name="game_max_length_toast">Result can\'t be larger than 9999999</string>
-
     <!--###EXERCISE###-->
     <string name="feedback_positive">Right Answer</string>
     <string name="feedback_negative">Wrong Answer</string>
     <string name="title_activity_exercise">Exercise</string>
     <string name="alert_title">Name Input</string>
-
     <!--###RESULT###-->
     <string name="title_activity_result">Result</string>
     <string name="upto">Up to</string>
@@ -48,30 +43,22 @@
     <string name="result_solved_of">of</string>
     <string name="result_highscore">Highscore</string>
     <string name="result_toast_selected">Selected exercise to be repeated</string>
-
     <!--###HELP###-->
     <string name="help">Help</string>
-
     <string name="help_whatis">What is Privacy Friendly Reckoning Skills?</string>
     <string name="help_whatis_answer">Privacy Friendly Reckoning Skills generates basic arithmetic mental exercises in four different number spaces. </string>
-
     <string name="help_game">How can I start a game?</string>
     <string name="help_game_answer">You can start a game by selecting one of the four number ranges and at least one of the four operators in the main menu and tapping the "New Game" button.</string>
-
     <string name="help_pause">How can I pause and continue a game?</string>
     <string name="help_pause_answer">Leaving the game window, for example by tapping the back button on the top left or by tapping the back button on your phone will pause the game. You can continue a paused game by tapping the "Continue" button in the main menu.</string>
-
     <string name="help_revisit">How can I revisit a particular exercise?</string>
     <string name="help_revisit_answer">You can select a particular exercise to be tested again by tapping it on the result screen after you finished a game.</string>
-
     <string name="help_score">How is the highscore calculated?</string>
     <string name="help_score_answer">The highscore takes into account how many exercises were solved successfully and how much time it took you to answer all of them.</string>
-
     <string name="help_privacy">What makes the app privacy-friendly?</string>
     <string name="help_privacy_answer">Privacy Friendly Reckoning Skills does not require any permission. It further does not include any tracking mechanisms or advertisement.</string>
     <string name="help_permission">Which permissions does the App require?</string>
     <string name="help_permission_answer">Privacy Friendly Reckoning Skills does not require any permissions.</string>
-
     <!--###ABOUT###-->
     <string name="about">About</string>
     <string name="version_number">Version</string>
@@ -83,7 +70,6 @@
     <string name="more_info">More information can be found on:</string>
     <string name="github" translatable="false"><a href="https://github.com/SecUSo/privacy-friendly-reckoning-skills">Github-Repo</a></string>
     <string name="url" translatable="false"><a href="https://www.secuso.org/pfa">SECUSO-Website</a></string>
-
     <!-- ###SETTINGS### -->
     <string name="title_activity_settings">Settings</string>
     <string name="pref_header_general">General</string>
@@ -98,25 +84,19 @@
     <string name="pref_text_defaultname_summary">Set default Name</string>
     <string name="pref_switch_answer">Correct Answer</string>
     <string name="pref_switch_answer_summary">Show correct answer instantly</string>
-
     <!-- ###SCORE### -->
     <string name="title_activity_score">Highscores</string>
     <string name="score_credit">Points</string>
-
     <!-- ### TUTORIAL DIALOG ### -->
     <string name="slide1_heading">Welcome!</string>
     <string name="slide1_text">Practice your reckoning skills by solving basic arithmetic exercises in different number ranges.</string>
-
     <string name="slide2_heading">Operators and number ranges</string>
     <string name="slide2_text">You can choose between four operators and number ranges in the main menu. Tapping any of the operators will enable/disable it for the next game.</string>
-
     <string name="slide3_heading">Repeating exercises</string>
     <string name="slide3_text">You can mark exercises to be repeated by tapping them on the result screen.</string>
-
     <string name="okay">Okay</string>
     <string name="viewhelp">View Help</string>
     <string name="main_button_welcomedialog">Show Welcome</string>
     <string name="next">Next</string>
     <string name="skip">Skip</string>
-
 </resources>

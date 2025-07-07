@@ -14,6 +14,7 @@
 
 package org.secuso.privacyfriendlyreckoningskills.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -454,6 +455,7 @@ public class ExerciseActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("Range")
     private exerciseInstance newExercise(){
 
         String op = game.randomOperator();

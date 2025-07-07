@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
 
+import androidx.appcompat.widget.AppCompatButton;
+
 /**
  *This program is free software: you can redistribute it and/or modify
  *it under the terms of the GNU General Public License as published by
@@ -19,7 +21,7 @@ import android.widget.Button;
  *along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class SquareButton extends Button {
+public class SquareButton extends AppCompatButton {
     public SquareButton(Context context) {
         super(context);
     }

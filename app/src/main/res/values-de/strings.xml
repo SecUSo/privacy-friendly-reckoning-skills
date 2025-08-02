@@ -1,37 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Kopfrechentrainer</string>
     <string name="app_name_long">Privacy Friendly Kopfrechentrainer</string>
-
     <!-- ###DRAWER###-->
     <string name="action_help">Hilfe</string>
     <string name="action_about">Über</string>
     <string name="action_settings">Einstellungen</string>
     <string name="action_main">Hauptmenü</string>
     <string name="action_game">Spiel</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="navigation_drawer_open">Navigationsmenü öffnen</string>
+    <string name="navigation_drawer_close">Navigationsmenü schließen</string>
     <!-- ###GAME###-->
     <string name="title_activity_game">Spiel</string>
     <string name="game_button_start">Neues Spiel</string>
     <string name="game_button_continue">Fortsetzen</string>
     <string name="game_desc">Dies ist das Standard-Menü für Spiele-Apps. Der Viewpager oben sollte verwendet werden, um zwischen verschiedenen Spielmodi zu wechseln.</string>
-
     <!--###EXERCISE###-->
     <string name="feedback_negative">Falsche Antwort</string>
     <string name="feedback_positive">Richtige Antwort</string>
-
     <!--###HELP###-->
     <string name="help">Help</string>
-
     <string name="help_whatis">Was ist Privacy Friendly Kopfrechentrainer?</string>
     <string name="help_whatis_answer">Privacy Friendly Kopfrechentrainer ermöglicht es simple arithmetische Kopfrechenaufgaben in vier verschiedenen Zahlenräumen zu üben.</string>
     <string name="help_privacy">Was macht die App privatsphäre-freundlich?</string>
     <string name="help_privacy_answer">Kein Tracking oder nötige Berechtigungen</string>
     <string name="help_permission">Welche Berechtigungen braucht die App?</string>
     <string name="help_permission_answer">Privacy Friendly Mathe-Trainer benötigt keine Berechtigungen.</string>
-
     <!--###ABOUT###-->
     <string name="about">Über</string>
     <string name="version_number">Version</string>
@@ -40,29 +34,23 @@
     <string name="about_affiliation">In Zusammenarbeit mit</string>
     <string name="privacy_friendly">Diese App gehört zur Gruppe der Privacy Friendly Apps entwickelt vom Karlsruher Institut für Technologie. Quelltext lizenziert unter GPLv3. Bilder copyright KIT und Google Inc.</string>
     <string name="more_info">Weitere Infos unter:</string>
-
     <!-- ###SETTINGS### -->
     <string name="title_activity_settings">Einstellungen</string>
     <string name="pref_header_general">Allgemein</string>
     <string name="pref_example_switch">Beispiel Switch</string>
     <string name="pref_example_switch_summary">Beispiel Switch Summary</string>
-    <string name="pref_example_summary">Beispiel Summary</string>
-
+    <string name="pref_example_summary">Beispielzusammenfassung</string>
     <!-- ### WELCOME DIALOG ### -->
     <string name="okay">Okay</string>
-    <string name="viewhelp">Hilfe</string>
+    <string name="viewhelp">Hilfe anzeigen</string>
     <string name="main_button_welcomedialog">Willkommen</string>
-
     <!-- ### TUTORIAL DIALOG ### -->
     <string name="slide1_heading">Willkommen!</string>
     <string name="slide1_text">Mit Privacy Friendly Kopfrechentrainer können Sie Aufgaben der 4 Grundrechenarten in verschiedenen Zahlenräumen üben.</string>
-
     <string name="slide2_heading">Rechenarten und Zahlenräume</string>
     <string name="slide2_text">Im Hauptmenü können Sie zwischen verschiedenen Rechenarten und Zahlenräumen wählen. Dabei wird die jeweilige Rechenart durch einen Klick gewählt.</string>
-
     <string name="slide3_heading">Aufgaben wiederholen</string>
     <string name="slide3_text">Falls Sie Aufgaben wiederholt üben möchten, können Sie diese im Ergebnisbildschirm durch einen Klick auswählen.</string>
-
     <string name="next">Weiter</string>
     <string name="skip">Überspringen</string>
     <string name="game_mode_one">Zahlenraum</string>
@@ -99,6 +87,5 @@
     <string name="help_revisit_answer">Auf dem Ergebnis-Bildschirm am Ende eines Spiels können Aufgaben zum Wiederholen im nächsten Spiel durch drücken ausgewählt werden.</string>
     <string name="help_score">Wie wird die Punktzahl berechnet?</string>
     <string name="help_score_answer">Die Punktzahl setzt sich aus der Anzahl der richtig beantworteten Aufgaben, sowie der Zeit die insgesamt für alle Aufgaben benötigt wurde zusammen.</string>
-    <string name="action_score" >Punktzahl</string>
-
+    <string name="action_score">Punktzahl</string>
 </resources>

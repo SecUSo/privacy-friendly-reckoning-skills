@@ -28,7 +28,7 @@
     <string name="result_solved_of">от</string>
     <string name="result_highscore">Рекорд</string>
     <string name="result_toast_selected">Выбранное упражнение для повторения</string>
-    <string name="help">Справка</string>
+    <string name="help">Помощь</string>
     <string name="help_game">Как я могу начать игру?</string>
     <string name="help_game_answer">Вы можете начать игру, выбрав один из четырёх диапазонов чисел и по крайней мере одного из четырёх операторов в главном меню и нажав кнопку «Новая игра».</string>
     <string name="help_pause">Как я могу сделать паузу и продолжить игру?</string>
@@ -46,7 +46,7 @@
     <string name="game_desc">Это главное меню по умолчанию для игровых приложений. Просмоторщик выше следует использовать для переключения между игровыми режимами.</string>
     <string name="slide1_heading">Добро пожаловать!</string>
     <string name="version_number">Версия</string>
-    <string name="about">О приложении</string>
+    <string name="about">О программе</string>
     <string name="about_author_contributors">и другие участники.</string>
     <string name="about_author">Авторы：</string>
     <string name="about_affiliation">В сотрудничестве с</string>

@@ -88,15 +88,15 @@
     <string name="title_activity_score">Highscores</string>
     <string name="score_credit">Points</string>
     <!-- ### TUTORIAL DIALOG ### -->
-    <string name="slide1_heading">Bienvenue!</string>
+    <string name="slide1_heading">Welcome!</string>
     <string name="slide1_text">Practice your reckoning skills by solving basic arithmetic exercises in different number ranges.</string>
     <string name="slide2_heading">Operators and number ranges</string>
     <string name="slide2_text">You can choose between four operators and number ranges in the main menu. Tapping any of the operators will enable/disable it for the next game.</string>
     <string name="slide3_heading">Repeating exercises</string>
     <string name="slide3_text">You can mark exercises to be repeated by tapping them on the result screen.</string>
-    <string name="okay">Ok</string>
-    <string name="viewhelp">Voir l\'aide</string>
+    <string name="okay">Okay</string>
+    <string name="viewhelp">View Help</string>
     <string name="main_button_welcomedialog">Show Welcome</string>
-    <string name="next">Suivant</string>
-    <string name="skip">Passer</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
 </resources>

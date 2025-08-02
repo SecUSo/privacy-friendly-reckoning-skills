@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about">Hakkında</string>
+    <string name="version_number">Sürüm</string>
+    <string name="about_author">Yazarlar:</string>
+    <string name="title_activity_settings">Ayarlar</string>
+    <string name="pref_header_general">Genel</string>
+    <string name="slide1_heading">Hoş geldiniz!</string>
+    <string name="help">Yardım</string>
+    <string name="action_help">Yardım</string>
+    <string name="navigation_drawer_close">Gezinti çekmecesini kapat</string>
+    <string name="game_button_reset">Sıfırla</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="game_button_continue">Devam</string>
+    <string name="result_solved">Çözüldü</string>
+    <string name="game_button_start">Yeni Oyun</string>
+    <string name="result_highscore">Yüksek skor</string>
+    <string name="action_about">Hakkında</string>
+    <string name="app_name">Hesaplama Yetenekleri</string>
+    <string name="action_main">Başlıca</string>
+    <string name="navigation_drawer_open">Gezinti çekmecesini aç</string>
+    <string name="action_score">Yüksek skor</string>
+    <string name="action_game">Oyun</string>
+    <string name="title_activity_game">Oyun</string>
+    <string name="game_button_highscore">Yüksek skor</string>
+    <string name="game_button_confirm">Onayla</string>
+    <string name="result_score">Yüksek skor</string>
+    <string name="about_affiliation">ile bağlantılı olarak</string>
+    <string name="about_author_contributors">ve katkıda bulunanlar.</string>
+    <string name="score_credit">Puan</string>
+    <string name="viewhelp">Yardımı Görüntüle</string>
+    <string name="okay">Tamam</string>
+    <string name="next">İleri</string>
+    <string name="skip">Atla</string>
+</resources>

@@ -66,4 +66,6 @@
     <string name="viewhelp">Afficher l\'aide</string>
     <string name="next">Suivant</string>
     <string name="skip">Ignorer</string>
+    <string name="result_solved_of">de</string>
+    <string name="slide3_heading">Répéter les exercises</string>
 </resources>

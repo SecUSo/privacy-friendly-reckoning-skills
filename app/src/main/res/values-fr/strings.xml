@@ -59,7 +59,8 @@
     <string name="pref_switch_answer_summary">Afficher instantanément la réponse correcte</string>
     <string name="title_activity_score">Meilleurs scores</string>
     <string name="score_credit">Points</string>
-    <string name="slide1_heading">Bienvenu.e !</string>
+    <string name="slide1_heading">Bienvenue !</string>
     <string name="result_highscore">Score</string>
     <string name="help_whatis">Qu\'est-ce que Compétences Arithmétiques Respectueuse de la Vie Privée ?</string>
+    <string name="okay">Okay</string>
 </resources>

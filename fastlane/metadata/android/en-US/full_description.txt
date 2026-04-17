@@ -18,7 +18,7 @@ For comparison: The Top Ten of similar apps from the Google Play Store requires 
 Moreover, Privacy Friendly Ludo distinguishes from many other applications in the way that it completely relinquishes advertisements. Advertisement might track a user's actions. It could also shorten battery life or use mobile data.
 
 This App requires minimal permissions and is part of the Privacy Friendly Apps group
-developed by the research group SECUSO at Technische Universität Darmstadt. More information can be found at https://secuso.org/pfa
+developed by the research group SECUSO at Karlsruhe Institute of Technology. More information can be found at https://secuso.org/pfa
 
 
 Feel free to contact us via:

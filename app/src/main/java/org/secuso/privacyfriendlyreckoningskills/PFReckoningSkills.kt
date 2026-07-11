@@ -1,21 +1,39 @@
 package org.secuso.privacyfriendlyreckoningskills
 
 import android.util.Log
-import androidx.multidex.MultiDexApplication
 import androidx.work.Configuration
+import org.secuso.pfacore.ui.PFApplication
 import org.secuso.privacyfriendlybackup.api.pfa.BackupManager
+import org.secuso.privacyfriendlyreckoningskills.activities.MainActivity
 import org.secuso.privacyfriendlyreckoningskills.backup.BackupCreator
 import org.secuso.privacyfriendlyreckoningskills.backup.BackupRestorer
 
-class PFReckoningSkills : MultiDexApplication(), Configuration.Provider {
+/**
+ * Application entry point for Privacy Friendly Reckoning Skills.
+ */
+class PFReckoningSkills : PFApplication() {
+
+    override val name: String
+        get() = getString(R.string.app_name)
+
+    override val data
+        get() = PFApplicationData.instance(baseContext).data
+
+    override val mainActivity = MainActivity::class.java
+
+
+    override val createBackup = false
 
     override fun onCreate() {
         super.onCreate()
+
         BackupManager.backupCreator = BackupCreator()
         BackupManager.backupRestorer = BackupRestorer()
     }
 
-    override val workManagerConfiguration by lazy  {
-        Configuration.Builder().setMinimumLoggingLevel(Log.INFO).build()
+    override val workManagerConfiguration by lazy {
+        Configuration.Builder()
+            .setMinimumLoggingLevel(Log.INFO)
+            .build()
     }
 }

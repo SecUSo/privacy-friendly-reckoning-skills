@@ -21,6 +21,8 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -61,6 +63,26 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+
+        getOnBackPressedDispatcher().addCallback(
+                this,
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        updateStats();
+                        updateScore(playerName);
+
+                        Intent intent = new Intent(
+                                ResultActivity.this,
+                                MainActivity.class
+                        );
+
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+        );
 
         SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = hs.edit();
@@ -146,15 +168,6 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
             score.setText(getResources().getString(R.string.result_score) + " " + game.score);
         }
         solved.setText(getResources().getString(R.string.result_solved) + " " + game.answeredCorrectly() + " "+ getResources().getString(R.string.result_solved_of) + " 10");
-    }
-
-    @Override
-    public void onBackPressed() {
-        updateStats();
-        updateScore(playerName);
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
     }
 
     @Override

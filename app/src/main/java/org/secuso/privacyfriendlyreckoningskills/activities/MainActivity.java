@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
 
         final SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         // Set up the ViewPager with the sections adapter.
@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity {
             mViewPager.setAdapter(mSectionsPagerAdapter);
         }
 
-        int index = mSharedPreferences.getInt("lastChosenPage", 0);
+        int index = getAppPreferences().getInt("lastChosenPage", 0);
 
         mViewPager.setCurrentItem(index);
         mArrowLeft = (ImageView) findViewById(R.id.arrow_left);
@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity {
                 mArrowRight.setVisibility((position==mSectionsPagerAdapter.getCount()-1)?View.INVISIBLE:View.VISIBLE);
 
                 //save position in settings
-                SharedPreferences.Editor editor = mSharedPreferences.edit();
+                SharedPreferences.Editor editor = getAppPreferences().edit();
                 editor.putInt("lastChosenPage", position);
                 editor.apply();
             }
@@ -121,8 +121,8 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected int getNavigationDrawerID() {
-        return R.id.nav_example;
+    protected String activeDrawerItemName() {
+        return getString(R.string.action_main);
     }
 
     public void onClick(View view) {

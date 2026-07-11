@@ -23,15 +23,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.SystemClock;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.text.InputType;
 import android.view.View;
 import android.widget.Chronometer;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.secuso.pfacore.model.dialog.ValueSelectionDialog;
+import org.secuso.pfacore.ui.dialog.DialogKt;
+import org.secuso.privacyfriendlyreckoningskills.databinding.DialogPlayerNameBinding;
 
 import org.secuso.privacyfriendlyreckoningskills.R;
 import org.secuso.privacyfriendlyreckoningskills.database.PFASQLiteHelper;
@@ -45,6 +46,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import kotlin.Unit;
 
 public class ExerciseActivity extends AppCompatActivity {
 
@@ -643,51 +646,111 @@ public class ExerciseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void displayNameInput(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getResources().getString(R.string.alert_title));
-        final EditText inputs = new EditText(this);
+    /**
+     * Displays a PFA-Core dialog for entering the high-score player name.
+     */
+    private void displayNameInput() {
+        final String defaultName =
+                PFApplicationData.instance(this)
+                        .defaultPlayerNameOrNull();
 
-        //check if name has been set
-        String name = PFApplicationData.instance(this).defaultPlayerNameOrNull();
+        final SharedPreferences highscorePreferences =
+                getSharedPreferences(
+                        "pfa-math-highscore",
+                        Context.MODE_PRIVATE
+                );
 
-        //otherwise use previous input
-        SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
-        if(name != null){
-            inputs.setText(name);
+        final String initialName;
+
+        if (defaultName != null) {
+            initialName = defaultName;
         } else {
-            inputs.setText(hs.getString("previousname",""));
+            initialName = highscorePreferences.getString(
+                    "previousname",
+                    ""
+            );
         }
 
-        inputs.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(inputs);
-        builder.setCancelable(false);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String text = inputs.getText().toString();
+        ValueSelectionDialog<String> dialog =
+                ValueSelectionDialog.Companion.<String>build(
+                        (AppCompatActivity) this,
+                        builder -> {
+                            builder.setTitle(
+                                    () -> getString(R.string.alert_title)
+                            );
 
-                //save name
-                SharedPreferences hs = getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = hs.edit();
-                editor.putString("previousname", text);
-                editor.commit();
+                            builder.setAcceptLabel(
+                                    getString(android.R.string.ok)
+                            );
 
-                startResultActivity(text);
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                if(name == null){
-                    startResultActivity("");
-                } else {
-                    startResultActivity(name);
-                }
-            }
-        });
-        builder.show();
+                            builder.setAbortLabel(
+                                    getString(android.R.string.cancel)
+                            );
+
+                            builder.setRequired(false);
+
+                            /*
+                             * Prevents the abort callback from also being
+                             * called after a successful confirmation.
+                             */
+                            builder.setHandleDismiss(false);
+
+                            builder.setOnConfirmation(enteredName -> {
+                                String name = enteredName == null
+                                        ? ""
+                                        : enteredName.trim();
+
+                                highscorePreferences.edit()
+                                        .putString("previousname", name)
+                                        .apply();
+
+                                startResultActivity(name);
+
+                                return Unit.INSTANCE;
+                            });
+
+                            builder.setOnAbort(() -> {
+                                startResultActivity(
+                                        defaultName == null
+                                                ? ""
+                                                : defaultName
+                                );
+
+                                return Unit.INSTANCE;
+                            });
+
+                            return Unit.INSTANCE;
+                        }
+                );
+
+        DialogKt.show(
+                DialogKt.content(
+                        dialog,
+
+                        () -> {
+                            DialogPlayerNameBinding binding =
+                                    DialogPlayerNameBinding.inflate(
+                                            getLayoutInflater()
+                                    );
+
+                            binding.playerNameInput.setText(initialName);
+                            binding.playerNameInput.setSelection(
+                                    initialName.length()
+                            );
+
+                            return binding;
+                        },
+
+                        binding -> {
+                            CharSequence enteredText =
+                                    binding.playerNameInput.getText();
+
+                            return enteredText == null
+                                    ? ""
+                                    : enteredText.toString().trim();
+                        }
+                )
+        );
     }
 
 }

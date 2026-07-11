@@ -68,4 +68,7 @@
     <string name="skip">Ignorer</string>
     <string name="result_solved_of">de</string>
     <string name="slide3_heading">Répéter les exercises</string>
+    <string name="pref_header_exercises">Exercices</string>
+    <string name="pref_switch_exclude_zero_one">Exclure 0 et 1</string>
+    <string name="pref_switch_exclude_zero_one_summary">Ne pas générer d’exercices contenant 0 ou 1.</string>
 </resources>

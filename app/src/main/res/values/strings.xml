@@ -99,4 +99,7 @@
     <string name="main_button_welcomedialog">Show Welcome</string>
     <string name="next">Next</string>
     <string name="skip">Skip</string>
+    <string name="pref_header_exercises">Exercises</string>
+    <string name="pref_switch_exclude_zero_one">Exclude 0 and 1</string>
+    <string name="pref_switch_exclude_zero_one_summary">Do not generate exercises containing 0 or 1.</string>
 </resources>

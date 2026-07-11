@@ -48,6 +48,7 @@ import java.io.ObjectOutputStream;
 
 public class ExerciseActivity extends AppCompatActivity {
 
+    private static final int MAX_EXERCISE_GENERATION_ATTEMPTS = 100;
     //Ui
     TextView input;
     TextView operand1;
@@ -454,25 +455,168 @@ public class ExerciseActivity extends AppCompatActivity {
     }
 
     @SuppressLint("Range")
-    private exerciseInstance newExercise(){
-
+    private exerciseInstance newExercise() {
         String op = game.randomOperator();
 
-        exerciseInstance savedExercise;
+        boolean excludeZeroAndOne =
+                PFApplicationData.instance(this)
+                        .shouldExcludeZeroAndOne();
+
         PFASQLiteHelper helper = new PFASQLiteHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
-        String[] cols = new String[] {"id", "operator1", "operator2", "operand", "space"};
-        Cursor cursor = db.query("SAVED_EXERCISES", cols, "space = " + game.space + " AND operand = '" + op + "'", null, null, null, null);
 
-        if (cursor.moveToFirst()) {
-            String operand = cursor.getString(cursor.getColumnIndex("operand"));
-            int x = cursor.getInt(cursor.getColumnIndex("operator1"));
-            int y = cursor.getInt(cursor.getColumnIndex("operator2"));
-            savedExercise = new exerciseInstance(x,y,0,operand);
-            db.delete("SAVED_EXERCISES","id = "+cursor.getInt(cursor.getColumnIndex("id")), null);
-            return savedExercise;
+        String[] columns = new String[]{
+                "id",
+                "operator1",
+                "operator2",
+                "operand",
+                "space"
+        };
+
+        String selection = "space = ? AND operand = ?";
+        String[] selectionArgs = new String[]{
+                String.valueOf(game.space),
+                op
+        };
+
+        try (Cursor cursor = db.query(
+                "SAVED_EXERCISES",
+                columns,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        )) {
+            /*
+             * Search all saved exercises for the selected operation.
+             * Exercises containing 0 or 1 are skipped while the option
+             * is enabled, but they remain stored for later use.
+             */
+            while (cursor.moveToNext()) {
+                int id = cursor.getInt(
+                        cursor.getColumnIndex("id")
+                );
+
+                String operand = cursor.getString(
+                        cursor.getColumnIndex("operand")
+                );
+
+                int x = cursor.getInt(
+                        cursor.getColumnIndex("operator1")
+                );
+
+                int y = cursor.getInt(
+                        cursor.getColumnIndex("operator2")
+                );
+
+                exerciseInstance savedExercise =
+                        new exerciseInstance(x, y, 0, operand);
+
+                if (
+                        !excludeZeroAndOne ||
+                                !containsZeroOrOne(savedExercise)
+                ) {
+                    db.delete(
+                            "SAVED_EXERCISES",
+                            "id = ?",
+                            new String[]{
+                                    String.valueOf(id)
+                            }
+                    );
+
+                    return savedExercise;
+                }
+            }
+        } finally {
+            helper.close();
         }
-        return game.createNewExercise();
+
+        return createGeneratedExercise(excludeZeroAndOne);
+    }
+    /**
+     * Generates an exercise that respects the zero-and-one setting.
+     */
+    private exerciseInstance createGeneratedExercise(
+            boolean excludeZeroAndOne
+    ) {
+        exerciseInstance generatedExercise =
+                game.createNewExercise();
+
+        int attempts = 1;
+
+        while (
+                excludeZeroAndOne &&
+                        containsZeroOrOne(generatedExercise) &&
+                        attempts < MAX_EXERCISE_GENERATION_ATTEMPTS
+        ) {
+            generatedExercise = game.createNewExercise();
+            attempts++;
+        }
+
+        /*
+         * A valid exercise should normally be generated after only a
+         * few attempts. This fallback prevents a theoretical endless
+         * generation loop.
+         */
+        if (
+                excludeZeroAndOne &&
+                        containsZeroOrOne(generatedExercise)
+        ) {
+            return createFallbackExercise();
+        }
+
+        return generatedExercise;
+    }
+    /**
+     * Checks whether an exercise contains zero or one as an operand
+     * or as its result.
+     */
+    private boolean containsZeroOrOne(
+            exerciseInstance exercise
+    ) {
+        int result = exercise.solve();
+
+        return exercise.x == 0 ||
+                exercise.x == 1 ||
+                exercise.y == 0 ||
+                exercise.y == 1 ||
+                result == 0 ||
+                result == 1;
+    }
+    /**
+     * Creates a guaranteed valid exercise without zero or one.
+     */
+    private exerciseInstance createFallbackExercise() {
+        String operator = game.randomOperator();
+
+        switch (operator) {
+            case "-":
+                return new exerciseInstance(
+                        4,
+                        2,
+                        0,
+                        operator
+                );
+
+            case "/":
+                return new exerciseInstance(
+                        4,
+                        2,
+                        0,
+                        operator
+                );
+
+            case "*":
+            case "+":
+            default:
+                return new exerciseInstance(
+                        2,
+                        2,
+                        0,
+                        operator
+                );
+        }
     }
 
     private Boolean achievedHighscore(int score, int space){

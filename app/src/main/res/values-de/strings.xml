@@ -88,4 +88,7 @@
     <string name="help_score">Wie wird die Punktzahl berechnet?</string>
     <string name="help_score_answer">Die Punktzahl setzt sich aus der Anzahl der richtig beantworteten Aufgaben, sowie der Zeit die insgesamt für alle Aufgaben benötigt wurde zusammen.</string>
     <string name="action_score">Punktzahl</string>
+    <string name="pref_header_exercises">Aufgaben</string>
+    <string name="pref_switch_exclude_zero_one">0 und 1 ausschließen</string>
+    <string name="pref_switch_exclude_zero_one_summary">Keine Aufgaben erzeugen, die 0 oder 1 enthalten.</string>
 </resources>

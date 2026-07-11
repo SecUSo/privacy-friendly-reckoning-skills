@@ -60,6 +60,8 @@ class PFApplicationData private constructor(context: Context) {
     lateinit var divisionEnabledPreference: Preferable<Boolean>
         private set
 
+    lateinit var excludeZeroAndOneSetting: ISettingData<Boolean>
+        private set
     private val preferences = appPreferences(context) {
         preferences {
             firstTimeLaunch = preferenceFirstTimeLaunch
@@ -151,6 +153,25 @@ class PFApplicationData private constructor(context: Context) {
                     }
 
                     default = ""
+                    backup = true
+                }
+            }
+
+            category(R.string.pref_header_exercises) {
+                excludeZeroAndOneSetting = switch {
+                    key = "pref_exclude_zero_and_one"
+
+                    title {
+                        resource(R.string.pref_switch_exclude_zero_one)
+                    }
+
+                    summary {
+                        resource(
+                            R.string.pref_switch_exclude_zero_one_summary
+                        )
+                    }
+
+                    default = false
                     backup = true
                 }
             }
@@ -318,6 +339,12 @@ class PFApplicationData private constructor(context: Context) {
         subtractionEnabledPreference.value = subtraction
         multiplicationEnabledPreference.value = multiplication
         divisionEnabledPreference.value = division
+    }
+    /**
+     * Returns whether exercises containing zero or one should be excluded.
+     */
+    fun shouldExcludeZeroAndOne(): Boolean {
+        return excludeZeroAndOneSetting.value
     }
     companion object {
         private const val LEGACY_TUTORIAL_PREFERENCES =

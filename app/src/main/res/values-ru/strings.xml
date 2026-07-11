@@ -80,4 +80,7 @@
     <string name="slide3_text">Вы можете отметить упражнения для повторного выполнения, нажав на них на экране результатов.</string>
     <string name="slide2_text">В главном меню вы можете выбрать одного из четырех операторов и диапазон номеров. Нажав на любого из операторов, вы включите/отключите его для следующей игры.</string>
     <string name="slide1_text">Тренируйте свои навыки счета, решая простые арифметические задачи с числами из разных диапазонов.</string>
+    <string name="pref_header_exercises">Задания</string>
+    <string name="pref_switch_exclude_zero_one">Исключить 0 и 1</string>
+    <string name="pref_switch_exclude_zero_one_summary">Не создавать задания, содержащие 0 или 1.</string>
 </resources>

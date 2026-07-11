@@ -22,6 +22,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -112,7 +114,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
             } else {
                 exercise.setTextColor(getResources().getColor(R.color.lightblue));
             }
-            solution.setTextColor(getResources().getColor(R.color.red));
+            solution.setTextColor(ContextCompat.getColor(this, R.color.red));
 
             exercise.setText(game.exercises.get(i).x + " " + game.exercises.get(i).o + " " + game.exercises.get(i).y + " = " + game.exercises.get(i).z);
             if(game.exercises.get(i).solve() == game.exercises.get(i).z){
@@ -121,7 +123,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
             } else {
                 String answer =""+game.exercises.get(i).z;
                 final SpannableStringBuilder sb = new SpannableStringBuilder(exercise.getText());
-                final ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.red));
+                final ForegroundColorSpan fcs = new ForegroundColorSpan(ContextCompat.getColor(this, R.color.red));
                 sb.setSpan(fcs, exercise.getText().length()-answer.length(), exercise.getText().length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                 solution.setText(""+game.exercises.get(i).solve());
                 exercise.setText(sb);

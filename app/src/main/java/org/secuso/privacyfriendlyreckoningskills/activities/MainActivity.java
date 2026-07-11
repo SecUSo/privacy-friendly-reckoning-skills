@@ -35,7 +35,7 @@ import org.secuso.privacyfriendlyreckoningskills.gameInstance;
 import org.secuso.privacyfriendlyreckoningskills.PFApplicationData;
 import androidx.core.content.ContextCompat;
 
-import static android.R.color.holo_orange_light;
+import com.google.android.material.color.MaterialColors;
 
 public class MainActivity extends BaseActivity {
 
@@ -291,7 +291,7 @@ public class MainActivity extends BaseActivity {
             View rootView = inflater.inflate(R.layout.fragment_main_menu, container, false);
 
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setTextColor(getResources().getColor(R.color.colorPrimary));
+            textView.setTextColor(MaterialColors.getColor(textView, com.google.android.material.R.attr.colorPrimary));
             switch(id) {
                 case(0): textView.setText(getResources().getString(R.string.number_range_one));
                     break;
@@ -371,34 +371,47 @@ public class MainActivity extends BaseActivity {
      * Updates the operator button colors according to their state.
      */
     private void updateOperatorButtonColors() {
+        int onSurfaceColor = MaterialColors.getColor(
+                addButton,
+                com.google.android.material.R.attr.colorOnSurface
+        );
+
+        int inactiveColor =
+                MaterialColors.compositeARGBWithAlpha(
+                        onSurfaceColor,
+                        Math.round(
+                                255 * MaterialColors.ALPHA_DISABLED
+                        )
+                );
+
         addButton.setTextColor(
-                ContextCompat.getColor(
-                        this,
-                        add ? R.color.red : R.color.middlegrey
-                )
+                add
+                        ? ContextCompat.getColor(this, R.color.red)
+                        : inactiveColor
         );
 
         subButton.setTextColor(
-                ContextCompat.getColor(
-                        this,
-                        sub ? R.color.green : R.color.middlegrey
-                )
+                sub
+                        ? ContextCompat.getColor(this, R.color.green)
+                        : inactiveColor
         );
 
         mulButton.setTextColor(
-                ContextCompat.getColor(
+                mul
+                        ? ContextCompat.getColor(
                         this,
-                        mul
-                                ? android.R.color.holo_orange_light
-                                : R.color.middlegrey
+                        android.R.color.holo_orange_light
                 )
+                        : inactiveColor
         );
 
         divButton.setTextColor(
-                ContextCompat.getColor(
+                div
+                        ? ContextCompat.getColor(
                         this,
-                        div ? R.color.lightblue : R.color.middlegrey
+                        R.color.lightblue
                 )
+                        : inactiveColor
         );
     }
 }

@@ -25,6 +25,8 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.TextView;
@@ -121,14 +123,14 @@ public class ExerciseActivity extends AppCompatActivity {
     }
 
     protected void updateLabels(){
-        if(!game.add)addsign.setTextColor(getResources().getColor(R.color.middlegrey)); else
-            addsign.setTextColor(getResources().getColor(R.color.red));
-        if(!game.sub)subsign.setTextColor(getResources().getColor(R.color.middlegrey)); else
-            subsign.setTextColor(getResources().getColor(R.color.green));
-        if(!game.mul)mulsign.setTextColor(getResources().getColor(R.color.middlegrey)); else
-            mulsign.setTextColor(getResources().getColor(android.R.color.holo_orange_light));
-        if(!game.div)divsign.setTextColor(getResources().getColor(R.color.middlegrey)); else
-            divsign.setTextColor(getResources().getColor(R.color.lightblue));
+        if(!game.add)addsign.setTextColor(ContextCompat.getColor(this, R.color.middlegrey)); else
+            addsign.setTextColor(ContextCompat.getColor(this, R.color.red));
+        if(!game.sub)subsign.setTextColor(ContextCompat.getColor(this, R.color.middlegrey)); else
+            subsign.setTextColor(ContextCompat.getColor(this, R.color.green));
+        if(!game.mul)mulsign.setTextColor(ContextCompat.getColor(this, R.color.middlegrey)); else
+            mulsign.setTextColor(ContextCompat.getColor(this, android.R.color.holo_orange_light));
+        if(!game.div)divsign.setTextColor(ContextCompat.getColor(this, R.color.middlegrey)); else
+            divsign.setTextColor(ContextCompat.getColor(this, R.color.lightblue));
 
         progress.setText(""+game.exercises.size()+"/"+"10");
 
@@ -189,14 +191,14 @@ public class ExerciseActivity extends AppCompatActivity {
                         sb.append("" + exercise.z);
                         String s = "" + exercise.z;
                         if (exercise.z == exercise.solve()) {
-                            input.setTextColor(getResources().getColor(R.color.green));
+                            input.setTextColor(ContextCompat.getColor(this, R.color.green));
                             s = s + "" + " \u2713";
                         } else {
                             if (PFApplicationData.instance(this).isCorrectAnswerEnabled()) {
                                 s = s + " (" + exercise.solve() + ")";
-                                input.setTextColor(getResources().getColor(R.color.red));
+                                input.setTextColor(ContextCompat.getColor(this, R.color.red));
                             } else {
-                                input.setTextColor(getResources().getColor(R.color.red));
+                                input.setTextColor(ContextCompat.getColor(this, R.color.red));
                             }
                         }
                         input.setText(s);
@@ -296,14 +298,14 @@ public class ExerciseActivity extends AppCompatActivity {
                     }
                     String s = ""+exercise.z;
                     if(exercise.z == exercise.solve()){
-                        input.setTextColor(getResources().getColor(R.color.green));
+                        input.setTextColor(ContextCompat.getColor(this, R.color.green));
                         s = s + "" + " \u2713";
                     } else {
                         if (appData.isCorrectAnswerEnabled()) {
                             s = s + " (" + exercise.solve() + ")";
-                            input.setTextColor(getResources().getColor(R.color.red));
+                            input.setTextColor(ContextCompat.getColor(this, R.color.red));
                         } else {
-                            input.setTextColor(getResources().getColor(R.color.red));
+                            input.setTextColor(ContextCompat.getColor(this, R.color.red));
                         }
                     }
                     input.setText(s);
@@ -313,7 +315,7 @@ public class ExerciseActivity extends AppCompatActivity {
                         timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
                         timer.start();
                         game.exercises.get(game.exercises.size()-1).pausedOn = false;
-                        input.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        input.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
                         commitAnswer();
                     }else {
                         long diff = (SystemClock.elapsedRealtime()- miliElapsed);
@@ -326,7 +328,7 @@ public class ExerciseActivity extends AppCompatActivity {
                     if(exercise.pausedOn){
                         miliElapsed =SystemClock.elapsedRealtime();
                         timer.setBase(SystemClock.elapsedRealtime() - game.timeElapsed);
-                        input.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        input.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
                         timer.start();
                     }
                     game.putExercise(exercise.x,exercise.y,inputtemp,exercise.o.toString());

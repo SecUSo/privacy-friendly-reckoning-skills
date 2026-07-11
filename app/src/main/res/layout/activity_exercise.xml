@@ -34,7 +34,7 @@
                     android:layout_weight="1"
                     android:text="0"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="48sp" />
 
                 <TextView
@@ -44,7 +44,7 @@
                     android:layout_weight="0.17"
                     android:text="+"
                     android:textAlignment="center"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="36sp" />
 
                 <TextView
@@ -54,7 +54,7 @@
                     android:layout_weight="1"
                     android:text="0"
                     android:textAlignment="textStart"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="48sp" />
 
             </LinearLayout>
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:text="="
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="36sp" />
 
             <TextView
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="48sp" />
 
             <View
@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="?attr/colorPrimary" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

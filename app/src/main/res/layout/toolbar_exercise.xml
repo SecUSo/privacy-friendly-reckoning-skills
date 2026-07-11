@@ -27,7 +27,7 @@
                 android:layout_weight="1"
                 android:text="TextView"
                 android:textAlignment="center"
-                android:textColor="@color/white" />
+                android:textColor="?attr/colorOnPrimary" />
 
         <LinearLayout
             android:layout_width="0px"
@@ -85,7 +85,7 @@
                 android:layout_weight="1"
                 android:text="TextView"
                 android:textAlignment="center"
-                android:textColor="@color/white" />
+                android:textColor="?attr/colorOnPrimary" />
 
             <Chronometer
                 android:id="@+id/chronometer"

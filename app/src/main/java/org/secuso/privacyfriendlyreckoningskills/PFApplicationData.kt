@@ -48,6 +48,18 @@ class PFApplicationData private constructor(context: Context) {
     lateinit var lastChosenPagePreference: Preferable<Int>
         private set
 
+    lateinit var additionEnabledPreference: Preferable<Boolean>
+        private set
+
+    lateinit var subtractionEnabledPreference: Preferable<Boolean>
+        private set
+
+    lateinit var multiplicationEnabledPreference: Preferable<Boolean>
+        private set
+
+    lateinit var divisionEnabledPreference: Preferable<Boolean>
+        private set
+
     private val preferences = appPreferences(context) {
         preferences {
             firstTimeLaunch = preferenceFirstTimeLaunch
@@ -55,6 +67,30 @@ class PFApplicationData private constructor(context: Context) {
             lastChosenPagePreference = preference {
                 key = "lastChosenPage"
                 default = 0
+                backup = true
+            }
+
+            additionEnabledPreference = preference {
+                key = "operator_addition_enabled"
+                default = true
+                backup = true
+            }
+
+            subtractionEnabledPreference = preference {
+                key = "operator_subtraction_enabled"
+                default = true
+                backup = true
+            }
+
+            multiplicationEnabledPreference = preference {
+                key = "operator_multiplication_enabled"
+                default = true
+                backup = true
+            }
+
+            divisionEnabledPreference = preference {
+                key = "operator_division_enabled"
+                default = true
                 backup = true
             }
         }
@@ -251,6 +287,37 @@ class PFApplicationData private constructor(context: Context) {
 
     fun setLastChosenPageValue(position: Int) {
         lastChosenPagePreference.value = position
+    }
+
+    fun isAdditionSelected(): Boolean {
+        return additionEnabledPreference.value
+    }
+
+    fun isSubtractionSelected(): Boolean {
+        return subtractionEnabledPreference.value
+    }
+
+    fun isMultiplicationSelected(): Boolean {
+        return multiplicationEnabledPreference.value
+    }
+
+    fun isDivisionSelected(): Boolean {
+        return divisionEnabledPreference.value
+    }
+
+    /**
+     * Stores the operator selection made on the main screen.
+     */
+    fun saveOperatorSelection(
+        addition: Boolean,
+        subtraction: Boolean,
+        multiplication: Boolean,
+        division: Boolean
+    ) {
+        additionEnabledPreference.value = addition
+        subtractionEnabledPreference.value = subtraction
+        multiplicationEnabledPreference.value = multiplication
+        divisionEnabledPreference.value = division
     }
     companion object {
         private const val LEGACY_TUTORIAL_PREFERENCES =

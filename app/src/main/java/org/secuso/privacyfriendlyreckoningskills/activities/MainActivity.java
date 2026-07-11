@@ -33,6 +33,7 @@ import android.widget.Toast;
 import org.secuso.privacyfriendlyreckoningskills.R;
 import org.secuso.privacyfriendlyreckoningskills.gameInstance;
 import org.secuso.privacyfriendlyreckoningskills.PFApplicationData;
+import androidx.core.content.ContextCompat;
 
 import static android.R.color.holo_orange_light;
 
@@ -42,11 +43,12 @@ public class MainActivity extends BaseActivity {
     private ImageView mArrowLeft;
     private ImageView mArrowRight;
 
-    private boolean add = true;
-    private boolean sub = true;
-    private boolean mul = true;
-    private boolean div = true;
-    private int activeOperators = 4;
+    private boolean add;
+    private boolean sub;
+    private boolean mul;
+    private boolean div;
+
+    private int activeOperators;
 
     private Button addButton;
     private Button subButton;
@@ -78,6 +80,8 @@ public class MainActivity extends BaseActivity {
         divButton = (Button) findViewById(R.id.button_div);
 
         continueButton = (Button) findViewById(R.id.game_button_continue);
+
+        loadOperatorSelection();
 
         //care for initial postiton of the ViewPager
         mArrowLeft.setVisibility((index==0)?View.INVISIBLE:View.VISIBLE);
@@ -133,53 +137,61 @@ public class MainActivity extends BaseActivity {
                 mViewPager.arrowScroll(View.FOCUS_RIGHT);
                 break;
             case R.id.button_add:
-                if(add==true && activeOperators > 1) {
-                    addButton.setTextColor(getResources().getColor(R.color.middlegrey));
+                if (add && activeOperators > 1) {
                     add = false;
                     activeOperators--;
-                } else if(!add) {
-                    addButton.setTextColor(getResources().getColor(R.color.red));
+                    saveOperatorSelection();
+                    updateOperatorButtonColors();
+                } else if (!add) {
                     add = true;
                     activeOperators++;
+                    saveOperatorSelection();
+                    updateOperatorButtonColors();
                 } else {
                     oneActiveToast();
                 }
                 break;
             case R.id.button_sub:
-                if(sub==true && activeOperators > 1) {
-                    subButton.setTextColor(getResources().getColor(R.color.middlegrey));
+                if (sub && activeOperators > 1) {
                     sub = false;
                     activeOperators--;
-                } else if(!sub) {
-                    subButton.setTextColor(getResources().getColor(R.color.green));
+                    saveOperatorSelection();
+                    updateOperatorButtonColors();
+                } else if (!sub) {
                     sub = true;
                     activeOperators++;
+                    saveOperatorSelection();
+                    updateOperatorButtonColors();
                 } else {
                     oneActiveToast();
                 }
                 break;
             case R.id.button_mul:
-                if(mul==true && activeOperators > 1) {
-                    mulButton.setTextColor(getResources().getColor(R.color.middlegrey));
+                if (mul && activeOperators > 1) {
                     mul = false;
                     activeOperators--;
-                } else if(!mul) {
-                    mulButton.setTextColor(getResources().getColor(holo_orange_light));
+                    saveOperatorSelection();
+                    updateOperatorButtonColors();
+                } else if (!mul) {
                     mul = true;
                     activeOperators++;
+                    saveOperatorSelection();
+                    updateOperatorButtonColors();
                 } else {
                     oneActiveToast();
                 }
                 break;
             case R.id.button_div:
-                if(div==true && activeOperators > 1) {
-                    divButton.setTextColor(getResources().getColor(R.color.middlegrey));
+                if (div && activeOperators > 1) {
                     div = false;
                     activeOperators--;
-                } else if(!div) {
-                    divButton.setTextColor(getResources().getColor(R.color.lightblue));
+                    saveOperatorSelection();
+                    updateOperatorButtonColors();
+                } else if (!div) {
                     div = true;
                     activeOperators++;
+                    saveOperatorSelection();
+                    updateOperatorButtonColors();
                 } else {
                     oneActiveToast();
                 }
@@ -293,5 +305,100 @@ public class MainActivity extends BaseActivity {
 
             return rootView;
         }
+    }
+
+    /**
+     * Loads the operator selection saved during the previous session.
+     */
+    private void loadOperatorSelection() {
+        PFApplicationData appData =
+                PFApplicationData.instance(this);
+
+        add = appData.isAdditionSelected();
+        sub = appData.isSubtractionSelected();
+        mul = appData.isMultiplicationSelected();
+        div = appData.isDivisionSelected();
+
+        activeOperators = 0;
+
+        if (add) {
+            activeOperators++;
+        }
+
+        if (sub) {
+            activeOperators++;
+        }
+
+        if (mul) {
+            activeOperators++;
+        }
+
+        if (div) {
+            activeOperators++;
+        }
+
+        /*
+         * This is a safety fallback for invalid or manually edited data.
+         * The application must always have at least one active operator.
+         */
+        if (activeOperators == 0) {
+            add = true;
+            sub = true;
+            mul = true;
+            div = true;
+            activeOperators = 4;
+
+            saveOperatorSelection();
+        }
+
+        updateOperatorButtonColors();
+    }
+
+    /**
+     * Saves the currently active calculation operators.
+     */
+    private void saveOperatorSelection() {
+        PFApplicationData.instance(this)
+                .saveOperatorSelection(
+                        add,
+                        sub,
+                        mul,
+                        div
+                );
+    }
+
+    /**
+     * Updates the operator button colors according to their state.
+     */
+    private void updateOperatorButtonColors() {
+        addButton.setTextColor(
+                ContextCompat.getColor(
+                        this,
+                        add ? R.color.red : R.color.middlegrey
+                )
+        );
+
+        subButton.setTextColor(
+                ContextCompat.getColor(
+                        this,
+                        sub ? R.color.green : R.color.middlegrey
+                )
+        );
+
+        mulButton.setTextColor(
+                ContextCompat.getColor(
+                        this,
+                        mul
+                                ? android.R.color.holo_orange_light
+                                : R.color.middlegrey
+                )
+        );
+
+        divButton.setTextColor(
+                ContextCompat.getColor(
+                        this,
+                        div ? R.color.lightblue : R.color.middlegrey
+                )
+        );
     }
 }

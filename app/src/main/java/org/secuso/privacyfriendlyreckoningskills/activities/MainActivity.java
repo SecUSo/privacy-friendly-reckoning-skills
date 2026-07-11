@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import org.secuso.privacyfriendlyreckoningskills.R;
 import org.secuso.privacyfriendlyreckoningskills.gameInstance;
+import org.secuso.privacyfriendlyreckoningskills.PFApplicationData;
 
 import static android.R.color.holo_orange_light;
 
@@ -65,7 +66,7 @@ public class MainActivity extends BaseActivity {
             mViewPager.setAdapter(mSectionsPagerAdapter);
         }
 
-        int index = getAppPreferences().getInt("lastChosenPage", 0);
+        int index = PFApplicationData.instance(this).getLastChosenPageValue();
 
         mViewPager.setCurrentItem(index);
         mArrowLeft = (ImageView) findViewById(R.id.arrow_left);
@@ -95,9 +96,7 @@ public class MainActivity extends BaseActivity {
                 mArrowRight.setVisibility((position==mSectionsPagerAdapter.getCount()-1)?View.INVISIBLE:View.VISIBLE);
 
                 //save position in settings
-                SharedPreferences.Editor editor = getAppPreferences().edit();
-                editor.putInt("lastChosenPage", position);
-                editor.apply();
+                PFApplicationData.instance(MainActivity.this).setLastChosenPageValue(position);
             }
 
             @Override

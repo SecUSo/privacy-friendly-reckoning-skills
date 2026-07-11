@@ -1,8 +1,6 @@
 package org.secuso.privacyfriendlyreckoningskills.activities
 
 import android.content.Intent
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import org.secuso.pfacore.model.DrawerElement
 import org.secuso.pfacore.model.DrawerMenu
 import org.secuso.pfacore.ui.activities.DrawerActivity
@@ -12,13 +10,6 @@ import org.secuso.privacyfriendlyreckoningskills.R
  * Base activity that provides the shared PFA-Core navigation drawer.
  */
 abstract class BaseActivity : DrawerActivity() {
-
-    /**
-     * Default application preferences, exposed for Java subclasses.
-     */
-    protected val appPreferences: SharedPreferences by lazy {
-        PreferenceManager.getDefaultSharedPreferences(this)
-    }
 
     /**
      * Builds the application-specific and default PFA-Core drawer entries.

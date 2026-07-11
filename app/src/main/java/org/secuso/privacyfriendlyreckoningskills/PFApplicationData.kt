@@ -45,9 +45,18 @@ class PFApplicationData private constructor(context: Context) {
     lateinit var defaultPlayerName: ISettingData<String>
         private set
 
+    lateinit var lastChosenPagePreference: Preferable<Int>
+        private set
+
     private val preferences = appPreferences(context) {
         preferences {
             firstTimeLaunch = preferenceFirstTimeLaunch
+
+            lastChosenPagePreference = preference {
+                key = "lastChosenPage"
+                default = 0
+                backup = true
+            }
         }
 
         settings {
@@ -235,6 +244,13 @@ class PFApplicationData private constructor(context: Context) {
                 true
             )
         }
+    }
+    fun getLastChosenPageValue(): Int {
+        return lastChosenPagePreference.value
+    }
+
+    fun setLastChosenPageValue(position: Int) {
+        lastChosenPagePreference.value = position
     }
     companion object {
         private const val LEGACY_TUTORIAL_PREFERENCES =

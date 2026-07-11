@@ -34,17 +34,6 @@
             android:name="org.secuso.privacyfriendlyreckoningskills.activities.ScoreActivity"
             android:label="@string/title_activity_score"
             android:parentActivityName="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity" />
-
-        <service
-            android:name="org.secuso.pfacore.backup.PFABackupService"
-            android:exported="false"
-            tools:node="remove">
-
-            <intent-filter>
-                <action
-                    android:name="org.secuso.privacyfriendlybackup.api.pfa.PFAAuthService" />
-            </intent-filter>
-        </service>
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"

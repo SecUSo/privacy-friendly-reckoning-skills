@@ -23,7 +23,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.preference.PreferenceManager;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -38,6 +37,7 @@ import org.secuso.privacyfriendlyreckoningskills.R;
 import org.secuso.privacyfriendlyreckoningskills.database.PFASQLiteHelper;
 import org.secuso.privacyfriendlyreckoningskills.exerciseInstance;
 import org.secuso.privacyfriendlyreckoningskills.gameInstance;
+import org.secuso.privacyfriendlyreckoningskills.PFApplicationData;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -168,8 +168,7 @@ public class ExerciseActivity extends AppCompatActivity {
             loadGameFromStorage();
             //this can happen if orientation changes during name input
             if (game.gameFinished) {
-                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-                String name = sharedPref.getString("weight",null);
+                String name = PFApplicationData.instance(this).defaultPlayerNameOrNull();
                 if(name == null){
                     startResultActivity("");
                 } else {
@@ -189,8 +188,7 @@ public class ExerciseActivity extends AppCompatActivity {
                             input.setTextColor(getResources().getColor(R.color.green));
                             s = s + "" + " \u2713";
                         } else {
-                            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-                            if (sharedPref.getBoolean("pref_switch_answer", false)) {
+                            if (PFApplicationData.instance(this).isCorrectAnswerEnabled()) {
                                 s = s + " (" + exercise.solve() + ")";
                                 input.setTextColor(getResources().getColor(R.color.red));
                             } else {
@@ -285,8 +283,9 @@ public class ExerciseActivity extends AppCompatActivity {
                 if(sb.length() > 0) {
                     inputtemp = Integer.parseInt(sb.toString());
                 }
-                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-                if(sharedPref.getBoolean("pref_switch_feedback", false)) {
+                PFApplicationData appData = PFApplicationData.instance(this);
+
+                if (appData.isDirectFeedbackEnabled()) {
                     exercise.z = inputtemp;
                     if(!exercise.pausedOn) {
                         game.putExercise2(exercise);
@@ -296,7 +295,7 @@ public class ExerciseActivity extends AppCompatActivity {
                         input.setTextColor(getResources().getColor(R.color.green));
                         s = s + "" + " \u2713";
                     } else {
-                        if(sharedPref.getBoolean("pref_switch_answer", false)) {
+                        if (appData.isCorrectAnswerEnabled()) {
                             s = s + " (" + exercise.solve() + ")";
                             input.setTextColor(getResources().getColor(R.color.red));
                         } else {
@@ -435,8 +434,7 @@ public class ExerciseActivity extends AppCompatActivity {
                 game.gameFinished = true;
                 displayNameInput();
             } else {
-                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-                String name = sharedPref.getString("weight",null);
+                String name = PFApplicationData.instance(this).defaultPlayerNameOrNull();
                 if(name == null){
                     startResultActivity("");
                 } else {
@@ -507,8 +505,7 @@ public class ExerciseActivity extends AppCompatActivity {
         final EditText inputs = new EditText(this);
 
         //check if name has been set
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        final String name = sharedPref.getString("weight",null);
+        String name = PFApplicationData.instance(this).defaultPlayerNameOrNull();
 
         //otherwise use previous input
         SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);

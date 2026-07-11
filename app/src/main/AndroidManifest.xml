@@ -13,58 +13,19 @@
 
     <application
         android:name=".PFReckoningSkills"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/icon_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name="org.secuso.privacyfriendlyreckoningskills.activities.SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="org.secuso.privacyfriendlyreckoningskills.tutorial.TutorialActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        android:theme="@style/PrivacyFriendlyCoreTheme">
         <activity
             android:name="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="org.secuso.privacyfriendlyreckoningskills.activities.AboutActivity"
-            android:label="@string/about"
-            android:parentActivityName="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity" />
-        </activity>
-        <activity
-            android:name="org.secuso.privacyfriendlyreckoningskills.activities.HelpActivity"
-            android:label="@string/help"
-            android:parentActivityName="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity" />
-        </activity>
-        <activity
-            android:name="org.secuso.privacyfriendlyreckoningskills.activities.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity" />
-        </activity>
+            android:theme="@style/PrivacyFriendlyCoreTheme.NoActionBar" />
         <activity
             android:name="org.secuso.privacyfriendlyreckoningskills.activities.ExerciseActivity"
             android:label="@string/title_activity_exercise"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/PrivacyFriendlyCoreTheme.NoActionBar" />
         <activity
             android:name="org.secuso.privacyfriendlyreckoningskills.activities.ResultActivity"
             android:label="@string/title_activity_result"
@@ -75,13 +36,13 @@
             android:parentActivityName="org.secuso.privacyfriendlyreckoningskills.activities.MainActivity" />
 
         <service
-            android:name=".backup.PFABackupService"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":backup"
-            tools:ignore="ExportedService">
+            android:name="org.secuso.pfacore.backup.PFABackupService"
+            android:exported="false"
+            tools:node="remove">
+
             <intent-filter>
-                <action android:name="org.secuso.privacyfriendlybackup.api.pfa.PFAAuthService" />
+                <action
+                    android:name="org.secuso.privacyfriendlybackup.api.pfa.PFAAuthService" />
             </intent-filter>
         </service>
         <provider

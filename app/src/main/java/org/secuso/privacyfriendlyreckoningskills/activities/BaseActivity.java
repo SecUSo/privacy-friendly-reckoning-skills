@@ -19,7 +19,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener;
@@ -33,7 +32,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import org.secuso.privacyfriendlyreckoningskills.R;
-import org.secuso.privacyfriendlyreckoningskills.tutorial.TutorialActivity;
 
 /**
  * @author Christopher Beckmann
@@ -150,34 +148,29 @@ public abstract class BaseActivity extends AppCompatActivity implements OnNaviga
         Intent intent;
 
         switch(itemId) {
-            case R.id.nav_example:
-                intent = new Intent(this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            case R.id.nav_tutorial:
+                intent = new Intent(this, org.secuso.pfacore.ui.activities.TutorialActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.nav_tutorial:
-                intent = new Intent(this, TutorialActivity.class);
-                intent.setAction(TutorialActivity.ACTION_SHOW_ANYWAYS);
-                createBackStack(intent);
-                break;
+
             case R.id.nav_score:
                 intent = new Intent(this, ScoreActivity.class);
-                intent.setAction(TutorialActivity.ACTION_SHOW_ANYWAYS);
                 createBackStack(intent);
                 break;
+
             case R.id.nav_about:
-                intent = new Intent(this, AboutActivity.class);
-                createBackStack(intent);
+                intent = new Intent(this, org.secuso.pfacore.ui.activities.AboutActivity.class);
+                startActivity(intent);
                 break;
+
             case R.id.nav_help:
-                intent = new Intent(this, HelpActivity.class);
-                createBackStack(intent);
+                intent = new Intent(this, org.secuso.pfacore.ui.activities.HelpActivity.class);
+                startActivity(intent);
                 break;
+
             case R.id.nav_settings:
-                intent = new Intent(this, SettingsActivity.class);
-                intent.putExtra( PreferenceActivity.EXTRA_SHOW_FRAGMENT, SettingsActivity.GeneralPreferenceFragment.class.getName() );
-                intent.putExtra( PreferenceActivity.EXTRA_NO_HEADERS, true );
-                createBackStack(intent);
+                intent = new Intent(this, org.secuso.pfacore.ui.activities.SettingsActivity.class);
+                startActivity(intent);
                 break;
             default:
         }

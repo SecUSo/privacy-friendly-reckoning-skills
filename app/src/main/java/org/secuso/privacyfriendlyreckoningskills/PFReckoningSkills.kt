@@ -27,6 +27,12 @@ class PFReckoningSkills : PFApplication() {
     override fun onCreate() {
         super.onCreate()
 
+        PFApplicationData.instance(this).migrateLegacyFirstLaunchPreference(this)
+
+        /*
+         * The old backup implementation remains active until the
+         * PFA-Core backup migration is completed.
+         */
         BackupManager.backupCreator = BackupCreator()
         BackupManager.backupRestorer = BackupRestorer()
     }

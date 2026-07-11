@@ -1,6 +1,7 @@
 package org.secuso.privacyfriendlyreckoningskills
 
 import android.content.Context
+import android.preference.PreferenceManager
 import androidx.lifecycle.map
 import org.secuso.pfacore.model.Theme
 import org.secuso.pfacore.model.about.About
@@ -15,6 +16,8 @@ import org.secuso.pfacore.ui.preferences.settings.preferenceFirstTimeLaunch
 import org.secuso.pfacore.ui.preferences.settings.settingDeviceInformationOnErrorReport
 import org.secuso.pfacore.ui.preferences.settings.settingThemeSelector
 import org.secuso.pfacore.ui.tutorial.buildTutorial
+import org.secuso.pfacore.ui.preferences.settings.input
+import org.secuso.pfacore.ui.preferences.settings.switch
 
 /**
  * Provides the application data required by the PFA-Core library.
@@ -33,6 +36,14 @@ class PFApplicationData private constructor(context: Context) {
     lateinit var includeDeviceDataInReport: Preferable<Boolean>
         private set
 
+    lateinit var directFeedback: ISettingData<Boolean>
+        private set
+
+    lateinit var showCorrectAnswer: ISettingData<Boolean>
+        private set
+
+    lateinit var defaultPlayerName: ISettingData<String>
+        private set
 
     private val preferences = appPreferences(context) {
         preferences {
@@ -40,6 +51,65 @@ class PFApplicationData private constructor(context: Context) {
         }
 
         settings {
+            category(R.string.pref_header_feedback) {
+                directFeedback = switch {
+                    key = "pref_switch_feedback"
+
+                    title {
+                        resource(R.string.pref_switch_feedback)
+                    }
+
+                    summary {
+                        resource(R.string.pref_switch_feedback_summary)
+                    }
+
+                    default = false
+                    backup = true
+                }
+
+                showCorrectAnswer = switch {
+                    key = "pref_switch_answer"
+
+                    title {
+                        resource(R.string.pref_switch_answer)
+                    }
+
+                    summary {
+                        resource(R.string.pref_switch_answer_summary)
+                    }
+
+                    default = false
+                    backup = true
+
+                    dependency = {
+                        "pref_switch_feedback" on true
+                    }
+                }
+            }
+
+            category(R.string.pref_header_user) {
+                defaultPlayerName = input<String> {
+                    key = "weight"
+
+                    title {
+                        resource(R.string.pref_text_defaultname)
+                    }
+
+                    summary {
+                        transform { _, value ->
+                            value.ifBlank {
+                                context.getString(
+                                    R.string.pref_text_defaultname_summary
+                                )
+                            }
+                        }
+                    }
+
+                    default = ""
+                    backup = true
+                }
+            }
+
             appearance {
                 theme = settingThemeSelector
             }
@@ -125,9 +195,57 @@ class PFApplicationData private constructor(context: Context) {
         includeDeviceDataInReport = includeDeviceDataInReport
     )
 
+    fun isDirectFeedbackEnabled(): Boolean {
+        return directFeedback.value
+    }
+
+    fun isCorrectAnswerEnabled(): Boolean {
+        return showCorrectAnswer.value
+    }
+
+    fun defaultPlayerNameOrNull(): String? {
+        return defaultPlayerName.value
+            .trim()
+            .takeIf { it.isNotEmpty() }
+    }
+    /**
+     * Migrates the tutorial state used by the previous implementation.
+     *
+     * This prevents existing users from seeing the tutorial again after
+     * upgrading to the PFA-Core version.
+     */
+    fun migrateLegacyFirstLaunchPreference(context: Context) {
+        val legacyPreferences = context.getSharedPreferences(
+            LEGACY_TUTORIAL_PREFERENCES,
+            Context.MODE_PRIVATE
+        )
+
+        val corePreferences =
+            PreferenceManager.getDefaultSharedPreferences(context)
+
+        /*
+         * Do not overwrite the PFA-Core value if it has already been saved.
+         */
+        if (
+            legacyPreferences.contains(LEGACY_FIRST_LAUNCH_KEY) &&
+            !corePreferences.contains(firstTimeLaunch.key)
+        ) {
+            firstTimeLaunch.value = legacyPreferences.getBoolean(
+                LEGACY_FIRST_LAUNCH_KEY,
+                true
+            )
+        }
+    }
     companion object {
+        private const val LEGACY_TUTORIAL_PREFERENCES =
+            "androidhive-welcome"
+
+        private const val LEGACY_FIRST_LAUNCH_KEY =
+            "IsFirstTimeLaunch"
+
         private var instance: PFApplicationData? = null
 
+        @JvmStatic
         fun instance(context: Context): PFApplicationData {
             if (instance == null) {
                 instance = PFApplicationData(context.applicationContext)

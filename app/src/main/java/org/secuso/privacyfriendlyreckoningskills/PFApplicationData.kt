@@ -7,6 +7,7 @@ import org.secuso.pfacore.model.Theme
 import org.secuso.pfacore.model.about.About
 import org.secuso.pfacore.model.preferences.Preferable
 import org.secuso.pfacore.model.preferences.settings.ISettingData
+import org.secuso.pfacore.ui.Inflatable
 import org.secuso.pfacore.ui.PFData
 import org.secuso.pfacore.ui.help.Help
 import org.secuso.pfacore.ui.preferences.appPreferences
@@ -242,6 +243,16 @@ class PFApplicationData private constructor(context: Context) {
             title = context.getString(R.string.slide2_heading)
             images = single(R.mipmap.splash_icon)
             description = context.getString(R.string.slide2_text)
+
+            content = {
+                Inflatable { inflater, root, _ ->
+                    inflater.inflate(
+                        R.layout.tutorial_stage_2,
+                        root,
+                        false
+                    )
+                }
+            }
         }
 
         stage {

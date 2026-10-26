@@ -19,7 +19,7 @@ import java.util.Random;
  *along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class gameInstance implements Serializable {
-    
+
     public int score = 0;
     public int space = 0;
     public Boolean mul,add,sub,div = true;

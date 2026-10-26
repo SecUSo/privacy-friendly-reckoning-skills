@@ -16,13 +16,13 @@ package org.secuso.privacyfriendlyreckoningskills.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.SystemClock;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -51,7 +51,7 @@ import java.io.ObjectOutputStream;
 
 import kotlin.Unit;
 
-public class ExerciseActivity extends AppCompatActivity {
+public class ExerciseActivity extends org.secuso.pfacore.ui.activities.BaseActivity {
 
     private static final int MAX_EXERCISE_GENERATION_ATTEMPTS = 100;
     //Ui
@@ -78,6 +78,10 @@ public class ExerciseActivity extends AppCompatActivity {
     Boolean exerciseAnswered = false;
     long miliElapsedOnPause = 0;
 
+    public ExerciseActivity() {
+        super(false);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +94,6 @@ public class ExerciseActivity extends AppCompatActivity {
         operator = (TextView) findViewById(R.id.operator);
         lastinput = (TextView) findViewById(R.id.lastinput);
         timer = (Chronometer) findViewById(R.id.chronometer);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         addsign = (TextView) findViewById(R.id.sign_add);
         subsign = (TextView) findViewById(R.id.sign_sub);
@@ -98,6 +101,7 @@ public class ExerciseActivity extends AppCompatActivity {
         divsign = (TextView) findViewById(R.id.sign_div);
         progress = (TextView) findViewById(R.id.progress);
         currentspace = (TextView) findViewById(R.id.space);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

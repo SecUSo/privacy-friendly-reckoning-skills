@@ -11,89 +11,97 @@
  You should have received a copy of the GNU General Public License
  along with Privacy Friendly Reckoning Skills. If not, see <http://www.gnu.org/licenses/>.
  */
+package org.secuso.privacyfriendlyreckoningskills.activities
 
-package org.secuso.privacyfriendlyreckoningskills.activities;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import org.secuso.privacyfriendlyreckoningskills.R
 
-import android.content.SharedPreferences;
-import android.os.Bundle;
+class ScoreFragment : Fragment() {
+    var space: Int = 0
 
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-import org.secuso.privacyfriendlyreckoningskills.R;
-
-public class ScoreFragment extends Fragment{
-
-    int space;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        space = getArguments().getInt("space", 0);
+        space = requireArguments().getInt("space", 0)
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_score, container, false);
+        return inflater.inflate(R.layout.fragment_score, container, false)
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    @SuppressLint("SetTextI18n")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-            SharedPreferences sharedPref = getActivity().getSharedPreferences("pfa-math-highscore", getActivity().MODE_PRIVATE);
+        val sharedPref =
+            requireActivity().getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE)
 
-            TextView add = getView().findViewById(R.id.stat_add);
-            TextView sub = getView().findViewById(R.id.stat_sub);
-            TextView mul = getView().findViewById(R.id.stat_mul);
-            TextView div = getView().findViewById(R.id.stat_div);
-            LinearLayout names = getView().findViewById(R.id.namelist);
-            LinearLayout scores = getView().findViewById(R.id.scorelist);
+        val add = requireView().findViewById<TextView>(R.id.stat_add)
+        val sub = requireView().findViewById<TextView>(R.id.stat_sub)
+        val mul = requireView().findViewById<TextView>(R.id.stat_mul)
+        val div = requireView().findViewById<TextView>(R.id.stat_div)
+        val names = requireView().findViewById<LinearLayout>(R.id.namelist)
+        val scores = requireView().findViewById<LinearLayout>(R.id.scorelist)
 
-            add.setText(""+perc(sharedPref.getInt("rightadd"+space,0),sharedPref.getInt("rightadd"+space,0)+sharedPref.getInt("wrongadd"+space,0))+"%");
-            sub.setText(""+perc(sharedPref.getInt("rightsub"+space,0),sharedPref.getInt("rightsub"+space,0)+sharedPref.getInt("wrongsub"+space,0))+"%");
-            mul.setText(""+perc(sharedPref.getInt("rightmul"+space,0),sharedPref.getInt("rightmul"+space,0)+sharedPref.getInt("wrongmul"+space,0))+"%");
-            div.setText(""+perc(sharedPref.getInt("rightdiv"+space,0),sharedPref.getInt("rightdiv"+space,0)+sharedPref.getInt("wrongdiv"+space,0))+"%");
+        add.text = "" + perc(
+            sharedPref.getInt("rightadd$space", 0),
+            sharedPref.getInt("rightadd$space", 0) + sharedPref.getInt("wrongadd$space", 0)
+        ) + "%"
+        sub.text = "" + perc(
+            sharedPref.getInt("rightsub$space", 0),
+            sharedPref.getInt("rightsub$space", 0) + sharedPref.getInt("wrongsub$space", 0)
+        ) + "%"
+        mul.text = "" + perc(
+            sharedPref.getInt("rightmul$space", 0),
+            sharedPref.getInt("rightmul$space", 0) + sharedPref.getInt("wrongmul$space", 0)
+        ) + "%"
+        div.text = "" + perc(
+            sharedPref.getInt("rightdiv$space", 0),
+            sharedPref.getInt("rightdiv$space", 0) + sharedPref.getInt("wrongdiv$space", 0)
+        ) + "%"
 
-            for (int i = 0; i < 5; i++) {
-                String name = sharedPref.getString("hsname"+i+space,null);
-                String score = sharedPref.getString("hsscore"+i+space,null);
+        for (i in 0..4) {
+            val name = sharedPref.getString("hsname$i$space", null)
+            val score = sharedPref.getString("hsscore$i$space", null)
 
-                if(name == null){
-                    break;
-                } else {
-                    TextView nameEntry = new TextView(getContext());
-                    TextView scoreEntry = new TextView(getContext());
-                    nameEntry.setTextSize(18);
-                    scoreEntry.setTextSize(18);
-                    nameEntry.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    scoreEntry.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    nameEntry.setTextColor(ContextCompat.getColor(requireContext(), R.color.lightblue));
-                    scoreEntry.setTextColor(ContextCompat.getColor(requireContext(), R.color.lightblue));
+            if (name == null) {
+                break
+            } else {
+                val nameEntry = TextView(context)
+                val scoreEntry = TextView(context)
+                nameEntry.textSize = 18f
+                scoreEntry.textSize = 18f
+                nameEntry.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                scoreEntry.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                nameEntry.setTextColor(ContextCompat.getColor(requireContext(), R.color.lightblue))
+                scoreEntry.setTextColor(ContextCompat.getColor(requireContext(), R.color.lightblue))
 
-                    nameEntry.setText(name + "\n");
-                    scoreEntry.setText(score + " " + getResources().getString(R.string.score_credit) + "\n");
+                nameEntry.text = name + "\n"
+                scoreEntry.text = score + " " + resources.getString(R.string.score_credit) + "\n"
 
-                    names.addView(nameEntry);
-                    scores.addView(scoreEntry);
-                }
+                names.addView(nameEntry)
+                scores.addView(scoreEntry)
             }
-    }
-
-    int perc (int x, int y){
-        if(y == 0){
-            return 0;
         }
-        //int i = (int)((x*100.0f) / y);
-        return (int)((x*100.0f) / y);
     }
 
+    fun perc(x: Int, y: Int): Int {
+        if (y == 0) {
+            return 0
+        }
+        return ((x * 100.0f) / y).toInt()
+    }
 }

@@ -11,74 +11,58 @@
  You should have received a copy of the GNU General Public License
  along with Privacy Friendly Reckoning Skills. If not, see <http://www.gnu.org/licenses/>.
  */
+package org.secuso.privacyfriendlyreckoningskills.activities
 
-package org.secuso.privacyfriendlyreckoningskills.activities;
+import android.content.res.Resources
+import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
+import org.secuso.privacyfriendlyreckoningskills.R
 
-import android.os.Bundle;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
+class ScoreActivity : AppCompatActivity() {
+    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
-import org.secuso.privacyfriendlyreckoningskills.R;
+    private var mViewPager: ViewPager? = null
 
-public class ScoreActivity extends AppCompatActivity {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_score)
 
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+        mSectionsPagerAdapter = ScoreActivity.SectionsPagerAdapter(resources,supportFragmentManager)
 
-    private ViewPager mViewPager;
+        mViewPager = findViewById<View?>(R.id.container) as ViewPager
+        mViewPager!!.setAdapter(mSectionsPagerAdapter)
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_score);
-
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+        val tabLayout = findViewById<View?>(R.id.tabs) as TabLayout
+        tabLayout.setupWithViewPager(mViewPager)
     }
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
+    class SectionsPagerAdapter(val resources: Resources, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+        override fun getItem(position: Int): Fragment {
+            val args = Bundle()
+            args.putInt("space", position)
+            val frag = ScoreFragment()
+            frag.setArguments(args)
+            return frag
         }
 
-        @Override
-        public Fragment getItem(int position) {
-
-            Fragment frag;
-            Bundle args = new Bundle();
-            args.putInt("space", position);
-            frag = new ScoreFragment();
-            frag.setArguments(args);
-            return frag;
+        override fun getCount(): Int {
+            return 4
         }
 
-        @Override
-        public int getCount() {
-            return 4;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return getResources().getString(R.string.number_range_one);
-                case 1:
-                    return getResources().getString(R.string.number_range_two);
-                case 2:
-                    return getResources().getString(R.string.number_range_three);
-                case 3:
-                    return getResources().getString(R.string.number_range_four);
+        override fun getPageTitle(position: Int): CharSequence? {
+            when (position) {
+                0 -> return resources.getString(R.string.number_range_one)
+                1 -> return resources.getString(R.string.number_range_two)
+                2 -> return resources.getString(R.string.number_range_three)
+                3 -> return resources.getString(R.string.number_range_four)
             }
-            return null;
+            return null
         }
     }
 }

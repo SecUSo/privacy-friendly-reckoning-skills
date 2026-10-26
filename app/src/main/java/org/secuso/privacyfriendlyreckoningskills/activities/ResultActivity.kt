@@ -11,282 +11,294 @@
  You should have received a copy of the GNU General Public License
  along with Privacy Friendly Reckoning Skills. If not, see <http://www.gnu.org/licenses/>.
  */
+package org.secuso.privacyfriendlyreckoningskills.activities
 
-package org.secuso.privacyfriendlyreckoningskills.activities;
+import android.content.ContentValues
+import android.content.Intent
+import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
+import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import org.secuso.privacyfriendlyreckoningskills.R
+import org.secuso.privacyfriendlyreckoningskills.database.PFASQLiteHelper
+import org.secuso.privacyfriendlyreckoningskills.gameInstance
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+class ResultActivity : AppCompatActivity(), View.OnClickListener {
+    val space: TextView by lazy { findViewById<TextView>(R.id.space)}
+    val score: TextView by lazy { findViewById<TextView>(R.id.score)}
+    val solved: TextView by lazy { findViewById<TextView>(R.id.solved)}
+    val addSign: TextView by lazy { findViewById<TextView>(R.id.sign_add)}
+    val subSign: TextView by lazy { findViewById<TextView>(R.id.sign_sub)}
+    val mulSign: TextView by lazy { findViewById<TextView>(R.id.sign_mul)}
+    val divSign: TextView by lazy { findViewById<TextView>(R.id.sign_div)}
+    var game: gameInstance? = null
+    var newHighScore: Boolean = false
+    var playerName: String? = null
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+    var resultTexts: ArrayList<TextView?>? = null
 
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.style.ForegroundColorSpan;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_result)
 
-import org.secuso.privacyfriendlyreckoningskills.R;
-import org.secuso.privacyfriendlyreckoningskills.database.PFASQLiteHelper;
-import org.secuso.privacyfriendlyreckoningskills.exerciseInstance;
-import org.secuso.privacyfriendlyreckoningskills.gameInstance;
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    updateStats()
+                    updateScore(playerName)
 
-import java.util.ArrayList;
+                    val intent = Intent(
+                        this@ResultActivity,
+                        MainActivity::class.java
+                    )
 
-public class ResultActivity extends AppCompatActivity implements View.OnClickListener {
-
-    TextView space;
-    TextView score;
-    TextView solved;
-    TextView addSign;
-    TextView subSign;
-    TextView mulSign;
-    TextView divSign;
-
-    gameInstance game;
-
-    Boolean newHighScore;
-    String playerName;
-
-    ArrayList<TextView> resultTexts;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
-
-        getOnBackPressedDispatcher().addCallback(
-                this,
-                new OnBackPressedCallback(true) {
-                    @Override
-                    public void handleOnBackPressed() {
-                        updateStats();
-                        updateScore(playerName);
-
-                        Intent intent = new Intent(
-                                ResultActivity.this,
-                                MainActivity.class
-                        );
-
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
-                    }
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
+                    finish()
                 }
-        );
+            }
+        )
 
-        SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = hs.edit();
-        editor.putBoolean("continue", false);
-        editor.commit();
-
-        game = (gameInstance) getIntent().getSerializableExtra("game");
-        newHighScore = getIntent().getBooleanExtra("highScoreAchieved",false);
-        playerName = getIntent().getStringExtra("name");
+        val hs = this.getSharedPreferences("pfa-math-highscore", MODE_PRIVATE)
+        val editor = hs.edit()
+        editor.putBoolean("continue", false)
+        editor.commit()
+        
+        game = intent.getSerializableExtra("game") as gameInstance?
+        newHighScore = intent.getBooleanExtra("highScoreAchieved", false)
+        playerName = intent.getStringExtra("name")
 
         //Ui
-        space = (TextView) findViewById(R.id.space);
-        score = (TextView) findViewById(R.id.score);
-        solved = (TextView) findViewById(R.id.solved);
-        space.setText("Up to \n" + game.getUpperBound());
-        addSign = (TextView) findViewById(R.id.sign_add);
-        subSign = (TextView) findViewById(R.id.sign_sub);
-        mulSign = (TextView) findViewById(R.id.sign_mul);
-        divSign = (TextView) findViewById(R.id.sign_div);
+        space.text = "Up to \n" + game!!.getUpperBound()
 
         //fab
-        FloatingActionButton myFab = (FloatingActionButton)  this.findViewById(R.id.myFAB);
-        myFab.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                saveSelectedExercises();
-                updateStats();
-                updateScore(playerName);
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
-
-        if(!game.add) addSign.setTextColor(getResources().getColor(R.color.middlegrey));
-        if(!game.sub) subSign.setTextColor(getResources().getColor(R.color.middlegrey));
-        if(!game.mul) mulSign.setTextColor(getResources().getColor(R.color.middlegrey));
-        if(!game.div) divSign.setTextColor(getResources().getColor(R.color.middlegrey));
-
-        resultTexts = new ArrayList<>();
-
-        for(int i = 0; i < 10; i++){
-            TextView exercise = new TextView(this);
-            TextView solution = new TextView(this);
-            exercise.setTextSize(24);
-            solution.setTextSize(24);
-            exercise.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-            solution.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            exercise.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            if(game.exercises.get(i).revisit) {
-                exercise.setTextColor(getResources().getColor(R.color.middlegrey));
-            } else {
-                exercise.setTextColor(getResources().getColor(R.color.lightblue));
-            }
-            solution.setTextColor(ContextCompat.getColor(this, R.color.red));
-
-            exercise.setText(game.exercises.get(i).x + " " + game.exercises.get(i).o + " " + game.exercises.get(i).y + " = " + game.exercises.get(i).z);
-            if(game.exercises.get(i).solve() == game.exercises.get(i).z){
-                solution.setText("\u2713");
-                solution.setTextColor(getResources().getColor(R.color.green));
-            } else {
-                String answer =""+game.exercises.get(i).z;
-                final SpannableStringBuilder sb = new SpannableStringBuilder(exercise.getText());
-                final ForegroundColorSpan fcs = new ForegroundColorSpan(ContextCompat.getColor(this, R.color.red));
-                sb.setSpan(fcs, exercise.getText().length()-answer.length(), exercise.getText().length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                solution.setText(""+game.exercises.get(i).solve());
-                exercise.setText(sb);
-            }
-
-            exercise.setId(i);
-            exercise.setOnClickListener(this);
-
-            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.exercises);
-            LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.solutions);
-            linearLayout.addView(exercise);
-            linearLayout2.addView(solution);
-
-            resultTexts.add(exercise);
+        val myFab = this.findViewById<View?>(R.id.myFAB) as FloatingActionButton
+        myFab.setOnClickListener { v ->
+            saveSelectedExercises()
+            updateStats()
+            updateScore(playerName)
+            val intent = Intent(v.getContext(), MainActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
         }
 
-        if(newHighScore) {
-            score.setText(getResources().getString(R.string.result_score) + " " + game.score + " " + getResources().getString(R.string.result_highscore));
+        if (!game!!.add) addSign.setTextColor(ResourcesCompat.getColor(resources,R.color.middlegrey, theme))
+        if (!game!!.sub) subSign.setTextColor(ResourcesCompat.getColor(resources,R.color.middlegrey, theme))
+        if (!game!!.mul) mulSign.setTextColor(ResourcesCompat.getColor(resources,R.color.middlegrey, theme))
+        if (!game!!.div) divSign.setTextColor(ResourcesCompat.getColor(resources,R.color.middlegrey, theme))
+
+        resultTexts = ArrayList<TextView?>()
+
+        for (i in 0..9) {
+            val exercise = TextView(this)
+            val solution = TextView(this)
+            exercise.textSize = 24f
+            solution.textSize = 24f
+            exercise.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
+            solution.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            exercise.setLayoutParams(
+                ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            )
+            if (game!!.exercises[i].revisit) {
+                exercise.setTextColor(getResources().getColor(R.color.middlegrey))
+            } else {
+                exercise.setTextColor(getResources().getColor(R.color.lightblue))
+            }
+            solution.setTextColor(ContextCompat.getColor(this, R.color.red))
+
+            exercise.text = game!!.exercises[i].x.toString() + " " + game!!.exercises[i].o + " " + game!!.exercises[i].y + " = " + game!!.exercises[i].z
+            if (game!!.exercises[i].solve() == game!!.exercises[i].z) {
+                solution.text = "\u2713"
+                solution.setTextColor(getResources().getColor(R.color.green))
+            } else {
+                val answer = "" + game!!.exercises[i].z
+                val sb = SpannableStringBuilder(exercise.getText())
+                val fcs = ForegroundColorSpan(ContextCompat.getColor(this, R.color.red))
+                sb.setSpan(
+                    fcs,
+                    exercise.getText().length - answer.length,
+                    exercise.getText().length,
+                    Spannable.SPAN_INCLUSIVE_INCLUSIVE
+                )
+                solution.text = "${game!!.exercises[i].solve()}"
+                exercise.text = sb
+            }
+
+            exercise.setId(i)
+            exercise.setOnClickListener(this)
+
+            val linearLayout = findViewById<View?>(R.id.exercises) as LinearLayout
+            val linearLayout2 = findViewById<View?>(R.id.solutions) as LinearLayout
+            linearLayout.addView(exercise)
+            linearLayout2.addView(solution)
+
+            resultTexts!!.add(exercise)
+        }
+
+        if (newHighScore) {
+            score.text = getResources().getString(R.string.result_score) + " " + game!!.score + " " + getResources().getString(
+                R.string.result_highscore
+            )
         } else {
-            score.setText(getResources().getString(R.string.result_score) + " " + game.score);
+            score.text = getResources().getString(R.string.result_score) + " " + game!!.score
         }
-        solved.setText(getResources().getString(R.string.result_solved) + " " + game.answeredCorrectly() + " "+ getResources().getString(R.string.result_solved_of) + " 10");
+        solved.text = getResources().getString(R.string.result_solved) + " " + game!!.answeredCorrectly() + " " + getResources().getString(
+            R.string.result_solved_of
+        ) + " 10"
     }
 
-    @Override
-    public void onClick(View v) {
-        for(int i = 0; i < game.exercisesSolved(); i++){
-            if((v.getId() == resultTexts.get(i).getId()) && (game.exercises.get(i).solve() != game.exercises.get(i).z)){
-                if(!game.exercises.get(i).revisit) {
-                    resultTexts.get(i).setTextColor(getResources().getColor(R.color.middlegrey));
-                    game.exercises.get(i).revisit = true;
-                    Toast.makeText(this, getResources().getString(R.string.result_toast_selected),
-                            Toast.LENGTH_SHORT).show();
+    override fun onClick(v: View) {
+        for (i in 0..<game!!.exercisesSolved()) {
+            if ((v.id == resultTexts!![i]!!.id) && (game!!.exercises[i].solve() != game!!.exercises[i].z)
+            ) {
+                if (!game!!.exercises[i].revisit) {
+                    resultTexts!![i]!!.setTextColor(ResourcesCompat.getColor(resources, R.color.middlegrey, theme))
+                    game!!.exercises[i].revisit = true
+                    Toast.makeText(
+                        this, getResources().getString(R.string.result_toast_selected),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
-                    resultTexts.get(i).setTextColor(getResources().getColor(R.color.lightblue));
-                    game.exercises.get(i).revisit = false;
+                    resultTexts!![i]!!.setTextColor(ResourcesCompat.getColor(resources,R.color.lightblue, theme))
+                    game!!.exercises[i].revisit = false
                 }
             }
         }
     }
 
-    private void saveSelectedExercises(){
-        PFASQLiteHelper helper = new PFASQLiteHelper(this);
-        SQLiteDatabase db = helper.getWritableDatabase();
-        for(int i = 0; i < game.exercisesSolved(); i++){
-            if(game.exercises.get(i).revisit) {
-                ContentValues values = new ContentValues();
-                values.put("operator1",game.exercises.get(i).x);
-                values.put("operator2",game.exercises.get(i).y);
-                values.put("operand",game.exercises.get(i).o);
-                values.put("space",game.space);
-                db.insert("SAVED_EXERCISES",null,values);
+    private fun saveSelectedExercises() {
+        val helper = PFASQLiteHelper(this)
+        val db = helper.writableDatabase
+        for (i in 0..<game!!.exercisesSolved()) {
+            if (game!!.exercises[i].revisit) {
+                val values = ContentValues()
+                values.put("operator1", game!!.exercises[i].x)
+                values.put("operator2", game!!.exercises[i].y)
+                values.put("operand", game!!.exercises[i].o)
+                values.put("space", game!!.space)
+                db.insert("SAVED_EXERCISES", null, values)
             }
         }
     }
 
-    private void updateStats(){
+    private fun updateStats() {
+        var rightAnswersAdd = 0
+        var rightAnswersSub = 0
+        var rightAnswersMul = 0
+        var rightAnswersDiv = 0
+        var wrongAnswersAdd = 0
+        var wrongAnswersSub = 0
+        var wrongAnswersMul = 0
+        var wrongAnswersDiv = 0
 
-        int rightAnswersAdd = 0;
-        int rightAnswersSub = 0;
-        int rightAnswersMul = 0;
-        int rightAnswersDiv = 0;
-        int wrongAnswersAdd = 0;
-        int wrongAnswersSub = 0;
-        int wrongAnswersMul = 0;
-        int wrongAnswersDiv = 0;
 
-
-        for(exerciseInstance e: game.exercises){
-            switch(e.o) {
-                case "+":
-                    if(e.solve()==e.z) rightAnswersAdd++; else wrongAnswersAdd++; break;
-                case "-":
-                    if(e.solve()==e.z) rightAnswersSub++; else wrongAnswersSub++; break;
-                case "*":
-                    if(e.solve()==e.z) rightAnswersMul++; else wrongAnswersMul++; break;
-                case "/":
-                    if(e.solve()==e.z) rightAnswersDiv++; else wrongAnswersDiv++; break;
+        for (e in game!!.exercises) {
+            when (e.o) {
+                "+" -> if (e.solve() == e.z) rightAnswersAdd++ else wrongAnswersAdd++
+                "-" -> if (e.solve() == e.z) rightAnswersSub++ else wrongAnswersSub++
+                "*" -> if (e.solve() == e.z) rightAnswersMul++ else wrongAnswersMul++
+                "/" -> if (e.solve() == e.z) rightAnswersDiv++ else wrongAnswersDiv++
             }
         }
 
-        SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = hs.edit();
-        editor.putInt("rightadd"+game.space,hs.getInt("rightadd"+game.space,0)+rightAnswersAdd);
-        editor.putInt("wrongadd"+game.space,hs.getInt("wrongadd"+game.space,0)+wrongAnswersAdd);
-        editor.putInt("rightsub"+game.space,hs.getInt("rightsub"+game.space,0)+rightAnswersSub);
-        editor.putInt("wrongsub"+game.space,hs.getInt("wrongsub"+game.space,0)+wrongAnswersSub);
-        editor.putInt("rightmul"+game.space,hs.getInt("rightmul"+game.space,0)+rightAnswersMul);
-        editor.putInt("wrongmul"+game.space,hs.getInt("wrongmul"+game.space,0)+wrongAnswersMul);
-        editor.putInt("rightdiv"+game.space,hs.getInt("rightdiv"+game.space,0)+rightAnswersDiv);
-        editor.putInt("wrongdiv"+game.space,hs.getInt("wrongdiv"+game.space,0)+wrongAnswersDiv);
-        editor.commit();
+        val hs = this.getSharedPreferences("pfa-math-highscore", MODE_PRIVATE)
+        val editor = hs.edit()
+        editor.putInt(
+            "rightadd" + game!!.space,
+            hs.getInt("rightadd" + game!!.space, 0) + rightAnswersAdd
+        )
+        editor.putInt(
+            "wrongadd" + game!!.space,
+            hs.getInt("wrongadd" + game!!.space, 0) + wrongAnswersAdd
+        )
+        editor.putInt(
+            "rightsub" + game!!.space,
+            hs.getInt("rightsub" + game!!.space, 0) + rightAnswersSub
+        )
+        editor.putInt(
+            "wrongsub" + game!!.space,
+            hs.getInt("wrongsub" + game!!.space, 0) + wrongAnswersSub
+        )
+        editor.putInt(
+            "rightmul" + game!!.space,
+            hs.getInt("rightmul" + game!!.space, 0) + rightAnswersMul
+        )
+        editor.putInt(
+            "wrongmul" + game!!.space,
+            hs.getInt("wrongmul" + game!!.space, 0) + wrongAnswersMul
+        )
+        editor.putInt(
+            "rightdiv" + game!!.space,
+            hs.getInt("rightdiv" + game!!.space, 0) + rightAnswersDiv
+        )
+        editor.putInt(
+            "wrongdiv" + game!!.space,
+            hs.getInt("wrongdiv" + game!!.space, 0) + wrongAnswersDiv
+        )
+        editor.commit()
     }
 
-    private void updateScore(String name){
-        SharedPreferences hs = this.getSharedPreferences("pfa-math-highscore", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = hs.edit();
+    private fun updateScore(name: String?) {
+        val hs = this.getSharedPreferences("pfa-math-highscore", MODE_PRIVATE)
+        val editor = hs.edit()
 
         //saved values
-        String[] highscoreNames = new String[5];
-        String[] highscoreScores = new String[5];
-        for(int i = 0; i <5; i++){
-            highscoreNames[i] = hs.getString("hsname"+i+game.space,null);
-            highscoreScores[i] = hs.getString("hsscore"+i+game.space,null);
+        val highscoreNames = arrayOfNulls<String>(5)
+        val highscoreScores = arrayOfNulls<String>(5)
+        for (i in 0..4) {
+            highscoreNames[i] = hs.getString("hsname" + i + game!!.space, null)
+            highscoreScores[i] = hs.getString("hsscore" + i + game!!.space, null)
         }
 
         //update values
-        Boolean updated = false;
-        String prevScore = "0";
-        String prevName = "N";
-        for(int i = 0; i < 5; i++){
-            if(!updated && (highscoreScores[i] != null) && game.score >= Integer.parseInt(highscoreScores[i])){
-                prevScore = highscoreScores[i];
-                prevName = highscoreNames[i];
-                highscoreScores[i] = ""+game.score;
-                highscoreNames[i] = name;
-                updated = true;
-            } else if(!updated && highscoreScores[i] == null){
-                highscoreScores[i] = ""+game.score;
-                highscoreNames[i] = name;
-                break;
-            } else if(updated && highscoreScores[i] == null){
-                highscoreScores[i] = prevScore;
-                highscoreNames[i] = prevName;
-                break;
-            } else if(updated){
-                String tempScore = prevScore;
-                String tempName = prevName;
-                prevScore = highscoreScores[i];
-                prevName = highscoreNames[i];
-                highscoreScores[i] = tempScore;
-                highscoreNames[i] = tempName;
+        var updated = false
+        var prevScore: String? = "0"
+        var prevName: String? = "N"
+        for (i in 0..4) {
+            if (!updated && (highscoreScores[i] != null) && game!!.score >= highscoreScores[i]!!.toInt()) {
+                prevScore = highscoreScores[i]
+                prevName = highscoreNames[i]
+                highscoreScores[i] = "" + game!!.score
+                highscoreNames[i] = name
+                updated = true
+            } else if (!updated && highscoreScores[i] == null) {
+                highscoreScores[i] = "" + game!!.score
+                highscoreNames[i] = name
+                break
+            } else if (updated && highscoreScores[i] == null) {
+                highscoreScores[i] = prevScore
+                highscoreNames[i] = prevName
+                break
+            } else if (updated) {
+                val tempScore = prevScore
+                val tempName = prevName
+                prevScore = highscoreScores[i]
+                prevName = highscoreNames[i]
+                highscoreScores[i] = tempScore
+                highscoreNames[i] = tempName
             }
         }
 
         //save new values
-        for(int i = 0; i <5; i++){
-            if(highscoreScores[i] != null){
-                editor.putString("hsscore"+i+game.space, highscoreScores[i]);
-                editor.putString("hsname"+i+game.space, highscoreNames[i]);
-                editor.commit();
+        for (i in 0..4) {
+            if (highscoreScores[i] != null) {
+                editor.putString("hsscore" + i + game!!.space, highscoreScores[i])
+                editor.putString("hsname" + i + game!!.space, highscoreNames[i])
+                editor.commit()
             }
         }
     }

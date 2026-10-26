@@ -42,18 +42,4 @@ abstract class BaseActivity : DrawerActivity() {
          */
         defaultDrawerSection(this)
     }
-
-    /**
-     * Marks the current activity's drawer entry as selected.
-     */
-    override fun isActiveDrawerElement(
-        element: DrawerElement
-    ): Boolean {
-        return element.name == activeDrawerItemName()
-    }
-
-    /**
-     * Name of the drawer item belonging to the current activity.
-     */
-    protected abstract fun activeDrawerItemName(): String
 }

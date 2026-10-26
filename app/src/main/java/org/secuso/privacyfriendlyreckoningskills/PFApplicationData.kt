@@ -272,19 +272,6 @@ class PFApplicationData private constructor(context: Context) {
         includeDeviceDataInReport = includeDeviceDataInReport
     )
 
-    fun isDirectFeedbackEnabled(): Boolean {
-        return directFeedback.value
-    }
-
-    fun isCorrectAnswerEnabled(): Boolean {
-        return showCorrectAnswer.value
-    }
-
-    fun defaultPlayerNameOrNull(): String? {
-        return defaultPlayerName.value
-            .trim()
-            .takeIf { it.isNotEmpty() }
-    }
     /**
      * Migrates the tutorial state used by the previous implementation.
      *
@@ -313,29 +300,6 @@ class PFApplicationData private constructor(context: Context) {
             )
         }
     }
-    fun getLastChosenPageValue(): Int {
-        return lastChosenPagePreference.value
-    }
-
-    fun setLastChosenPageValue(position: Int) {
-        lastChosenPagePreference.value = position
-    }
-
-    fun isAdditionSelected(): Boolean {
-        return additionEnabledPreference.value
-    }
-
-    fun isSubtractionSelected(): Boolean {
-        return subtractionEnabledPreference.value
-    }
-
-    fun isMultiplicationSelected(): Boolean {
-        return multiplicationEnabledPreference.value
-    }
-
-    fun isDivisionSelected(): Boolean {
-        return divisionEnabledPreference.value
-    }
 
     /**
      * Stores the operator selection made on the main screen.
@@ -354,9 +318,7 @@ class PFApplicationData private constructor(context: Context) {
     /**
      * Returns whether exercises containing zero or one should be excluded.
      */
-    fun shouldExcludeZeroAndOne(): Boolean {
-        return excludeZeroAndOneSetting.value
-    }
+
     companion object {
         private const val LEGACY_TUTORIAL_PREFERENCES =
             "androidhive-welcome"

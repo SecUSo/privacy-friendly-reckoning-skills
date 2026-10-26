@@ -174,8 +174,8 @@ public class ExerciseActivity extends AppCompatActivity {
             loadGameFromStorage();
             //this can happen if orientation changes during name input
             if (game.gameFinished) {
-                String name = PFApplicationData.instance(this).defaultPlayerNameOrNull();
-                if(name == null){
+                String name = PFApplicationData.instance(this).getDefaultPlayerName().getValue();
+                if(name.isBlank()){
                     startResultActivity("");
                 } else {
                     startResultActivity(name);
@@ -194,7 +194,7 @@ public class ExerciseActivity extends AppCompatActivity {
                             input.setTextColor(ContextCompat.getColor(this, R.color.green));
                             s = s + "" + " \u2713";
                         } else {
-                            if (PFApplicationData.instance(this).isCorrectAnswerEnabled()) {
+                            if (PFApplicationData.instance(this).getShowCorrectAnswer().getValue()) {
                                 s = s + " (" + exercise.solve() + ")";
                                 input.setTextColor(ContextCompat.getColor(this, R.color.red));
                             } else {
@@ -291,7 +291,7 @@ public class ExerciseActivity extends AppCompatActivity {
                 }
                 PFApplicationData appData = PFApplicationData.instance(this);
 
-                if (appData.isDirectFeedbackEnabled()) {
+                if (appData.getDirectFeedback().getValue()) {
                     exercise.z = inputtemp;
                     if(!exercise.pausedOn) {
                         game.putExercise2(exercise);
@@ -301,7 +301,7 @@ public class ExerciseActivity extends AppCompatActivity {
                         input.setTextColor(ContextCompat.getColor(this, R.color.green));
                         s = s + "" + " \u2713";
                     } else {
-                        if (appData.isCorrectAnswerEnabled()) {
+                        if (appData.getShowCorrectAnswer().getValue()) {
                             s = s + " (" + exercise.solve() + ")";
                             input.setTextColor(ContextCompat.getColor(this, R.color.red));
                         } else {
@@ -440,8 +440,8 @@ public class ExerciseActivity extends AppCompatActivity {
                 game.gameFinished = true;
                 displayNameInput();
             } else {
-                String name = PFApplicationData.instance(this).defaultPlayerNameOrNull();
-                if(name == null){
+                String name = PFApplicationData.instance(this).getDefaultPlayerName().getValue();
+                if(name.isBlank()){
                     startResultActivity("");
                 } else {
                     startResultActivity(name);
@@ -464,8 +464,7 @@ public class ExerciseActivity extends AppCompatActivity {
         String op = game.randomOperator();
 
         boolean excludeZeroAndOne =
-                PFApplicationData.instance(this)
-                        .shouldExcludeZeroAndOne();
+                PFApplicationData.instance(this).getExcludeZeroAndOneSetting().getValue();
 
         PFASQLiteHelper helper = new PFASQLiteHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
@@ -654,7 +653,7 @@ public class ExerciseActivity extends AppCompatActivity {
     private void displayNameInput() {
         final String defaultName =
                 PFApplicationData.instance(this)
-                        .defaultPlayerNameOrNull();
+                        .getDefaultPlayerName().getValue();
 
         final SharedPreferences highscorePreferences =
                 getSharedPreferences(
@@ -664,7 +663,7 @@ public class ExerciseActivity extends AppCompatActivity {
 
         final String initialName;
 
-        if (defaultName != null) {
+        if (defaultName.isBlank()) {
             initialName = defaultName;
         } else {
             initialName = highscorePreferences.getString(

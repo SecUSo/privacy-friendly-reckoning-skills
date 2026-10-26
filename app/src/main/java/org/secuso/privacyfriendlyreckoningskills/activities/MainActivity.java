@@ -30,6 +30,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.jetbrains.annotations.NotNull;
+import org.secuso.pfacore.model.DrawerElement;
+import org.secuso.pfacore.model.preferences.Preferable;
 import org.secuso.privacyfriendlyreckoningskills.R;
 import org.secuso.privacyfriendlyreckoningskills.gameInstance;
 import org.secuso.privacyfriendlyreckoningskills.PFApplicationData;
@@ -68,8 +71,8 @@ public class MainActivity extends BaseActivity {
             mViewPager.setAdapter(mSectionsPagerAdapter);
         }
 
-        int index = PFApplicationData.instance(this).getLastChosenPageValue();
-
+        Preferable<Integer> lastChosenPage = PFApplicationData.instance(this).getLastChosenPagePreference();
+        int index = lastChosenPage.getValue();
         mViewPager.setCurrentItem(index);
         mArrowLeft = (ImageView) findViewById(R.id.arrow_left);
         mArrowRight = (ImageView) findViewById(R.id.arrow_right);
@@ -100,7 +103,7 @@ public class MainActivity extends BaseActivity {
                 mArrowRight.setVisibility((position==mSectionsPagerAdapter.getCount()-1)?View.INVISIBLE:View.VISIBLE);
 
                 //save position in settings
-                PFApplicationData.instance(MainActivity.this).setLastChosenPageValue(position);
+                lastChosenPage.setValue(position);
             }
 
             @Override
@@ -121,11 +124,6 @@ public class MainActivity extends BaseActivity {
             continueButton.setBackgroundResource(R.drawable.button_disabled);
             continueButton.setEnabled(false);
         }
-    }
-
-    @Override
-    protected String activeDrawerItemName() {
-        return getString(R.string.action_main);
     }
 
     public void onClick(View view) {
@@ -236,6 +234,11 @@ public class MainActivity extends BaseActivity {
         toast.show();
     }
 
+    @Override
+    public boolean isActiveDrawerElement(@NotNull DrawerElement element) {
+        return element.getName().equals(getString(R.string.action_main));
+    }
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -314,10 +317,10 @@ public class MainActivity extends BaseActivity {
         PFApplicationData appData =
                 PFApplicationData.instance(this);
 
-        add = appData.isAdditionSelected();
-        sub = appData.isSubtractionSelected();
-        mul = appData.isMultiplicationSelected();
-        div = appData.isDivisionSelected();
+        add = appData.getAdditionEnabledPreference().getValue();
+        sub = appData.getSubtractionEnabledPreference().getValue();
+        mul = appData.getMultiplicationEnabledPreference().getValue();
+        div = appData.getDivisionEnabledPreference().getValue();
 
         activeOperators = 0;
 

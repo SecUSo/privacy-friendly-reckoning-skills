@@ -10,8 +10,8 @@ android {
         applicationId "org.secuso.privacyfriendlyrecknoningskills"
         minSdkVersion 17
         targetSdkVersion 34
-        versionCode 100
-        versionName "1.1.3"
+        versionCode 101
+        versionName "1.2.0"
         multiDexEnabled true
     }
     buildTypes {
@@ -68,10 +68,9 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ax.work.testing
 
-    // Dependencies not currently available in the PFA-Core catalog
-    implementation 'androidx.viewpager:viewpager:1.0.0'
-    implementation 'androidx.fragment:fragment:1.6.0'
-    implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
+    implementation libs.ax.viewpager
+    implementation libs.ax.fragment
+    implementation libs.ax.drawerlayout
 
     // PFA-Core
     implementation project(':model')

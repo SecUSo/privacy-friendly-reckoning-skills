@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_about">关于</string>
+    <string name="title_activity_game">游戏</string>
+    <string name="version_number">版本</string>
+    <string name="about_author_contributors">及贡献者们.</string>
+    <string name="about_affiliation">隶属于</string>
+    <string name="slide1_heading">欢迎！</string>
+    <string name="next">下个</string>
+    <string name="pref_example_summary">示例摘要</string>
+</resources>
